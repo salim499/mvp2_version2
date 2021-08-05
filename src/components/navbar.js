@@ -1,18 +1,18 @@
 // Import from react
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // Import from libraries 
 import {IconContext} from 'react-icons'
 import {FaBars} from 'react-icons/fa'
 import {AiOutlineClose} from 'react-icons/ai'
 
-import {Link, useHistory} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 
-// Import svgs
-import dashboard_navbar from '../assets/svgs/dashboard_navbar.svg'
-import newModel_navbar from '../assets/svgs/newmodel_navbar.svg'
-import analysis_navbar from '../assets/svgs/analysis_navbar.svg'
-import scalnyx_logo from '../assets/svgs/scalnyx_logo.svg'
+// Import icons
+import dashboard_navbar from '../assets/icons/dashboard_navbar.svg'
+import newModel_navbar from '../assets/icons/model_navbar.svg'
+import analysis_navbar from '../assets/icons/analysis_navbar.svg'
+import scalnyx_logo from '../assets/icons/scalnyx_logo.svg'
 
 // Import css files
 import '../css/navbar.css'
@@ -21,10 +21,15 @@ function NavBar(props) {
     const handleShowSideBar=()=>{
         setShowSideBar(!showSideBar)
     }
-    // use History
-    const history=useHistory()
-    // useStates
+    // useLocation
+    const { pathname } = useLocation();
+    // useState
     const [showSideBar, setShowSideBar]=useState(true)
+
+    // useEffect
+    useEffect(()=>{
+      console.log(pathname)
+    },[{...pathname}])
 
     return (
     <div className="navbar">
@@ -32,13 +37,12 @@ function NavBar(props) {
         <div className="nav-header">
         <div className="nav-menu-user">  
          <div className="menu-bars">
-         
-         {/*<FAIcons.FaUserTimes/>*/} 
+      
          </div> 
-        <Link to="/login" className="menu-bars-text">
+        <Link to="/sign_in" className="menu-bars-text">
           Login
         </Link>  
-        <Link to="/register" className="menu-bars-text">
+        <Link to="/signup" className="menu-bars-text">
           Register
         </Link>   
         </div>
@@ -62,9 +66,9 @@ function NavBar(props) {
 
             <div className='navbar-texts'>
                 <li key="dashboard" className="nav-text">
-                  <Link to="/dashboard">
+                  <Link to="/dashboard" style={{color:pathname=="/dashboard"&&"rgb(46,196,182)"}}>
                     <img src={dashboard_navbar}/>
-                    <span style={{color:history.location.pathname==="/dashboard"&&"rgb(46,196,182)"}}>Dashboard</span>
+                    <span>Dashboard</span>
                   </Link>
                 </li>
             </div>
@@ -72,22 +76,36 @@ function NavBar(props) {
                 <li key="newmodel"  className="nav-text">
                   <Link to="/new-model">
                     <img src={newModel_navbar}/>
-                    <span style={{color:history.location.pathname==="/new-model"&&"rgb(46,196,182)"}}>New Model</span>
+                    <span style={{color:pathname=="/new-model"&&"rgb(46,196,182)"}}>New Model</span>
                   </Link>
                 </li>
             </div>
             <div className='navbar-texts'>
                 <li key="analysis"  className="nav-text">
                   <Link to="/analysis">
-                    <img src={analysis_navbar}/>
-                    <span style={{color:history.location.pathname==="/analysis"&&"rgb(46,196,182)"}}>Analysis</span>
+                    <img src={analysis_navbar} style={{color:pathname==="/analysis"&&"rgb(46,196,182)"}}/>
+                    <span>Analysis</span>
+                  </Link>
+                </li>
+            </div>
+            <div className='navbar-texts'>
+                <li key="pdfReport"  className="nav-text">
+                  <Link to="#">
+                    <span className="navbar-pdfReport-label">PDF Report</span>
+                  </Link>
+                </li>
+                <div className="navbar-pdfReport-text">
+                  download pdf monthly
+                </div>
+            </div>
+            <div className='navbar-texts'>
+                <li key="newmodel"  className="nav-text">
+                  <Link to="new-model">
+                   <button className="btn-download">Download</button>
                   </Link>
                 </li>
             </div>
           </ul>
-          <div className="nav-text">
-              PDF report
-          </div>
         </nav>
     </div>
     )

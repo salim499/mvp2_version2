@@ -31,13 +31,17 @@
   .nav-menu {
     background-color: var(--navbar-background);
     width: 301px;
-    height: 100vh;
     display: flex;
     justify-content: center;
     position: fixed;
+    height: 100%;
+    overflow: auto;
     top: 0;
     left: -100%;
     transition: 850ms;
+  }
+  .nav-menu::-webkit-scrollbar {
+    display: none;
   }
   
   .nav-menu.active {
@@ -61,6 +65,7 @@
     width: 98%;
     height: 100%;
     display: flex;
+    
     align-items: center;
     padding: 0 16px;
     border-radius: 4px;
@@ -91,6 +96,7 @@
   }
   .nav-menu-user {
     display: flex;
+    width:50%;
     flex-direction: row-reverse;
     margin-right: 2rem;
     font-size: 2rem;
@@ -106,4 +112,41 @@ ul {
 }
 .nav-scalnyx-logo {
     margin-right: 16px;
+}
+.navbar-pdfReport-label{
+font-family: Overpass;
+font-style: normal;
+font-weight: bold;
+font-size: 24px;
+line-height: 25px;
+/* or 104% */
+align-items: center;
+color: #2EC4B6;
+}
+.navbar-pdfReport-text{
+font-family: Overpass;
+font-style: normal;
+font-weight: bold;
+font-size: 18px;
+line-height: 25px;
+/* or 139% */
+display: flex;
+justify-content:center;
+align-items: center;
+color: #E5E5E5; 
+margin-right: 30px;
+}
+.btn-download{
+  background: #2EC4B6;
+  border: 2px solid #2EC4B6;
+  box-sizing: border-box;
+  border-radius: 2px;
+  width: 212px;
+  height:39px;
+  margin-right: 50px;
+}
+.menu-bars-toggle{
+  display: flex;
+  width:50%;
+  margin-left: 1rem;
 }

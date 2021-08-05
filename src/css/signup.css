@@ -1,0 +1,118 @@
+.signup-container{
+    width: 418px;
+    height: 639px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 15px 5px rgba(0, 0, 0, 0.25);
+    margin: "0 auto";
+   /* margin-top: 195px;*/
+    margin-top: 45px;
+    margin-left: 301px;
+}
+.signup-text{
+    width: 118px;
+    height: 24px;
+    font-family: Overpass;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 24px;
+    /* identical to box height, or 96% */
+    color: #081C4D;
+    margin-left: 54px;
+    margin-top: 75px;
+}
+.signup-email{
+    margin-left: 54px;
+    margin-top: 46px;
+}
+.signup-password{
+    margin-left: 54px;
+    margin-top: 18px;
+}
+
+.signup-email-label{
+    width: 167px;
+    height: 15px;
+    font-family: Overpass;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 15px;
+    /* identical to box height, or 107% */
+    color: #9B9B9B;
+    margin-left: 0px;
+}
+.signup-email-input{
+    display: flex;
+    margin-top: 8px;
+    border: none;
+}
+.signup-email-input-text{
+    width: 90%;    
+}
+.signup-email-input-logo{
+    width:10%;
+    margin-right: 53.97px;
+}
+.signup-email-input-delimiter{
+    width: 310px;
+    height: 0px;
+    border: 1px solid #DFDFDF;
+    margin-top: 13px;
+}
+.signup-terms{
+    display: flex;
+    margin-left: 54px;
+}
+.signup-terms-text{
+    margin-top: 26px;
+    width: 243px;
+    height: 15px;
+    font-family: Overpass;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 15px;
+    /* identical to box height, or 107% */
+    color: #9B9B9B;
+}
+.signup-terms-checkbox{
+    margin-top: 28px;
+    width:100%-243px;
+    margin-right: 53.97px;
+}
+.signup-form-submit{
+    width: 310px;
+    height: 46px;
+    background: #081C4D;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 15px;
+    /* identical to box height, or 100% */
+    color: #FFFFFF;
+    margin-left: 54px;
+    margin-top: 35px;
+}
+.signup-secondContainer{
+    width: 418px;
+    height: 67px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 15px 5px rgba(0, 0, 0, 0.25);   
+    margin-top: 22px;
+    margin-left: 301px;
+}
+.signup-secondContainer-text{
+    width: 172px;
+    height: 15px;
+    font-family: Overpass;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 15px;
+    /* identical to box height, or 100% */
+    color: #000000;
+    margin-left: 123px;
+    margin-top: 26px;
+}
