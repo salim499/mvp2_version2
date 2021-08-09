@@ -2,7 +2,6 @@ import React, {useRef} from 'react'
 
 // Import from libraries
 import {Link} from 'react-router-dom'
-import axios from 'axios'
 
 // Import css files 
 import '../css/signup.css'
@@ -11,23 +10,26 @@ import '../css/signup.css'
 import emailIcon from '../assets/icons/email.svg'
 import passwordIcon from '../assets/icons/password.svg'
 
-
+// import contexts
+import { useAuth } from "../contexts/user"
 
 const SignIn= () => {
+
+    // import sign_in function and current user state
+    const { sign_in, currentUser } = useAuth()
 
     // useRef 
     const email=useRef()
     const password = useRef()
 
     // functions
-    const handleSignIn = async (e) => {
+    const handleSignIn = async(e) => {
         e.preventDefault()
 
         // send information to backend and try to sig in
         try {
-            const res=await axios.post(`${process.env.REACT_APP_URL_MASTER}/signin`,
-            { name:"toto", password:"toto" })
-            console.log(res)
+             console.log(await sign_in(
+                 email.current.value, password.current.value))
         }
         catch {
             console.log("failed to login")

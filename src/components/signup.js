@@ -2,7 +2,6 @@ import React, {useRef, useState} from 'react'
 
 // Import from libraries
 import {Link} from 'react-router-dom'
-import axios from 'axios'
 
 // Import css files 
 import '../css/signup.css'
@@ -11,10 +10,16 @@ import '../css/signup.css'
 import emailIcon from '../assets/icons/email.svg'
 import passwordIcon from '../assets/icons/password.svg'
 
+// Import contexts
+import { useAuth } from "../contexts/user"
+
 // Const 
 const passwordsMatchError = "Passwords do not match"
 
 function Signup() {
+
+    // import signup function and current user state
+    const { signup, currentUser } = useAuth()
 
     // useRef 
     const email=useRef()
@@ -25,22 +30,16 @@ function Signup() {
     const [errorMessage, setErrorMessage] = useState(null)
 
     // functions
-    const handleSignUp = async (e) => {
+    const handleSignUp = (e) => {
         e.preventDefault()
 
         // verify if password === passwordConfirm
-
+        if(password.current.value === passwordConfirm.current.value){
+            setErrorMessage(passwordsMatchError)
+        }
 
         // send information to backend and try to signup  
-        
-            /*const res=await axios.post(`${process.env.REACT_APP_URL_MASTER}/signin`,
-            { name:"toto", password:"toto" })*/
-            //console.log(res)
-            const res2=await axios.post(`http://82.123.47.154:8087/users`,
-            { name:"totoSSSSs", password:"totoSSSSs"})
-            console.log(res2)
-            console.log("3AAAAA")
-        
+        signup(email.current.value,password.current.value,currentUser.token)     
     }
 
     return (

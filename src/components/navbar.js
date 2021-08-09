@@ -16,7 +16,15 @@ import scalnyx_logo from '../assets/icons/scalnyx_logo.svg'
 
 // Import css files
 import '../css/navbar.css'
+
+// Import contexts
+import { useAuth } from "../contexts/user"
+
 function NavBar(props) {
+
+    // import signup function and current user state
+    const { currentUser } = useAuth()
+
     // functions 
     const handleShowSideBar=()=>{
         setShowSideBar(!showSideBar)
@@ -39,12 +47,22 @@ function NavBar(props) {
          <div className="menu-bars">
       
          </div> 
+         {
+           currentUser != null && !currentUser.is_admin &&
+           <Link to="/update-count" className="menu-bars-text">
+            UpdateCount
+           </Link> 
+         }        
         <Link to="/sign_in" className="menu-bars-text">
           Login
         </Link>  
-        <Link to="/signup" className="menu-bars-text">
-          Register
-        </Link>   
+        {
+          currentUser && currentUser.is_admin &&
+          <Link to="/signup" className="menu-bars-text">
+            Add user
+          </Link> 
+        }
+  
         </div>
         <div className="menu-bars-toggle">
         <Link to="#" className="menu-bars">
