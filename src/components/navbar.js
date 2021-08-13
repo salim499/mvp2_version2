@@ -19,8 +19,11 @@ import '../css/navbar.css'
 
 // Import contexts
 import { useAuth } from "../contexts/user"
+import { useNavBar } from "../contexts/navbar"
 
 function NavBar(props) {
+
+  const {navBarState, setNavBarState} = useNavBar()
 
     // import signup function and current user state
     const { currentUser } = useAuth()
@@ -28,6 +31,7 @@ function NavBar(props) {
     // functions 
     const handleShowSideBar=()=>{
         setShowSideBar(!showSideBar)
+        setNavBarState(!navBarState)
     }
     // useLocation
     const { pathname } = useLocation();
@@ -36,8 +40,8 @@ function NavBar(props) {
 
     // useEffect
     useEffect(()=>{
-      console.log(pathname)
-    },[{...pathname}])
+      console.log(navBarState)
+    },[navBarState])
 
     return (
     <div className="navbar">
