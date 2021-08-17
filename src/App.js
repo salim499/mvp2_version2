@@ -19,6 +19,9 @@ import ChoseDataset from './features/choseDataset'
 import ComposePortfolio from './features/composePortfolio'
 import Dashboard from './features/dashboard'
 import ViewPortfolio from './features/viewPortfolio'
+import ChoseDateWindow from './features/choseDateWindow'
+import CausalModelView from './features/causalModelView'
+
 
 // Import contexts
 import { AuthProvider } from "./contexts/user"
@@ -33,6 +36,9 @@ function App() {
       <NavBar/>
       <div>
       <Route path="/" exact>
+        <CausalModelView/>
+      </Route>        
+      <Route path="/view-portfolio" exact>
         <ViewPortfolio/>
       </Route>
       <Route path="/dashboard" exact>
@@ -43,6 +49,9 @@ function App() {
       </Route>
       <Route path="/create-portfolio" exact>
         <ChoseDataset/>
+      </Route>
+      <Route path="/chose-date-window" exact>
+        <ChoseDateWindow/>
       </Route>
       <Route path="/signup" exact>
         <Signup/>

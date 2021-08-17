@@ -1,0 +1,22 @@
+.dataset_set_container {
+    width: 90%;
+    margin-top: 43px;
+}
+.dataset_name_container {
+    height: 65px;
+    background: #ffffff;
+    border-radius: 5px;
+}
+.dataset_name_container-text {
+    width: 423px;
+    height: 25px;    
+    margin-left: 38px;
+    margin-top: 21px;
+    font-family: Overpass;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height, or 139% */
+    color: #081C4D;
+} 

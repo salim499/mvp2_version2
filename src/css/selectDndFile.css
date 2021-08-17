@@ -1,0 +1,42 @@
+.first_div-csv_selection
+{
+    border: 1px dashed #1B746B;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color:#ffffff;
+    width: 50%;
+    height:235px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 23px;
+}
+
+.first_div-csv_selection-text {
+
+    font-family: Overpass;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 25px;
+    /* or 139% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+}
+.first_div-csv_selection-text2 {
+    font-family: Overpass;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 25px;
+    /* or 179% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #2EC4B6;
+    margin-top: 10px;
+    justify-content: center;
+}

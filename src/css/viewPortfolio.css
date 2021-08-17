@@ -1,0 +1,11 @@
+.graphs_portfolio {
+    display: flex;
+    width: 90%;
+}
+.graphs_portfolio-plot {
+    width: 67%;
+}
+.graphs_portfolio-bar {
+    width: 33%; 
+
+}

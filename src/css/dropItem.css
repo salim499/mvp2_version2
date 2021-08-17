@@ -1,0 +1,30 @@
+.item {
+    width: 90%;
+    height: 147px;
+    margin-top: 39px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    border: 2px  #C4C4C4;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+ 
+}
+.item-factor {
+    height: 63px;
+    margin:2px;
+    background: #FFD60A;  
+    color:#ffffff;
+}
+.item-label {
+    width: 73px;
+    height: 25px;
+    margin:2px;
+    font-family: Overpass;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 25px;
+    /* identical to box height, or 104% */
+    color: #081C4D;
+}

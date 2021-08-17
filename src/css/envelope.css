@@ -1,0 +1,35 @@
+.envelope-container {
+    width: 95%;
+    height: 127px;
+    background: #C4C4C4;
+}
+.envelope-container-text {
+    width: 90%;   
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */   
+    color: #E5E5E5;   
+    margin-left: 28px;
+    margin-top: 28px;
+}
+.envelope-container-line1 {
+    margin-top: 64px;
+    margin-right: 20px;
+    position: relative;
+    width: 632.56px;
+    height: 0px;
+    border: 1px solid #E5E5E5;
+    transform: rotate(10.88deg);
+}
+.envelope-container-line2 {
+    margin-top: 0px;
+    margin-right: 20px;
+    position: relative;
+    width: 632.56px;
+    height: 0px;
+    border: 1px solid #E5E5E5;
+    transform: rotate(169.5deg);
+}
