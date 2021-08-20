@@ -7,12 +7,14 @@ import '../css/horizontalFlexItems.css'
 function horizontalFlexItems(props) {
     return (
         <div className="horizontal-items"> 
-        {props.datasetsNames.map((datasetName) => (
+          {props.datasetsNames.map((datasetName) => (
             <div className="horizontal-items-item">
-                {datasetName}
-                <img src={props.datasetIcon}/>
+              <div className="horizontal-items-item-title">
+              {datasetName}
+              </div>
+              <img src={props.datasetIcon} />
             </div>           
-        ))}
+          ))}
         </div>
     )
 }

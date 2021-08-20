@@ -29,6 +29,22 @@ import { NavbarProvider} from "./contexts/navbar"
 
 function App() {
 
+  useEffect(()=>{
+    fetch("https://love-calculator.p.rapidapi.com/getPercentage?fname=John&sname=Alice", {
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-key": "36f99601d0mshff227eef7694e85p164d14jsn84b0ebf94d9e",
+        "x-rapidapi-host": "love-calculator.p.rapidapi.com"
+      }
+    })
+    .then(response => 
+      response.json()
+    )
+    .then((errs) => {
+      console.log(errs);
+    });
+  },[])
+
   return (
       <Router>
       <NavbarProvider>

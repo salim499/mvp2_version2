@@ -1,5 +1,8 @@
 // Import from react
-import React from 'react'
+import React, {useState, useCallback} from 'react'
+
+// Import from libraries
+import {get, post} from 'axios'
 
 // Import css files 
 import '../css/choseDataset.css'
@@ -21,14 +24,48 @@ import { useNavBar } from "../contexts/navbar"
 const dndText="Or drag and drop it here"
 const selectText="Select a CSV file to import"
 const envelopeText="Before you upload your files below, make sure your file is ready to be imported"
-const datasetsNames=["dataset1", "dataset2", "dataset3"]
 
-function ChoseDataset() {
+    function ChoseDataset() {
 
+    // useContext
     const {navBarState, setNavBarState} = useNavBar()
 
+    // useState 
+    const [dataSet, setDataSet] = useState(["dataset1", "dataset2", "dataset3"])
+    const [previewVisibility, setPreviewVisibility] = useState("hidden")
+    const [nextVisibility, setNextVisibility] = useState("hidden")
+    const [dataSourcesNames, setDataSourcesNames] = useState([])
+
+    // useEffect 
+    /* get user datasources names */
+    useEffect(async ()=>{
+      try {
+        const res= await get(
+            `${process.env.REACT_APP_URL_MASTER}/datasources?fileds=name`
+           )
+           console.log(res)
+      }
+      catch {
+
+      }
+    },[])   
+
+    // useCallback 
+    const handlePostCsv = useCallback(async()=>{
+        try {
+            const res =await post(
+                `${process.env.REACT_APP_URL_MASTER}/datasources`,
+                    dataSet
+                )
+            console.log(res)
+        }
+        catch {
+            console.log("error")
+        }
+    },[dataSet])
+
     return (
-        <div className={navBarState?"App":"App2"}>
+      <div className={navBarState?"App":"App2"}>
             <Timeline/>
         <div className="start_from_scratch">
             <div className="first_div">
@@ -38,6 +75,8 @@ function ChoseDataset() {
                 <SelectDndFile
                 dndText={dndText}
                 selectText={selectText}
+                setDataSet={setDataSet}
+                setNextVisibility={setNextVisibility}
                 />
             </div>
             <div className="second_div">
@@ -55,8 +94,12 @@ function ChoseDataset() {
         datasetIcon={select_csv}
         />       
         </div>
-        <NextPreview/>
-        </div>
+        <NextPreview 
+        handleNext={handlePostCsv}
+        nextVisibility={nextVisibility}
+        previewVisibility={previewVisibility}
+        />
+      </div>
     )
 }
 
