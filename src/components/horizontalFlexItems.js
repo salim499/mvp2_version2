@@ -4,13 +4,15 @@ import React from 'react'
 // Import css files
 import '../css/horizontalFlexItems.css'
 
-function horizontalFlexItems(props) {
+function HorizontalFlexItems(props) {
     return (
+        console.log('horizontalFlexItems'),
         <div className="horizontal-items"> 
-          {props.datasetsNames.map((datasetName) => (
-            <div className="horizontal-items-item">
+          {props.datasets.map((dataset,index) => (
+            <div className="horizontal-items-item" key={dataset.id}
+            onClick={()=>props.handleChoseDataset(dataset.id)}>
               <div className="horizontal-items-item-title">
-              {datasetName}
+              {dataset.name}
               </div>
               <img src={props.datasetIcon} />
             </div>           
@@ -19,4 +21,4 @@ function horizontalFlexItems(props) {
     )
 }
 
-export default horizontalFlexItems
+export default React.memo(HorizontalFlexItems)

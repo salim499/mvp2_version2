@@ -1,8 +1,9 @@
 .graphs-choseDateWindow-bar {
+    margin-top: 80px;
     width: 90%;
-    height: 1308px;
     background: #FFFFFF;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 .dataset_set_container {
     margin-top:43px;

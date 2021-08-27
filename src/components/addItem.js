@@ -7,9 +7,10 @@ import '../css/addItem.css'
 // Import icons
 import new_category from '../assets/icons/new_category.svg'
 
-function addItem() {
+function AddItem(props) {
     return (
-      <div className="new_item">
+      console.log("RENDER"),
+      <div className="new_item" onClick={()=>props.handleAddItem()}>
         <div className="new_item-label">
             New category
         </div>
@@ -18,4 +19,4 @@ function addItem() {
     )
 }
 
-export default addItem
+export default React.memo(AddItem)

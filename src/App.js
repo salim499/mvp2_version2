@@ -13,6 +13,7 @@ import Signup from './components/signup'
 import SignIn from './components/signIn'
 import UpdateCount from './components/updateCount'
 
+import Portal from './components/modalNewItem'
 
 // Import features 
 import ChoseDataset from './features/choseDataset'
@@ -22,28 +23,11 @@ import ViewPortfolio from './features/viewPortfolio'
 import ChoseDateWindow from './features/choseDateWindow'
 import CausalModelView from './features/causalModelView'
 
-
 // Import contexts
 import { AuthProvider } from "./contexts/user"
 import { NavbarProvider} from "./contexts/navbar"
 
 function App() {
-
-  useEffect(()=>{
-    fetch("https://love-calculator.p.rapidapi.com/getPercentage?fname=John&sname=Alice", {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-key": "36f99601d0mshff227eef7694e85p164d14jsn84b0ebf94d9e",
-        "x-rapidapi-host": "love-calculator.p.rapidapi.com"
-      }
-    })
-    .then(response => 
-      response.json()
-    )
-    .then((errs) => {
-      console.log(errs);
-    });
-  },[])
 
   return (
       <Router>
@@ -52,6 +36,9 @@ function App() {
       <NavBar/>
       <div>
       <Route path="/" exact>
+       <SignIn/>
+      </Route>
+      <Route path="/portfolio-causal-model" exact>
         <CausalModelView/>
       </Route>        
       <Route path="/view-portfolio" exact>

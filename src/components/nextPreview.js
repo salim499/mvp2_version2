@@ -1,6 +1,9 @@
 // Import from react
 import React from 'react'
 
+// Import from libraries
+import { Link } from 'react-router-dom'
+
 // Import css files 
 import '../css/nextPreview.css'
 
@@ -10,7 +13,7 @@ function NextPreview(props) {
       <div className="next_preview"> 
           <div className="next_preview-preview"
           style={{visibility: props.previewVisibility}}
-          >
+          onClick={()=>props.handlePreview()}>
             <div className="next_preview-preview-text">
                 Preview
             </div>

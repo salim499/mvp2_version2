@@ -1,24 +1,28 @@
 .item {
     width: 90%;
-    height: 147px;
+    min-height: 147px;
     margin-top: 39px;
     margin-bottom: 10px;
     background: #ffffff;
-    border: 2px  #C4C4C4;
     display: flex;
     flex-direction: column;
-    justify-content:space-evenly;
- 
+    justify-content:flex-start;
+    border: dashed #C4C4C4;
 }
 .item-factor {
-    height: 63px;
+    height: 40px;
     margin:2px;
     background: #FFD60A;  
     color:#ffffff;
 }
-.item-label {
-    width: 73px;
-    height: 25px;
+.item-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+}
+.item-header-label {
+    height: 100%;
     margin:2px;
     font-family: Overpass;
     font-style: normal;
@@ -27,4 +31,10 @@
     line-height: 25px;
     /* identical to box height, or 104% */
     color: #081C4D;
+}
+.item-header-icon {
+   height:100%;
+   display: flex;
+   margin-top:2px;
+   margin-right:2px;
 }

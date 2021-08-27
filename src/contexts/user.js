@@ -33,6 +33,8 @@ export function AuthProvider({ children }) {
         const res=await axios.post(`${process.env.REACT_APP_URL_MASTER}/signin`,
         { name: userName, password: password })
         setCurrentUser(res.data)
+        // save token on localStorage
+        localStorage.setItem('token', res.data.token)
         return res
     }
 
@@ -41,6 +43,7 @@ export function AuthProvider({ children }) {
     }
 
     const updateCount = async (userName, password, token, id) => {
+        console.log(token)
         const res=await axios.put(`${process.env.REACT_APP_URL_MASTER}/users/${id}`,
         { name: userName, password: password },
         {

@@ -12,9 +12,12 @@ import passwordIcon from '../assets/icons/password.svg'
 
 // import contexts
 import { useAuth } from "../contexts/user"
+import { useNavBar } from "../contexts/navbar"
 
 const SignIn= () => {
 
+    // useContext
+    const {navBarState} = useNavBar()
     // import sign_in function and current user state
     const { sign_in, currentUser } = useAuth()
 
@@ -25,11 +28,9 @@ const SignIn= () => {
     // functions
     const handleSignIn = async(e) => {
         e.preventDefault()
-
         // send information to backend and try to sig in
         try {
-             console.log(await sign_in(
-                 email.current.value, password.current.value))
+            await sign_in(email.current.value, password.current.value)
         }
         catch {
             console.log("failed to login")
@@ -37,7 +38,7 @@ const SignIn= () => {
     }
 
     return (
-        <>
+        <div className={navBarState?"App":"App2"}>
         <div className="signup-container">
           <div className="signup-text">
               Welcome back !
@@ -82,7 +83,7 @@ const SignIn= () => {
                 Don't Have An Account? <Link to="/register">Sign Up Now!</Link>
             </div>
         </div>
-        </>
+        </div>
     )
 }
 

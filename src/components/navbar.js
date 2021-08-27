@@ -96,9 +96,9 @@ function NavBar(props) {
             </div>
             <div className='navbar-texts'>
                 <li key="newmodel"  className="nav-text">
-                  <Link to="/new-model">
+                  <Link to="/create-portfolio">
                     <img src={newModel_navbar}/>
-                    <span style={{color:pathname=="/new-model"&&"rgb(46,196,182)"}}>New Model</span>
+                    <span style={{color:pathname=="/create-model"&&"rgb(46,196,182)"}}>New Model</span>
                   </Link>
                 </li>
             </div>

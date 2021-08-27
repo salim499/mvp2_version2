@@ -6,6 +6,7 @@
     height: 65px;
     background: #ffffff;
     border-radius: 5px;
+    display: flex;
 }
 .dataset_name_container-text {
     width: 423px;

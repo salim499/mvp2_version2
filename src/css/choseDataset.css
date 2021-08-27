@@ -29,7 +29,7 @@
 }
 .start_from_existing_files {
     width: 90%;
-    height: 304px;
+    min-height: 304px;
     background: #ffffff;
     border-radius: 5px;
     margin-top: 36px;

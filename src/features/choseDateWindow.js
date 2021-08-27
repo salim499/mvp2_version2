@@ -1,18 +1,23 @@
 // Import from react
-import React from 'react';
+import React, {useState, useCallback} from 'react';
 
 // Import from libraries
 import { Bar } from 'react-chartjs-2';
+import { useHistory } from 'react-router-dom';
 
 // Import components
 import Timeline from '../components/timeline'
 import DataSetContainer from '../components/dataSetContainer'
+import NextPreview from '../components/nextPreview'
 
 // Import css files
 import '../css/choseDateWindow.css'
 
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
+
+// Constants
+const timelineLevel=3
 
 const data = {
   labels: ['1', '2', '3', '4', '5', '6'],
@@ -50,19 +55,46 @@ const options = {
 
 const ChoseDateWindow = () => {
 
+    // useHistory
+    const history = useHistory()
+
+    // useContext
     const {navBarState, setNavBarState} = useNavBar()
+
+    // useState
+    const [previewVisibility, setPreviewVisibility] = useState("visible")
+    const [nextVisibility, setNextVisibility] = useState("visible")
+
+    // useCallback
+    // preview button
+    const handlePreview = useCallback (()=>{
+      history.push({
+          pathname : '/compose-portfolio',
+      }) 
+    },[])
+  
+    // next button 
+    const handleNext = useCallback (()=>{
+        history.push({
+            pathname : '/portfolio-causal-model',
+        }) 
+    },[])
 
     return(
         <div className={navBarState?"App":"App2"}>
-        <div>
-            <Timeline/>
-        </div>
+        <Timeline timelineLevel={timelineLevel}/>
         <div className="dataset_set_container">
             <DataSetContainer/>
         </div>
         <div className="graphs-choseDateWindow-bar">
             <Bar data={data} options={options} />
         </div>
+        <NextPreview
+        handleNext={handleNext}
+        handlePreview={handlePreview}
+        nextVisibility={nextVisibility}
+        previewVisibility={previewVisibility} 
+        />
         </div>
     )};
 

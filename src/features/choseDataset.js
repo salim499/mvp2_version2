@@ -1,8 +1,9 @@
 // Import from react
-import React, {useState, useCallback} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 
 // Import from libraries
 import {get, post} from 'axios'
+import { useHistory } from 'react-router-dom'
 
 // Import css files 
 import '../css/choseDataset.css'
@@ -20,30 +21,41 @@ import NextPreview from '../components/nextPreview'
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
 
-// Const and vars
+// Constants
 const dndText="Or drag and drop it here"
 const selectText="Select a CSV file to import"
 const envelopeText="Before you upload your files below, make sure your file is ready to be imported"
+const timelineLevel=1
 
     function ChoseDataset() {
 
+    // useHistory
+    const history = useHistory()
+
     // useContext
-    const {navBarState, setNavBarState} = useNavBar()
+    const {navBarState} = useNavBar()
 
     // useState 
-    const [dataSet, setDataSet] = useState(["dataset1", "dataset2", "dataset3"])
+    const [file, setFile] = useState(null)
+    const [dataSources, setDataSources] = useState([])
+    const [chosenDataSetId, setChosenDataSetId] = useState(null)
     const [previewVisibility, setPreviewVisibility] = useState("hidden")
     const [nextVisibility, setNextVisibility] = useState("hidden")
-    const [dataSourcesNames, setDataSourcesNames] = useState([])
 
     // useEffect 
     /* get user datasources names */
     useEffect(async ()=>{
       try {
+
         const res= await get(
-            `${process.env.REACT_APP_URL_MASTER}/datasources?fileds=name`
+            `${process.env.REACT_APP_URL_MASTER}/datasources`,
+            {
+                headers:{
+                    token: localStorage.getItem('token')
+                }
+            }
            )
-           console.log(res)
+           setDataSources(res.data)
       }
       catch {
 
@@ -51,22 +63,58 @@ const envelopeText="Before you upload your files below, make sure your file is r
     },[])   
 
     // useCallback 
-    const handlePostCsv = useCallback(async()=>{
+    // case post csv
+    const handleNext = useCallback(async()=>{
+        // case choosing an existing file 
+        console.log(chosenDataSetId)
+        if(chosenDataSetId!=null){
+            history.push({
+                pathname : '/compose-portfolio',
+                state : chosenDataSetId
+            })   
+            return         
+        } 
+        // case choosing and upload an new file 
         try {
+            const formData = new FormData()
+            formData.append("files", file)
             const res =await post(
                 `${process.env.REACT_APP_URL_MASTER}/datasources`,
-                    dataSet
+                    formData,
+                    {
+                        headers:{
+                            token: localStorage.getItem('token')
+                        }
+                    }
                 )
-            console.log(res)
+            history.push({
+                pathname : '/compose-portfolio',
+                state : res.data.id
+            })
         }
         catch {
             console.log("error")
         }
-    },[dataSet])
+    },[file, chosenDataSetId])
+
+    // case chose an existing csv file (dataset)
+    const handleChoseDataset = useCallback((datasetId)=>{
+        console.log(datasetId)
+        setChosenDataSetId(datasetId)
+        setFile(null)
+        setNextVisibility('visible')
+    },[])
+    // case upload a new csv file 
+    const handleUploadFile = useCallback((uploadedFile) => {
+        console.log(uploadedFile)
+        setFile(uploadedFile)
+        setChosenDataSetId(null)
+        setNextVisibility('visible')
+    },[])
 
     return (
       <div className={navBarState?"App":"App2"}>
-            <Timeline/>
+            <Timeline timelineLevel={timelineLevel}/>
         <div className="start_from_scratch">
             <div className="first_div">
                 <div className="first_div-label">
@@ -75,8 +123,7 @@ const envelopeText="Before you upload your files below, make sure your file is r
                 <SelectDndFile
                 dndText={dndText}
                 selectText={selectText}
-                setDataSet={setDataSet}
-                setNextVisibility={setNextVisibility}
+                handleUploadFile={handleUploadFile}
                 />
             </div>
             <div className="second_div">
@@ -90,12 +137,13 @@ const envelopeText="Before you upload your files below, make sure your file is r
         Or choose from existing Files
         </div>
         <UserCsvFiles
-        datasetsNames={datasetsNames}
+        datasets={dataSources}
         datasetIcon={select_csv}
+        handleChoseDataset={handleChoseDataset}
         />       
         </div>
         <NextPreview 
-        handleNext={handlePostCsv}
+        handleNext={handleNext}
         nextVisibility={nextVisibility}
         previewVisibility={previewVisibility}
         />

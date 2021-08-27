@@ -1,20 +1,39 @@
 // Import from react
 import React from 'react'
 
+// Import Icons
+import Trash from '../assets/icons/delete.svg'
+
 // Import css files 
 import '../css/dropItem.css'
 
-function dropItem() {
+function DropItem(props) {
+
     return (
-      <div className="item">
-        <div className="item-label">
-            ASSETS
+      <div className="item" 
+      ref={props.provided.innerRef} 
+      {...props.provided.draggableProps} 
+      {...props.provided.dragHandleProps}
+      >
+        <div style={{backgroundColor:props.backgroundP, minHeight: '147px'}}>
+        <div className="item-header">
+        <div className="item-header-label">
+            {props.item&&props.item.name}
         </div>
-        <div className="item-factor">Asset 1</div>
-        <div className="item-factor">Asset 2 </div>
-      <div className="item-factor">Asset 3 </div>
+        <div className="item-header-icon" onClick={()=>props.handleDeleteItem(props.item.name)}>
+            <img src={Trash} />
+        </div>
+        </div>
+        {
+          props.item&&props.item.factors.map((factor, index) => (
+            <div className="item-factor" style={{
+              backgroundColor:props.color
+            }}>{factor.name}</div>
+          ))
+        }
+    </div>
     </div>
     )
 }
 
-export default dropItem
+export default DropItem

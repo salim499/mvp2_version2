@@ -12,13 +12,16 @@ import passwordIcon from '../assets/icons/password.svg'
 
 // Import contexts
 import { useAuth } from "../contexts/user"
+import { useNavBar } from "../contexts/navbar"
 
 // Const 
 const passwordsMatchError = "Passwords do not match"
 
 function Signup() {
 
-    // import signup function and current user state
+    // useContext
+    const {navBarState} = useNavBar()
+    // import context signup function and current user state
     const { signup, currentUser } = useAuth()
 
     // useRef 
@@ -37,13 +40,12 @@ function Signup() {
         if(password.current.value === passwordConfirm.current.value){
             setErrorMessage(passwordsMatchError)
         }
-
         // send information to backend and try to signup  
-        signup(email.current.value,password.current.value,currentUser.token)     
+        signup(email.current.value,password.current.value, localStorage.getItem('token'))     
     }
 
     return (
-        <>
+        <div className={navBarState?"App":"App2"}>
         <div className="signup-container">
           <div className="signup-text">
               Welcome !
@@ -100,7 +102,7 @@ function Signup() {
                 Have An Account? <Link to="/login">SignIn</Link>
             </div>
         </div>
-        </>
+        </div>
     )
 }
 

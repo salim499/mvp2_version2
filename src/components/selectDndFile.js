@@ -28,19 +28,15 @@ function SelectDndFile(props) {
 
   // useCallback
   const onDrop = useCallback(acceptedFiles => {
-    console.log(acceptedFiles[0])
+
     if(acceptedFiles[0].type==='application/vnd.ms-excel'){
       // set background of dnd div to default
       selectDndDiv.current.style=null
       // remove error message of dnd and select actions
       setErrorMessage(null)
       // set name and content of csv file to dataSetState
-      props.setDataSet({
-        files:acceptedFiles[0],
-        name:acceptedFiles[0].name,
-      })
-      // show next button
-      props.setNextVisibility('visible')
+      props.handleUploadFile(acceptedFiles[0])
+
       /*// get csv contents 
       
       parse(acceptedFiles[0],{

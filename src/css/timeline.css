@@ -1,38 +1,29 @@
 .timeline-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-top: 69px;
     width: 90%;
     margin-bottom: 30px;
-  }
-  
-  .timeline-container > div {
+  } 
+  .square-container {
+    height:110px;
+    width: 10%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    color: var(--stronger-grey);
+    justify-content: center;
   }
-  
-  .timeline-container > div > .square {
+  .square-container > .square {
     height: 35px;
     width: 35px;
     border-radius: 50%;
-    background-color: var(--stronger-grey);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    margin-bottom: 10px;
+  }
+  .line-container {
+    height:110px;
+    width: 20%;
+  }
+
+  .line {
+    margin-top: 18px;
   }
   
-  .timeline-container > .line {
-    width: 157px;
-    border: 1px solid var(--stronger-grey);
-    background-color: var(--stronger-grey);
-  }
-  
-  .timeline-highlight > .div {
-    color: var(--medium-blue);
-  }
