@@ -1,0 +1,51 @@
+.model-see_constraints-orders {
+    height: 380px;
+    width: calc(268% /3.66); 
+    background-color:#E5E5E5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.model-see_constraints-orders-select {
+    background: #E5E5E5;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 4px;
+    width:88%;
+}
+.model-see_constraints-orders-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width:88%;
+    height: 66%;
+}
+.model-see_constraints-orders-items-item {
+    display: flex;
+    height:20px;
+}
+.model-see_constraints-orders-items-item-label {
+    width: 50%;
+    display: flex;
+    background-color:aqua;
+}
+.model-see_constraints-orders-items-item-label-text {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 13px;
+    color: #000000;
+}
+.model-see_constraints-orders-items-item-inputs {
+    width: 50%;
+    background-color:blueviolet;
+    display: flex;
+    justify-content:space-between;
+}
+.model-see_constraints-orders-items-item-inputs-input {
+    width: 50%;
+    border-radius: 0px;
+    text-align: center;
+}

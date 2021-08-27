@@ -1,0 +1,49 @@
+.model-apply_constraints-header {
+    height: 48px;
+    background-color:white;
+    display: flex;
+    justify-content:flex-end;
+}
+.model-apply_constraints-header-content {
+    background-color: darkgoldenrod;
+    display: flex;
+    width:50%;
+}
+.model-apply_constraints-header-content-text {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    text-transform: lowercase;
+    font-feature-settings: 'tnum' on, 'lnum' on, 'ss01' on;
+    color: #000000;
+    width: 25%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+.model-apply_constraints-header-content-text-action {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    text-transform: lowercase;
+    font-feature-settings: 'tnum' on, 'lnum' on, 'ss01' on;
+    color: #000000;
+    width: 25%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+.model-apply_constraints-header-content-icon {
+    width: 25%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}

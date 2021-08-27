@@ -1,0 +1,50 @@
+.model-see_constraints-historical_actions {
+    height: 291px;
+    width: calc(268% /3.66); 
+    background-color:#E5E5E5;
+    display: flex;
+    flex-direction: column;
+}
+.model-see_constraints-historical_actions-exit {
+    display: flex;
+    justify-content: flex-end;
+    height:10%;
+}
+
+.model-see_constraints-historical_actions-exit-icon {
+    width:12%;
+    margin-top:2px;
+    margin-right: 2px;
+}
+.model-see_constraints-historical_actions-title {
+    margin-top: 10%;
+    margin-left: 10%;
+    height:10%;
+}
+.model-see_constraints-historical_actions-title-text {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    font-feature-settings: 'tnum' on, 'lnum' on;   
+    color: #000000;
+}
+.model-see_constraints-historical_actions-items {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.model-see_constraints-historical_actions-items-item {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    /* identical to box height */
+    color: #000000;
+}

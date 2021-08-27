@@ -1,0 +1,37 @@
+.model-apply_constraints-body-actions-categories {
+    margin-top: 1px;
+    min-height: 226px;
+    background-color:brown;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+}
+.model-apply_constraints-body-actions-categories-item {
+    display: flex;
+    justify-content:flex-start;
+    background-color:chartreuse;
+}
+.model-apply_constraints-body-actions-categories-item-input {
+    margin-left: 10%;
+    background: #000000;
+}
+.model-apply_constraints-body-actions-categories-item-label {
+    margin-right: 10%;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */ 
+    color: #000000;
+}
+.model-apply_constraints-body-actions-categories-text {
+    margin-left: 10%;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    color: #000000;   
+}

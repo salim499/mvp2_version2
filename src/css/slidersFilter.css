@@ -1,0 +1,45 @@
+.model-apply_constraints-body-actions-entropies {
+    margin-top: 1px;
+    height: 547.76px;
+    background-color:rgb(221, 154, 28);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.model-apply_constraints-body-actions-entropies-factor {
+    display: flex;
+    justify-content:space-around;
+    flex-direction: column;
+    align-items: center;
+}
+.model-apply_constraints-body-actions-entropies-factor-label {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    color: #000000;
+}
+.model-apply_constraints-body-actions-entropies-relation {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: center;
+}
+.model-apply_constraints-body-actions-entropies-factor-input {
+    border: 2px solid rgba(0, 0, 0, 0.8);
+}
+.model-apply_constraints-body-actions-entropies-relation-label {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    color: #000000;
+}
+.model-apply_constraints-body-actions-entropies-relation-input {
+    border: 2px solid rgba(0, 0, 0, 0.8);
+}

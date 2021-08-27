@@ -1,0 +1,33 @@
+.model-apply_constraints-body-graph-header {
+    height: 32px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    background-color:cadetblue;
+}
+.model-apply_constraints-body-graph-header-item {
+    width:20%;
+    background-color:violet;
+    display: flex;
+    justify-content:space-around;
+}
+.model-apply_constraints-body-graph-header-item2 {
+    width:20%;
+    background-color:rgb(245, 221, 8);
+    display: flex;
+    justify-content:space-around;
+}
+.model-apply_constraints-body-graph-header-item-text {
+    font-family: Overpass;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+    color: #000000;
+}
+.model-apply_constraints-body-graph-header-item-icon {
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}

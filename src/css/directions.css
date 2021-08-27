@@ -1,0 +1,16 @@
+.model-apply_constraints-body-actions-directional_keys {
+    min-height: 160px;
+    background-color:darkslategray;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.model-apply_constraints-body-actions-directional_keys-item {
+    height: 53px;
+    width:33%;
+    background-color:firebrick;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
