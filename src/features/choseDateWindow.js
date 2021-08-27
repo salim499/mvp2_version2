@@ -3,7 +3,7 @@ import React, {useState, useCallback} from 'react';
 
 // Import from libraries
 import { Bar } from 'react-chartjs-2';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 // Import components
 import Timeline from '../components/timeline'
@@ -55,6 +55,9 @@ const options = {
 
 const ChoseDateWindow = () => {
 
+    // useLocations 
+    const location = useLocation()
+
     // useHistory
     const history = useHistory()
 
@@ -77,6 +80,7 @@ const ChoseDateWindow = () => {
     const handleNext = useCallback (()=>{
         history.push({
             pathname : '/portfolio-causal-model',
+            state : location.state
         }) 
     },[])
 

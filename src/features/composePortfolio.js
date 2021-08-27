@@ -76,11 +76,13 @@ function ComposePortfolio() {
     const handleNext = useCallback (()=>{
         history.push({
             pathname : '/chose-date-window',
+            state : location.state
         }) 
-    },[])
+    },[location.state])
 
     // useEffect 
     useEffect(async()=>{
+      try {
         const res= await get(`${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}`,
         {
             headers:{
@@ -91,6 +93,10 @@ function ComposePortfolio() {
         res.data.columns.forEach(column => {
             setFactors(factors=>[...factors, {name:column}])
         })
+      }
+      catch (e) {
+          console.log(e)
+      }
     },[])
 
     // functions 

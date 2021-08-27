@@ -14,32 +14,48 @@ import star from '../assets/icons/star.svg'
 // Import css files 
 import '../css/actions.css'
 
-function  ModelActions() {
+function  ModelActions(props) {
+
+    // functions
+    const handleSelectAction = (event) => {
+        if(event.target.dataset.name){
+            props.handleSelectAction(event.target.dataset.name)
+        }
+    }
+
     return (
-        <div className="model-apply_constraints-body-actions-icons">
-            <div className="model-apply_constraints-body-actions-icons-item">
-                <img src={zoom_in}/>
+        <div className="model-apply_constraints-body-actions-icons" onClick={handleSelectAction}>
+            <div className="model-apply_constraints-body-actions-icons-item"
+             data-name="zoomIn">
+                <img src={zoom_in} data-name="zoomIn"/>
             </div>
-            <div className="model-apply_constraints-body-actions-icons-item">
-                <img src={zoom_out}/>
+            <div className="model-apply_constraints-body-actions-icons-item"
+            data-name="zoomOut">
+                <img src={zoom_out} data-name="zoomOut"/>
             </div>
-            <div className="model-apply_constraints-body-actions-icons-item">
-                <img src={trash_factor}/>
+            <div className="model-apply_constraints-body-actions-icons-item"
+            data-name="deleteFactor">
+                <img src={trash_factor} data-name="deleteFactor"/>
             </div>
-            <div className="model-apply_constraints-body-actions-icons-item">
-                <img src={trash_relation}/>
+            <div className="model-apply_constraints-body-actions-icons-item"
+            data-name="deleteRelation">
+                <img src={trash_relation} data-name="deleteRelation"/>
             </div>
-            <div className="model-apply_constraints-body-actions-icons-item">
-                <img src={order}/>
+            <div className="model-apply_constraints-body-actions-icons-item"
+            data-name="deleteFOrder">
+                <img src={order} data-name="deleteFOrder"/>
             </div>
-            <div className="model-apply_constraints-body-actions-icons-item">
-                <img src={add_relation}/>
+            <div className="model-apply_constraints-body-actions-icons-item"
+            data-name="deleteRelation">
+                <img src={add_relation} data-name="deleteRelation"/>
             </div>
-            <div className="model-apply_constraints-body-actions-icons-item">
-                <img src={star}/>
+            <div className="model-apply_constraints-body-actions-icons-item"
+            data-name="SelectTarget">
+                <img src={star} data-name="SelectTarget"/>
             </div>
-            <div className="model-apply_constraints-body-actions-icons-item">
-                <img src={path}/>
+            <div className="model-apply_constraints-body-actions-icons-item"
+            data-name="path">
+                <img src={path} data-name="path"/>
             </div>
         </div>
     )
