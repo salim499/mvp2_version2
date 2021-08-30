@@ -9,7 +9,6 @@ import new_category from '../assets/icons/new_category.svg'
 
 function AddItem(props) {
     return (
-      console.log("RENDER"),
       <div className="new_item" onClick={()=>props.handleAddItem()}>
         <div className="new_item-label">
             New category

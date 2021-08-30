@@ -9,7 +9,6 @@ import '../css/nextPreview.css'
 
 function NextPreview(props) {
     return (
-      console.log("render"),
       <div className="next_preview"> 
           <div className="next_preview-preview"
           style={{visibility: props.previewVisibility}}

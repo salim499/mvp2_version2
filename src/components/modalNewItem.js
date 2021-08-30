@@ -150,4 +150,4 @@ function ModalNewItem(props) {
     )
 }
 
-export default ModalNewItem
+export default React.memo(ModalNewItem)

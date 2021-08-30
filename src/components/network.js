@@ -113,7 +113,7 @@ function NetworkGraph(props) {
     return (
         <div ref={dom} style={{height: '1266px',  
         border: '1px solid #444444',
-        backgroundColor: '#222222'}}>
+        backgroundColor: '#FFFFFF'}}>
             
         </div>
     )

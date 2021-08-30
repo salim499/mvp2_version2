@@ -1,9 +1,9 @@
 .model-apply_constraints-body-actions-filters {
-    margin-top:1px;
+    margin-top:2px;
     min-height: 38.47px;
     display: flex;
     justify-content: space-between;
-    background-color:violet;
+    background: rgba(229, 229, 229, 1);
 }
 .model-apply_constraints-body-actions-filters-text {
     margin-left: 10%;

@@ -1,15 +1,14 @@
 .model-apply_constraints-body-actions-categories {
     margin-top: 1px;
     min-height: 226px;
-    background-color:brown;
     display: flex;
     flex-direction: column;
     justify-content:space-around;
+    background: rgba(229, 229, 229, 1);
 }
 .model-apply_constraints-body-actions-categories-item {
     display: flex;
     justify-content:flex-start;
-    background-color:chartreuse;
 }
 .model-apply_constraints-body-actions-categories-item-input {
     margin-left: 10%;

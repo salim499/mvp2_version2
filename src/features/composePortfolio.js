@@ -101,7 +101,6 @@ function ComposePortfolio() {
 
     // functions 
     const handleOnDragEnd = (result) => {
-        console.log(result.destination.index)
         // remove highlight from categories sections
         setCurrentDropIndex(null)
         // no drop destination or destination not equal to categories container 

@@ -47,6 +47,7 @@ function CausalModelView() {
     const [currentSelectedAction, setCurrentSelectedAction] = useState(null)
     const [previewVisibility, setPreviewVisibility] = useState("visible")
     const [nextVisibility, setNextVisibility] = useState("visible")
+    const [showModalApplyConstraints, setShowModalApplyConstraints] = useState()
 
     // preview button
     const handlePreview = useCallback (()=>{
@@ -78,6 +79,16 @@ function CausalModelView() {
         setCurrentSelectedAction(action)
     },[])
 
+    // show or hide the modal to apply constraints 
+    const handleShowApplyConstraintsModal = useCallback (()=>{
+        setShowModalApplyConstraints(!showModalApplyConstraints)
+    },[showModalApplyConstraints])
+
+
+    const handleApplyConstraints = useCallback (()=>{
+
+    },[])
+
     // useEffect
 /*    useEffect(async()=>{
         console.log(location.state)
@@ -98,16 +109,15 @@ function CausalModelView() {
 
     return (
         <div className={navBarState?"App":"App2"}>
-            {
-        console.log(selectedFactors),
-        console.log(selectedRelations)}
             <Timeline timelineLevel={timelineLevel}/>
             <CreatePortfolioNavbar
             width='100%'
             />
             <div className="model-constraints">
             <div className="model-apply_constraints">
-                <ModelHeaderFilter/>
+                <ModelHeaderFilter
+                handleHideModal={handleShowApplyConstraintsModal}
+                handleApplyConstraints={handleApplyConstraints}/>
                 <div className="model-apply_constraints-body">
                 <div className="model-apply_constraints-body-actions">
                     <ModelActions

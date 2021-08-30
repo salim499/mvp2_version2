@@ -1,0 +1,27 @@
+.date_interval {
+    display: flex;
+    justify-content:space-around;
+    width: 90%;
+    align-items:center;
+    margin-bottom: 43px;
+    margin-top: 43px;
+}
+.date_interval-item {  
+    background-color: '#FFFFFF';
+    border-radius: '5px';
+    text-align: center;
+}
+p {
+    margin:0%;
+    background-color:white;
+    border: solid 8px white;
+}
+.date_interval-item label {
+    font-family: Overpass;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 18px;
+    /* or 100% */  
+    color: #081C4D;   
+}

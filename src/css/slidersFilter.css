@@ -1,11 +1,11 @@
 .model-apply_constraints-body-actions-entropies {
     margin-top: 1px;
     height: 547.76px;
-    background-color:rgb(221, 154, 28);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    background: rgba(229, 229, 229, 1);
 }
 .model-apply_constraints-body-actions-entropies-factor {
     display: flex;

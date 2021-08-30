@@ -1,15 +1,16 @@
 // Import from react
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 
 // Import from libraries
-import { Bar } from 'react-chartjs-2';
 import { useHistory, useLocation } from 'react-router-dom';
+import { get } from 'axios';
 
 // Import components
 import Timeline from '../components/timeline'
 import DataSetContainer from '../components/dataSetContainer'
 import NextPreview from '../components/nextPreview'
-
+import DateWindow from '../components/verticalBar'
+import DateInterval from '../components/dateInterval'
 // Import css files
 import '../css/choseDateWindow.css'
 
@@ -19,38 +20,7 @@ import { useNavBar } from "../contexts/navbar"
 // Constants
 const timelineLevel=3
 
-const data = {
-  labels: ['1', '2', '3', '4', '5', '6'],
-  datasets: [
-    {
-      label: '# of Red Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: 'rgb(255, 99, 132)',
-    },
-    {
-      label: '# of Blue Votes',
-      data: [2, 3, 20, 5, 1, 4],
-      backgroundColor: 'rgb(54, 162, 235)',
-    },
-    {
-      label: '# of Green Votes',
-      data: [3, 10, 13, 15, 22, 30],
-      backgroundColor: 'rgb(75, 192, 192)',
-    },
-  ],
-};
 
-const options = {
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true,
-        },
-      },
-    ],
-  },
-};
 
 
 const ChoseDateWindow = () => {
@@ -67,6 +37,9 @@ const ChoseDateWindow = () => {
     // useState
     const [previewVisibility, setPreviewVisibility] = useState("visible")
     const [nextVisibility, setNextVisibility] = useState("visible")
+    const [startDate, setStartDate] = useState()
+    const [endDate, setEndDate] = useState()
+    const [columns, setColumns] = useState([])
 
     // useCallback
     // preview button
@@ -84,6 +57,28 @@ const ChoseDateWindow = () => {
         }) 
     },[])
 
+    // set datesInterval 
+    const handleSetDatesInterval = useCallback ((startD, endD)=>{
+      setStartDate(startD)
+      setEndDate(endD)
+    },[startDate,endDate])
+
+    useEffect (async()=>{
+      try {
+        const res= await get(`${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}`,
+        {
+            headers:{
+                token: localStorage.getItem('token')
+            }
+        }
+        )
+        setColumns(res.data.columns)
+      }
+      catch (e) {
+          console.log(e)
+      }
+    },[])
+
     return(
         <div className={navBarState?"App":"App2"}>
         <Timeline timelineLevel={timelineLevel}/>
@@ -91,13 +86,18 @@ const ChoseDateWindow = () => {
             <DataSetContainer/>
         </div>
         <div className="graphs-choseDateWindow-bar">
-            <Bar data={data} options={options} />
+            <DateWindow
+            handleSetDatesInterval={handleSetDatesInterval}
+            columns={columns}/>
         </div>
-        <NextPreview
-        handleNext={handleNext}
-        handlePreview={handlePreview}
-        nextVisibility={nextVisibility}
-        previewVisibility={previewVisibility} 
+          <DateInterval
+          startDate={startDate}
+          endDate={endDate}/>
+          <NextPreview
+          handleNext={handleNext}
+          handlePreview={handlePreview}
+          nextVisibility={nextVisibility}
+          previewVisibility={previewVisibility} 
         />
         </div>
     )};

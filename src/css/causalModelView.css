@@ -6,7 +6,6 @@
 .model-apply_constraints {
     height:1348px;
     width:calc(936% / 12.41);
-    background-color: yellow;
 }
 .model-apply_constraints-body {
     display:flex;
@@ -15,24 +14,23 @@
     margin-top: 1px;
     height: 1299px;
     width:calc(158% / 9.36);  
-    background-color:gray; 
+    background-color: #F5FAFD;
 }
 .model-apply_constraints-body-graph {
     margin-top: 1px;
     height: 1299px;
     width:calc(778% / 9.36);  
-    background-color:rgb(8, 218, 255); 
     display: flex;
     flex-direction: column;
 }
 .model-see_constraints {
     height:1348px;
     width:calc(305% / 12.41);
-    background-color: red;
     display: flex;
     flex-direction:column;
     align-items: center;
     justify-content: space-around;
+    background-color: #F5FAFD;;
 }
 
 

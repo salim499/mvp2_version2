@@ -66,7 +66,6 @@ const timelineLevel=1
     // case post csv
     const handleNext = useCallback(async()=>{
         // case choosing an existing file 
-        console.log(chosenDataSetId)
         if(chosenDataSetId!=null){
             history.push({
                 pathname : '/compose-portfolio',
@@ -99,7 +98,6 @@ const timelineLevel=1
 
     // case chose an existing csv file (dataset)
     const handleChoseDataset = useCallback((datasetId)=>{
-        console.log(datasetId)
         setChosenDataSetId(datasetId)
         setFile(null)
         setNextVisibility('visible')
