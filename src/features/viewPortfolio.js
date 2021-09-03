@@ -4,7 +4,7 @@ import React from 'react'
 // Import components
 import CreatePortfolioNavbar from '../components/createPortfolioNavbar'
 import PlotPortfolio from '../components/testChart2'
-import BarPortfolio from '../components/verticalBar'
+import BarPortfolio from '../components/verticalBar2'
 
 // Import css files
 import '../css/viewPortfolio.css'

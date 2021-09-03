@@ -1,101 +1,119 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import { Network} from 'vis-network/standalone/esm/vis-network';
-var nodes = [
-  { id: 0, label: "0" },
-  { id: 1, label: "1" },
-  { id: 2, label: "2" },
-  { id: 3, label: "3" },
-  { id: 4, label: "4" },
-  { id: 5, label: "5" },
-  { id: 6, label: "6" },
-  { id: 7, label: "7" },
-  { id: 8, label: "8" },
-  { id: 9, label: "9" },
-  { id: 10, label: "10" },
-  { id: 11, label: "11" },
-  { id: 12, label: "12" },
-  { id: 13, label: "13" },
-  { id: 14, label: "14" },
-  { id: 15, label: "15" },
-  { id: 16, label: "16" },
-  { id: 17, label: "17" },
-  { id: 18, label: "18" },
-];
-var edges = [
-  { from: 0, to: 1 },
-  { from: 0, to: 6 },
-  { from: 0, to: 13 },
-  { from: 0, to: 11 },
-  { from: 1, to: 2 },
-  { from: 2, to: 3 },
-  { from: 2, to: 4 },
-  { from: 3, to: 5 },
-  { from: 1, to: 10 },
-  { from: 1, to: 7 },
-  { from: 2, to: 8 },
-  { from: 2, to: 9 },
-  { from: 3, to: 14 },
-  { from: 1, to: 12 },
-  { from: 16, to: 15 },
-  { from: 15, to: 17 },
-  { from: 18, to: 17 },
-];
-  
-  var options = {
-    nodes: {
-      shape: "dot",
-      size: 20,
-      font: {
-        size: 15,
-        color: "#ffffff",
-      },
-      borderWidth: 2,
-    },
-    edges: {
-      width: 2,
-    },
-    groups: {
-      diamonds: {
-        color: { background: "red", border: "white" },
-        shape: "diamond",
-      },
-      dotsWithLabel: {
-        label: "I'm a dot!",
-        shape: "dot",
-        color: "cyan",
-      },
-      mints: { color: "rgb(0,255,140)" },
-      icons: {
-        shape: "icon",
-        icon: {
-          face: "FontAwesome",
-          code: "\uf0c0",
-          size: 50,
-          color: "orange",
-        },
-      },
-      source: {
-        color: { border: "white" },
-      },
-    },
-  };
 
-var data = {
-      nodes: nodes,
-      edges: edges,
-  };
+var changeChosenLabelColor = function (values, id, selected, hovering) {
+  values.color = "#FFFFFF"
+  values.size += 1
+  values.face = "serif"
+  values.mod = "bold italic"
+  values.strokeWidth = 5
+  values.strokeColor = "#000000"
+};
+
+const options = {
+  autoResize:true,
+  height: '100%',
+  width: '100%',
+  clickToUse:false,
+  
+layout: {
+    // this would make the tree directed
+    hierarchical: {
+        enabled:true,
+        levelSeparation: 75,
+        nodeSpacing:100,
+        direction:'UD',
+        edgeMinimization: false,
+        parentCentralization: false,
+        sortMethod:"directed",
+        shakeTowards:"leaves",
+        blockShifting:true
+    },
+    randomSeed:2,
+    improvedLayout:true,
+    clusterThreshold:100
+  },
+  interaction: {
+    tooltipDelay:10,
+    selectConnectedEdges:true,
+    hoverConnectedEdges:true,
+    hover:true,
+    hideEdgesOnDrag:true,
+    hideNodesOnDrag:false,
+    dragView:true,
+    dragNodes :true,
+    navigationButtons: true,
+    keyboard: {
+      enabled: false,
+      speed: {x: 10, y: 10, zoom: 0.02},
+      bindToWindow: true
+    },
+    zoomSpeed: 1,
+    zoomView:true
+  },
+    nodes: {
+      size:18,
+      borderWidth:2,
+      borderWidthSelected:3,
+      chosen:{
+        label:changeChosenLabelColor,
+      },
+        //image, circularImage, diamond, dot, star, triangle, triangleDown, hexagon, square and icon.
+      shape: "hexagon",
+      scaling: {
+          label: {
+            min: 8,
+            max: 20,
+            
+          },
+      },
+
+    },
+    edges:{
+      smooth:true,
+      arrows:{
+        to:true
+      }
+    },
+   
+    physics: {
+    
+      hierarchicalRepulsion: {
+        centralGravity: 0,
+        avoidOverlap: 0.5,
+      },
+      solver: "hierarchicalRepulsion",
+      adaptiveTimestep:true,
+      enabled: true
+    },
+}
+
 
 function NetworkGraph(props) {
 
+    // useRef
     const network = useRef()
     const dom= useRef()
 
+    // useState
+    const [nodes, setNodes] = useState([])
+    const [edges, setEdges] = useState([])
+
+    // useEffect
+    // create the initial network    
     useEffect(()=>{
         // create network 
-        network.current = new Network(dom.current, data, options)
+        network.current = new Network(dom.current, {nodes,edges}, options)
 
         // network click event
         network.current.on('click', function (properties){
+          console.log(network.current)
+          console.log(network.current.getScale())
+          network.current.moveTo({
+            position: {x: 0, y: 0},
+            offset: {x: 1, y: 0},
+            scale: network.current.getScale()*0.98,
+        })
           const node = network.current.body.nodes[properties['nodes']['0']]
           const edge = network.current.body.edges[properties['edges']['0']]
           // case of node click
@@ -108,7 +126,33 @@ function NetworkGraph(props) {
             return            
           }
         })
-    },[])
+    },[nodes, edges])
+
+    // filter te network depends on factorEntropyValue
+    useEffect(()=>{
+      if(props.dataNetwork!=null){
+        setNodes(props.dataNetwork.nodes.filter(node=>node.entropy>props.factorEntropyValue))
+      } 
+    },[props.factorEntropyValue])
+
+    // filter te network depends on relationEntropyValue
+    useEffect(()=>{
+      if(props.dataNetwork!=null){
+        setEdges(props.dataNetwork.edges.filter(edge=>edge.entropy>props.relationEntropyValue))
+      } 
+    },[props.relationEntropyValue])
+
+    // setInitialDataNetwork
+    useEffect(()=>{
+      console.log(props.dataNetwork)
+      if(props.dataNetwork!=null){
+        props.dataNetwork.nodes.forEach(element => {
+          element.label=element.name
+        }) 
+        setNodes(props.dataNetwork.nodes)
+        setEdges(props.dataNetwork.edges)
+      }
+    },[props.dataNetwork])
 
     return (
         <div ref={dom} style={{height: '1266px',  
@@ -119,4 +163,4 @@ function NetworkGraph(props) {
     )
 }
 
-export default NetworkGraph
+export default React.memo(NetworkGraph)

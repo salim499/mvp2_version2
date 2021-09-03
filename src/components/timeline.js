@@ -12,9 +12,13 @@ const Timeline = ({timelineLevel}) => {
                 className="square"
                 style={{ 
                   backgroundColor: timelineLevel>1 ? "#081c4d" : null, 
-                  border: timelineLevel===1 ? "2px solid #081c4d" : "2px solid #C4C4C4"
+                  border: timelineLevel===1 ? "2px solid #081c4d" : "2px solid #C4C4C4",
+                  display:'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  color: timelineLevel>1 ? "#FFFFFF" : "#081c4d"
                 }}
-                ></div>
+                >1</div>
                 <div style={{ 
                   color: timelineLevel>0 ? "#081c4d" : "#C4C4C4",
                   textAlign:"center" }}>Choose Dataset</div>
@@ -24,7 +28,7 @@ const Timeline = ({timelineLevel}) => {
               style={{
                 color: timelineLevel>1? "#081c4d" : "#C4C4C4",
                 border: timelineLevel>1? "2px solid #081c4d" : "1px solid #C4C4C4",
-                backgroundColor: timelineLevel>1? "#081c4d" : "#C4C4C4" 
+                backgroundColor: timelineLevel>1? "#081c4d" : "#C4C4C4",
               }}>
               </div>
               </div>
@@ -33,9 +37,13 @@ const Timeline = ({timelineLevel}) => {
                 className="square"
                 style={{ 
                   backgroundColor: timelineLevel>2 ? "#081c4d" : null, 
-                  border: timelineLevel>1 ? "2px solid #081c4d" : "2px solid #C4C4C4" 
+                  border: timelineLevel>1 ? "2px solid #081c4d" : "2px solid #C4C4C4",
+                  display:'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  color: timelineLevel>2 ? "#FFFFFF" : "#081c4d"
                 }}
-                ></div>
+                >2</div>
                 <div style={{ color: timelineLevel>1? "#081c4d" : "#C4C4C4",
                               textAlign:"center" }}>Compose Portfolio</div>
             </div>
@@ -53,9 +61,13 @@ const Timeline = ({timelineLevel}) => {
                 className="square"
                 style={{ 
                   backgroundColor: timelineLevel>3 ? "#081c4d" : null, 
-                  border: timelineLevel>2 ? "2px solid #081c4d" : "2px solid #C4C4C4" 
+                  border: timelineLevel>2 ? "2px solid #081c4d" : "2px solid #C4C4C4",
+                  display:'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  color: timelineLevel>3 ? "#FFFFFF" : "#081c4d"
                 }}
-                 ></div>
+                 >3</div>
                 <div style={{ color: timelineLevel>2? "#081c4d" : "#C4C4C4",
                               textAlign:"center" }}>Chose Date</div>
             </div>
@@ -73,9 +85,13 @@ const Timeline = ({timelineLevel}) => {
                 className="square"
                 style={{ 
                   border: timelineLevel>3 ? "2px solid #081c4d" : "2px solid #C4C4C4", 
-                  backgroundColor: timelineLevel>4? "#081c4d" : null
+                  backgroundColor: timelineLevel>4? "#081c4d" : null,
+                  display:'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  color: timelineLevel>4 ? "#FFFFFF" : "#081c4d"
                 }}
-                ></div>
+                >4</div>
                 <div style={{ color: timelineLevel>3? "#081c4d" : "#C4C4C4",
                               textAlign:"center" }}>Portfolio & CM</div>
             </div>

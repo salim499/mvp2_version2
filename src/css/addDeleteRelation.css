@@ -1,0 +1,88 @@
+.model-see_constraints-relations {
+    height: 380px;
+    width: calc(268% /3.66); 
+    background-color: #E5E5E5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.model-see_constraints-relations {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.model-see_constraints-relations-title {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+    text-align: center;
+}
+.model-see_constraints-relations-fromTo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+}
+.model-see_constraints-relations-fromTo-item {
+    display:flex;
+    width: 100%;
+    justify-content:space-around;
+}
+.model-see_constraints-relations-fromTo-text {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    /* identical to box height */  
+    color: #000000;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+.model-see_constraints-relations-fromTo-select {
+    width: calc(268% /3.66);  
+    height: 24px;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background: #E5E5E5;
+}
+.model-see_constraints-relations-relations {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width:100%;
+}
+.model-see_constraints-relations-relations-item {
+    display: flex;
+    width:100%;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+.model-see_constraints-relations-relations-item-text {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    /* identical to box height */
+    color: #000000;
+    width:30%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+.model-see_constraints-relations-relations-item-icon {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.model-see_constraints-relations-relations-item-icon img {
+    height:75%;
+}

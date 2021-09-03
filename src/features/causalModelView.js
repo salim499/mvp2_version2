@@ -2,7 +2,7 @@
 import React, {useEffect, useCallback, useState} from 'react'
 
 // Import from libraries
-import {get} from 'axios'
+import {post} from 'axios'
 import { useLocation, useHistory } from 'react-router-dom'
 
 // Import css files
@@ -19,10 +19,11 @@ import ModelFilterCategories from '../components/multiCheck'
 import FilterHeader from '../components/filterHeader'
 import HistoricalActions from '../components/historicalActions'
 import CausalModelGuide from '../components/guide'
-import Orders from '../components/orders'
+import FactorSelection from '../components/factorSelection'
 import ModelHeaderFilter from '../components/modelFilter'
 import ModelHeaderConstraints from '../components/modelConstraints'
 import NextPreview from '../components/nextPreview'
+import ModalApplyConstraints from '../components/modalApplyConstraints'
 
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
@@ -44,10 +45,24 @@ function CausalModelView() {
     // useState
     const [selectedFactors, setSelectedFactors] = useState([])
     const [selectedRelations, setSelectedRelations] = useState([])
-    const [currentSelectedAction, setCurrentSelectedAction] = useState(null)
+    const [currentSelectedAction, setCurrentSelectedAction] = useState("deleteFactor")
     const [previewVisibility, setPreviewVisibility] = useState("visible")
     const [nextVisibility, setNextVisibility] = useState("visible")
-    const [showModalApplyConstraints, setShowModalApplyConstraints] = useState()
+    const [showModalApplyConstraints, setShowModalApplyConstraints] = useState(false)
+    const [factorSliderValue, setFactorSliderValue] = useState(0)
+    const [relationSliderValue, setRelationSliderValue] = useState(0)
+    const [chosenCategories, setChosenCategories] = useState([])
+    const [factorsToDelete, setFactorsToDelete] = useState([])
+    const [relationsToDelete, setRelationsToDelete] = useState([])
+    const [relationsToAdd, setRelationsToAdd] = useState([])
+    const [factorsOrders, setFactorsOrders] = useState({})
+    const [factorsFilters, setFactorsFilters] = useState({})
+    const [dataNetwork, setDataNetwork] = useState(null)
+    const [factors, setFactors] = useState([])
+    const [relations, setRelations] = useState([])
+    const [maxFactorSliderValue, setMaxFactorSliderValue] = useState(null)
+    const [maxRelationSliderValue, setMaxRelationSliderValue] = useState(null)
+    const [showFilterCategorySection, setShowFilterCategorySection] = useState(true)
 
     // preview button
     const handlePreview = useCallback (()=>{
@@ -75,7 +90,6 @@ function CausalModelView() {
 
     // save the current selected action from model model actions
     const handleSelectAction = useCallback ((action)=>{
-        console.log(action)
         setCurrentSelectedAction(action)
     },[])
 
@@ -89,26 +103,63 @@ function CausalModelView() {
 
     },[])
 
-    // useEffect
-/*    useEffect(async()=>{
-        console.log(location.state)
-      try {  
-        const res= await get(`${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}`,
-        {
-            headers:{
-                token: localStorage.getItem('token')
-            }
-        })
-        console.log(res)
-        console.log(res.data)
-     }
-     catch (e) {
-         console.log(e)
-     }
-    },[])*/
+    const handleFactorSliderChangeValue = useCallback ((sliderValue)=>{
+        setFactorSliderValue(sliderValue)
+    },[factorSliderValue])
+
+    const handleRelationSliderChangeValue = useCallback ((sliderValue)=>{
+        setRelationSliderValue(sliderValue)
+    },[relationSliderValue])
+
+    const handleChosenCategories = useCallback ((chosenCategoryName, toAdd)=>{
+        if(toAdd){
+            setChosenCategories(chosenCategories=> [...chosenCategories,chosenCategoryName])
+            return
+        }
+        setChosenCategories(chosenCategories.filter(categoryName=>categoryName!=chosenCategoryName))
+    },[chosenCategories])
+
+    const handleSetFactorsOrders = useCallback((factorName,order) => {
+        setFactorsOrders(factorsOrders=>({...factorsOrders,[factorName]:order}))
+    },[])
+
+    const handleShowFilterCategorySection = useCallback((value)=>{
+        setShowFilterCategorySection(value)
+    },[])
+
+    // get model data
+    useEffect(async()=>{
+        try{
+          // set data network
+          const res=await post(`http://86.238.208.39:8081/models-mock-1`)
+          setDataNetwork(
+              {
+                  nodes:res.data.network.factors,
+                  edges:res.data.network.relations
+              }
+              )
+          console.log(res.data)
+          // set factors
+          setFactors(res.data.network.factors) 
+          // set relations
+          setRelations(res.data.network.relations)
+          // set the max value of filter factor entropy slider
+          const maxFactorEntropy=Math.max.apply(Math, res.data.network.factors.map(function(o) { return o.entropy; }))
+          setMaxFactorSliderValue(maxFactorEntropy)
+          // set the max value of filter relation entropy slider
+          const maxRelationEntropy=Math.max.apply(Math, res.data.network.factors.map(function(o) { return o.entropy; }))
+          setMaxRelationSliderValue(maxRelationEntropy)
+        }
+        catch (e){
+          console.log(e)
+        }
+      },[])
+
+
 
     return (
-        <div className={navBarState?"App":"App2"}>
+        <>
+        <div className={navBarState?"App":"App2"} onClick={handleSetFactorsOrders}>
             <Timeline timelineLevel={timelineLevel}/>
             <CreatePortfolioNavbar
             width='100%'
@@ -116,30 +167,48 @@ function CausalModelView() {
             <div className="model-constraints">
             <div className="model-apply_constraints">
                 <ModelHeaderFilter
-                handleHideModal={handleShowApplyConstraintsModal}
-                handleApplyConstraints={handleApplyConstraints}/>
+                handleShowApplyConstraintsModal={handleShowApplyConstraintsModal}
+                />
                 <div className="model-apply_constraints-body">
                 <div className="model-apply_constraints-body-actions">
                     <ModelActions
                     handleSelectAction={handleSelectAction}/>
-                    <FilterHeader/>
-                    <ModelFilterCategories/>
-                    <ModelFilterSliders/>
+                    <FilterHeader
+                    currentFilterState={handleShowFilterCategorySection}
+                    />
+                    <ModelFilterCategories
+                    handleChosenItems={handleChosenCategories}
+                    showSection={showFilterCategorySection}
+                    />
+                    <ModelFilterSliders
+                    handleFirstSliderChangeValue={handleFactorSliderChangeValue}
+                    handleSecondSliderChangeValue={handleRelationSliderChangeValue}
+                    maxFirstSliderValue={maxFactorSliderValue}
+                    maxSecondSliderValue={maxRelationSliderValue}
+                    />
                     <ModelDirections/>
                 </div>
                     <div className="model-apply_constraints-body-graph">
                         <ModelHeaderConstraints/>
                         <div className="model-apply_constraints-body-graph-network-header-item">
                             <Network
+                            dataNetwork={dataNetwork}
                             handleClickNode={handleSelectFactor}
                             handleClickEdge={handleSelectRelation}
+                            factorEntropyValue={factorSliderValue}
+                            relationEntropyValue={relationSliderValue}
                             />
                          </div>
                     </div>
                 </div>
             </div>
             <div className="model-see_constraints">
-                <Orders/>
+                <FactorSelection 
+                currentSelectedAction={currentSelectedAction}
+                handleSetFactorsOrders={handleSetFactorsOrders}
+                factors={factors}
+                relations={relations}
+                />
                 <HistoricalActions/>
                 <CausalModelGuide/>
             </div>
@@ -151,6 +220,13 @@ function CausalModelView() {
             previewVisibility={previewVisibility} 
             />
         </div>
+        {
+            showModalApplyConstraints&&
+            <ModalApplyConstraints
+            handleHideModal={handleShowApplyConstraintsModal}
+            handleApplyConstraints={handleApplyConstraints}/>
+        }
+        </>
     )
 }
 

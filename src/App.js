@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 
 // Import from libraries
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-
+import axios from 'axios'
 // Import css files
 import './App.css'
 

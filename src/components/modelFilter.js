@@ -7,18 +7,19 @@ import reset_network from '../assets/icons/reset_network.svg'
 // Import css files 
 import '../css/modelFilter.css'
 
-function ModelFilter() {
+function ModelFilter(props) {
     return (
         <div className="model-apply_constraints-header">
         <div className="model-apply_constraints-header-content">
           <div className="model-apply_constraints-header-content-text">
               analysis
           </div>
-          <div className="model-apply_constraints-header-content-text-action">
-              guide
+          <div className="model-apply_constraints-header-content-text-action"
+          onClick={props.handleShowApplyConstraintsModal}>
+              apply constraints
           </div>
           <div className="model-apply_constraints-header-content-text-action">
-              constraints
+              guide
           </div>
           <div className="model-apply_constraints-header-content-icon">
               <img src={reset_network} />

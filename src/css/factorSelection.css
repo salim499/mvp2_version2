@@ -6,7 +6,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-
 }
 .model-see_constraints-orders-select {
     background: #E5E5E5;
@@ -18,16 +17,20 @@
 .model-see_constraints-orders-items {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     width:88%;
     height: 66%;
+    overflow:scroll;
+    overflow-x:hidden;
+    overflow-y:hidden;
 }
 .model-see_constraints-orders-items-item {
     display: flex;
     height:20px;
+    margin-bottom: 5px;
 }
 .model-see_constraints-orders-items-item-label {
-    width: 50%;
+    width: 57%;
     display: flex;
 }
 .model-see_constraints-orders-items-item-label-text {
@@ -39,7 +42,7 @@
     color: #000000;
 }
 .model-see_constraints-orders-items-item-inputs {
-    width: 50%;
+    width: 43%;
     display: flex;
     justify-content:space-between;
 }
@@ -47,4 +50,27 @@
     width: 50%;
     border-radius: 0px;
     text-align: center;
+}
+.model-see_constraints-orders-items-item-inputs-select {
+    width: 60%;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 13px;
+
+    color: #000000;
+}
+.model-see_constraints-orders-items-item-inputs-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+.model-see_constraints-orders-items-item-inputs-icon {
+    width:100%;
+    height:100%;
+}
+.model-see_constraints-orders-items-item-inputs-empty {
+    width:100%;
 }
