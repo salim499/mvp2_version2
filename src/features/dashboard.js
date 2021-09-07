@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 // Import css files 
 import '../css/dashboard.css'
@@ -15,12 +15,143 @@ import Graph_portfolio from '../components/testChart2'
 import Circle_portfolio from '../components/Circle'
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
+import { useAuth } from "../contexts/user"
+
+const dataFromBackend =[
+    {
+        "date": "23.07.2007",
+        "US Treasuries": 75.9375,
+        "US High Yield": 140.1308,
+        "US Equities": 1365.45,
+      },
+      {
+        "US Treasuries": 76.0625,
+        "US High Yield": 139.1285,
+        "US Equities": 1342.09,
+      },
+      {
+        "US Treasuries": 76.234375,
+        "US High Yield": 138.0593,
+        "US Equities": 1344.03,
+      },
+      {
+  
+        "US Treasuries": 76.90625,
+        "US High Yield": 137.1479,
+        "US Equities": 1311.59,
+      },
+      {
+        "US Treasuries": 76.8125,
+        "US High Yield": 137.1906,
+        "US Equities": 1285.23,
+      },
+      {
+        "US Treasuries": 76.6875,
+        "US High Yield": 136.824,
+        "US Equities": 1305.24,
+      },
+      {
+        "US Treasuries": 76.828125,
+        "US High Yield": 135.3339,
+        "US Equities": 1288.67,
+      },
+      {
+        "date": "01.08.2007",
+        "US Treasuries": 76.859375,
+        "US High Yield": 135.7713,
+        "US Equities": 1295.72,
+      },
+      {
+        "US Treasuries": 76.859375,
+        "US High Yield": 135.7568,
+        "US Equities": 1306.12,
+      },
+      {
+        "date": "03.08.2007",
+        "US Treasuries": 77.15625,
+        "US High Yield": 136.5559,
+        "US Equities": 1272.01,
+      },
+      {
+        "US Treasuries": 77.015625,
+        "US High Yield": 136.6757,
+        "US Equities": 1293.78,
+      },
+      {
+        "date": "07.08.2007",
+        "US Treasuries": 76.9375,
+        "US High Yield": 136.8472,
+        "US Equities": 1306.74,
+      },
+      {
+        "date": "09.08.2007",
+        "US Treasuries": 76.796875,
+        "US High Yield": 138.2235,
+        "US Equities": 1285.14,
+      },
+      {
+        "date": "10.08.2007",
+        "US Treasuries": 76.875,
+        "US High Yield": 138.3298,
+        "US Equities": 1279.06,
+      },
+      {
+        "date": "13.08.2007",
+        "US Treasuries": 76.90625,
+        "US High Yield": 138.468,
+        "US Equities": 1282.68,
+      },
+      {
+        "date": "14.08.2007",
+        "US Treasuries": 77.15625,
+        "US High Yield": 138.8395,
+        "US Equities": 1264.34,
+      },
+      {
+        "date": "15.08.2007",
+        "US Treasuries": 77.375,
+        "US High Yield": 138.8794,
+        "US Equities": 1246.8,
+      },
+      {
+        "date": "17.08.2007",
+        "US Treasuries": 77.671875,
+        "US High Yield": 138.0627,
+        "US Equities": 1278.09,
+      },
+      {
+        "date": "20.08.2007",
+        "US Treasuries": 77.796875,
+        "US High Yield": 138.1764,
+        "US Equities": 1277.39,
+      },
+      {
+        "date": "21.08.2007",
+        "US Treasuries": 78.015625,
+        "US High Yield": 138.1962,
+        "US Equities": 1278.45,
+      },
+      {
+        "US Treasuries": 77.84375,
+        "US High Yield": 138.8875,
+        "US Equities": 1294.66,
+      },
+      {
+        "US Treasuries": 77.828125,
+        "US High Yield": 139.3422,
+        "US Equities": 1292.64,
+      },
+    ]
 
 function Dashboard() {
+ 
+    const { currentUser } = useAuth()
+    const {navBarState} = useNavBar()
 
-    const {navBarState, setNavBarState} = useNavBar()
+    const [assetsGraphData, setAssetsGraphData] = useState(dataFromBackend)
 
     return (
+        currentUser!=null &&
         <div className={navBarState?"App":"App2"}>
             <div className="user_information">
                 <div className="user_information-user_name">
@@ -106,7 +237,8 @@ function Dashboard() {
             </div>
             <div className="portfolio-values">
                 <div className="portfolio-values-graph">
-                    <Graph_portfolio/>
+                    <Graph_portfolio
+                    lineChartData={assetsGraphData}/>
                     <div className="rebalance">
                         <div className="rebalance_item">
                             <div className="rebalance_item-button">

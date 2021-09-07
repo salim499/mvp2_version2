@@ -11,7 +11,7 @@ export function useNavBar() {
 export function NavbarProvider({ children }) {
 
     // useState
-    const [navBarState, setNavBarState] = useState(true)
+    const [navBarState, setNavBarState] = useState(false)
 
     const obj={
         navBarState, 

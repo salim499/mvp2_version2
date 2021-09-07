@@ -36,12 +36,8 @@ function NavBar(props) {
     // useLocation
     const { pathname } = useLocation();
     // useState
-    const [showSideBar, setShowSideBar]=useState(true)
+    const [showSideBar, setShowSideBar]=useState(false)
 
-    // useEffect
-    useEffect(()=>{
-      console.log(navBarState)
-    },[navBarState])
 
     return (
     <div className="navbar">
@@ -51,15 +47,19 @@ function NavBar(props) {
          <div className="menu-bars">
       
          </div> 
-         {
+         {/*
            currentUser != null && !currentUser.is_admin &&
            <Link to="/update-count" className="menu-bars-text">
             UpdateCount
            </Link> 
-         }        
+         */}  
+        {
+          /*
         <Link to="/sign_in" className="menu-bars-text">
           Login
         </Link>  
+          */
+        }      
         {
           currentUser && currentUser.is_admin &&
           <Link to="/signup" className="menu-bars-text">
@@ -68,14 +68,17 @@ function NavBar(props) {
         }
   
         </div>
-        <div className="menu-bars-toggle">
-        <Link to="#" className="menu-bars">
-        <FaBars onClick={handleShowSideBar}/>
-        </Link> 
-        </div>
+        {
+          currentUser!=null&&
+          <div className="menu-bars-toggle">
+          <Link to="#" className="menu-bars">
+          <FaBars onClick={handleShowSideBar}/>
+          </Link> 
+          </div>
+        }
         </div>
         </IconContext.Provider>
-        <nav className={showSideBar ? 'nav-menu active' : 'nav-menu'}>
+        <nav className={showSideBar && currentUser!=null ? 'nav-menu active' : 'nav-menu'}>
           <ul className='nav-menu-items'>
             <li className='navbar-toggle'>
               <IconContext.Provider value={{ color: '#fff' }}>

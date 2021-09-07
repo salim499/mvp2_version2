@@ -55,7 +55,7 @@ function CausalModelView() {
     const [factorsToDelete, setFactorsToDelete] = useState([])
     const [relationsToDelete, setRelationsToDelete] = useState([])
     const [relationsToAdd, setRelationsToAdd] = useState([])
-    const [factorsOrders, setFactorsOrders] = useState({})
+    const [factorsOrders, setFactorsOrders] = useState([])
     const [factorsFilters, setFactorsFilters] = useState({})
     const [dataNetwork, setDataNetwork] = useState(null)
     const [factors, setFactors] = useState([])
@@ -119,13 +119,52 @@ function CausalModelView() {
         setChosenCategories(chosenCategories.filter(categoryName=>categoryName!=chosenCategoryName))
     },[chosenCategories])
 
-    const handleSetFactorsOrders = useCallback((factorName,order) => {
-        setFactorsOrders(factorsOrders=>({...factorsOrders,[factorName]:order}))
-    },[])
+    const handleSetFactorsOrders = useCallback((factorId,order) => {
+        // verify if the factor is already existing on factors orders
+        const findInFactorsOrders = factorsOrders.find(factor => factor.id===parseInt(factorId))
+        // case if the factor is already exist in factorsOrders
+        if(findInFactorsOrders){
+            findInFactorsOrders.order=parseInt(order)
+            return
+        }
+        // case if the factor does not already exist in factorsOrders
+        setFactorsOrders(factorsOrders=>([...factorsOrders, {id:parseInt(factorId), order:parseInt(order)}]))
+    },[factorsOrders])
+
+    const handleSetFactorsFilters = useCallback((factorId,value) => {
+        console.log(factorsFilters)
+        console.log(factorId,value)
+        // verify if the factor is already existing on factors orders
+        const findInFactorsFilters = factorsFilters.find(factor => factor.id===parseInt(factorId))
+        // case if the factor is already exist in factorsOrders
+        if(findInFactorsFilters){
+            findInFactorsFilters.value=value
+            return
+        }
+        // case if the factor does not already exist in factorsOrders
+        setFactorsFilters(factorsFilters=>([...factorsFilters, {id:parseInt(factorId), value:value}]))
+    },[factorsFilters])
 
     const handleShowFilterCategorySection = useCallback((value)=>{
         setShowFilterCategorySection(value)
     },[])
+
+    const handleUnselectFactors= useCallback((factorId)=>{
+        if(currentSelectedAction==="orderFactor"){
+            setFactorsOrders(factorsOrders.filter(factor=>factor.id===parseInt(factorId)))
+            return
+        }
+        if(currentSelectedAction==="filterFactor"){
+            setFactorsFilters(factorsFilters.filter(factor=>factor.id===parseInt(factorId)))
+            return
+        }
+        if(currentSelectedAction==="addRelation"){
+            return
+        }
+        if(currentSelectedAction==="deleteRelation"){
+            return
+        }
+    },[factorsOrders, currentSelectedAction])
 
     // get model data
     useEffect(async()=>{
@@ -138,7 +177,6 @@ function CausalModelView() {
                   edges:res.data.network.relations
               }
               )
-          console.log(res.data)
           // set factors
           setFactors(res.data.network.factors) 
           // set relations
@@ -159,7 +197,7 @@ function CausalModelView() {
 
     return (
         <>
-        <div className={navBarState?"App":"App2"} onClick={handleSetFactorsOrders}>
+        <div className={navBarState?"App":"App2"}>
             <Timeline timelineLevel={timelineLevel}/>
             <CreatePortfolioNavbar
             width='100%'
@@ -206,6 +244,8 @@ function CausalModelView() {
                 <FactorSelection 
                 currentSelectedAction={currentSelectedAction}
                 handleSetFactorsOrders={handleSetFactorsOrders}
+                handleUnselectFactors={handleUnselectFactors}
+                handleSetFactorsFilters={handleSetFactorsFilters}
                 factors={factors}
                 relations={relations}
                 />

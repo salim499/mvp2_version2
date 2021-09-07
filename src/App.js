@@ -36,6 +36,7 @@ function App() {
       <NavBar/>
       <div>
       <Route path="/" exact>
+      <Dashboard/>
        <SignIn/>
       </Route>
       <Route path="/portfolio-causal-model" exact>
@@ -43,9 +44,6 @@ function App() {
       </Route>        
       <Route path="/view-portfolio" exact>
         <ViewPortfolio/>
-      </Route>
-      <Route path="/dashboard" exact>
-        <Dashboard/>
       </Route>
       <Route path="/compose-portfolio" exact>
         <ComposePortfolio/>

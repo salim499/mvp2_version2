@@ -38,6 +38,7 @@ const SignIn= () => {
     }
 
     return (
+        currentUser===null&&
         <div className={navBarState?"App":"App2"}>
         <div className="signup-container">
           <div className="signup-text">
