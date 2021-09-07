@@ -1,5 +1,5 @@
 // Import from react
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 
 // Import icons 
 import delete_factor from '../assets/icons/delete.svg'
@@ -15,6 +15,17 @@ function FactorSelection(props) {
 
     // useState
     const [selectedFactors, setSelectedFactors] = useState([])
+
+    const handleAddRelation = useCallback ((from, to) => {
+        console.log(from, to)
+        props.handleAddRelation(from, to)
+    },[])
+
+    // useEffect
+    // reset selected factors to an empty array on change of the current action
+    useEffect (()=>{
+        setSelectedFactors([])
+    },[props.currentSelectedAction])
 
     // functions 
     const handleSetFactorsOrders = (event) => {
@@ -37,11 +48,6 @@ function FactorSelection(props) {
     const handleSetFactorsFilters = (event) => {
         props.handleSetFactorsFilters(event.target.dataset.id, event.target.value)
     }
-    
-    // reset selected factors to an empty array on change of the current action
-    useEffect (()=>{
-        setSelectedFactors([])
-    },[props.currentSelectedAction])
 
     return (
         <>
@@ -50,7 +56,6 @@ function FactorSelection(props) {
         <select className="model-see_constraints-orders-select" onChange={handleSelectFactors}>
         <option key="choseFactor" value="">chose factor</option>    
         {
-            console.log(props.factors),
             props.factors.map((factor, index)=>(
                 !selectedFactors.find(selectedFactor=>selectedFactor.name===factor.name)&&
                 <option key={factor.name}>{factor.name}</option>
@@ -103,11 +108,15 @@ function FactorSelection(props) {
         }
         {
         props.currentSelectedAction==="addRelation"&&
-        <AddDeleteRelation action="add"/>
+        <AddDeleteRelation action="add"
+        factors={props.factors}
+        handleAddRelation={handleAddRelation}/>
         }
         {
         props.currentSelectedAction==="deleteRelation"&&
-        <AddDeleteRelation action="delete"/>            
+        <AddDeleteRelation action="delete"
+        factors={props.factors}
+        handleAddRelation={handleAddRelation}/>            
         }
     </>
 )

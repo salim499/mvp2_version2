@@ -40,33 +40,10 @@ function NavBar(props) {
 
 
     return (
-    <div className="navbar">
-        <IconContext.Provider value={{ color: '#fff' }}>
-        <div className="nav-header">
+    <div className={!showSideBar ? 'navbar' : 'navbar2'}>
+        <IconContext.Provider value={{ color: '#081C4D' }}>
+        <div className="nav-header" style={{height: showSideBar&&'0px'}}>
         <div className="nav-menu-user">  
-         <div className="menu-bars">
-      
-         </div> 
-         {/*
-           currentUser != null && !currentUser.is_admin &&
-           <Link to="/update-count" className="menu-bars-text">
-            UpdateCount
-           </Link> 
-         */}  
-        {
-          /*
-        <Link to="/sign_in" className="menu-bars-text">
-          Login
-        </Link>  
-          */
-        }      
-        {
-          currentUser && currentUser.is_admin &&
-          <Link to="/signup" className="menu-bars-text">
-            Add user
-          </Link> 
-        }
-  
         </div>
         {
           currentUser!=null&&

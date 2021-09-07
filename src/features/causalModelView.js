@@ -56,7 +56,7 @@ function CausalModelView() {
     const [relationsToDelete, setRelationsToDelete] = useState([])
     const [relationsToAdd, setRelationsToAdd] = useState([])
     const [factorsOrders, setFactorsOrders] = useState([])
-    const [factorsFilters, setFactorsFilters] = useState({})
+    const [factorsFilters, setFactorsFilters] = useState([])
     const [dataNetwork, setDataNetwork] = useState(null)
     const [factors, setFactors] = useState([])
     const [relations, setRelations] = useState([])
@@ -133,7 +133,6 @@ function CausalModelView() {
 
     const handleSetFactorsFilters = useCallback((factorId,value) => {
         console.log(factorsFilters)
-        console.log(factorId,value)
         // verify if the factor is already existing on factors orders
         const findInFactorsFilters = factorsFilters.find(factor => factor.id===parseInt(factorId))
         // case if the factor is already exist in factorsOrders
@@ -151,20 +150,28 @@ function CausalModelView() {
 
     const handleUnselectFactors= useCallback((factorId)=>{
         if(currentSelectedAction==="orderFactor"){
-            setFactorsOrders(factorsOrders.filter(factor=>factor.id===parseInt(factorId)))
+            setFactorsOrders(factorsOrders.filter(factor=>factor.id!=parseInt(factorId)))
             return
         }
         if(currentSelectedAction==="filterFactor"){
-            setFactorsFilters(factorsFilters.filter(factor=>factor.id===parseInt(factorId)))
+            console.log(factorsFilters)
+            console.log(factorId)
+            setFactorsFilters(factorsFilters.filter(factor=>factor.id!=parseInt(factorId)))
             return
         }
+    },[factorsOrders, factorsFilters, currentSelectedAction])
+
+    const handleAddRelation = useCallback((from, to)=>{
+        console.log(from, to)
         if(currentSelectedAction==="addRelation"){
+            console.log(from, to)
             return
         }
         if(currentSelectedAction==="deleteRelation"){
+            console.log(from, to)
             return
         }
-    },[factorsOrders, currentSelectedAction])
+    },[])
 
     // get model data
     useEffect(async()=>{
@@ -246,6 +253,7 @@ function CausalModelView() {
                 handleSetFactorsOrders={handleSetFactorsOrders}
                 handleUnselectFactors={handleUnselectFactors}
                 handleSetFactorsFilters={handleSetFactorsFilters}
+                handleAddRelation={handleAddRelation}
                 factors={factors}
                 relations={relations}
                 />

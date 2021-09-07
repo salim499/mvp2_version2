@@ -1,5 +1,5 @@
 // Import from react
-import React from 'react'
+import React, {useState} from 'react'
 
 // Import icons
 import FromTo from '../assets/icons/fromTo.svg'
@@ -10,7 +10,43 @@ import '../css/addDeleteRelation.css'
 
 
 function AddDeleteRelation(props) {
+
+    // useState
+    const [from, setFrom] = useState(null)
+    const [to, setTo] = useState(null)
+
+    // function 
+    const handleFrom = (event) => {
+
+        // case of destination factor already existing
+        if(to!=null){
+            props.handleAddRelation(props.factors.find(factor=>factor.name===event.target.value).id, to)
+            // reset from and to states
+            setFrom(null)
+            setTo(null)
+        }
+
+        // set From Id
+        setFrom(props.factors.find(factor=>factor.name===event.target.value).id)
+
+    }
+    const handleTo = (event) => {
+
+        // case of source factor already existing
+        if(from!=null){
+            props.handleAddRelation(from,props.factors.find(factor=>factor.name===event.target.value).id)
+            // reset from and to states
+            setFrom(null)
+            setTo(null)
+            return
+        }
+
+        // set To Id
+        setTo(props.factors.find(factor=>factor.name===event.target.value).id)
+    }
+
     return (
+        console.log(props.factors),
         <div className="model-see_constraints-relations">
             <div className="model-see_constraints-relations-title">
                 Select factors to {props.action} relation
@@ -22,20 +58,30 @@ function AddDeleteRelation(props) {
                 <div className="model-see_constraints-relations-fromTo-text">
                     From 
                 </div>
-                <select className="model-see_constraints-relations-fromTo-select">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
+                <select className="model-see_constraints-relations-fromTo-select"
+                onChange={handleFrom}>
+                <option key="choseFactor" value="">chose factor</option> 
+                {
+                props.factors.map((factor, index)=>(
+                    factor.id != to &&
+                    <option key={factor.id}>{factor.name}</option>
+                ))
+                }
                 </select>
               </div>
               <div className="model-see_constraints-relations-fromTo-item">
                 <div className="model-see_constraints-relations-fromTo-text">
                     To
                 </div>
-                <select className="model-see_constraints-relations-fromTo-select">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
+                <select className="model-see_constraints-relations-fromTo-select"
+                onChange={handleTo}>
+                <option key="choseFactor" value="">chose factor</option> 
+                {
+                props.factors.map((factor, index)=>(
+                    factor.id != from &&
+                    <option key={factor.id}>{factor.name}</option>
+                ))
+                }
                 </select>
               </div>
             </div>
