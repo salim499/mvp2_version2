@@ -1,5 +1,5 @@
 // Import from react
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // Import from libraries
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -24,20 +24,29 @@ import ChoseDateWindow from './features/choseDateWindow'
 import CausalModelView from './features/causalModelView'
 
 // Import contexts
-import { AuthProvider } from "./contexts/user"
-import { NavbarProvider} from "./contexts/navbar"
+import { useAuth } from "./contexts/user"
+import { useNavBar } from "./contexts/navbar"
 
 function App() {
 
+  const {navBarState, setNavBarState} = useNavBar()
+
+  const { currentUser } = useAuth()
+
+  console.log(currentUser)
+
   return (
       <Router>
-      <NavbarProvider>
-      <AuthProvider>
-      <NavBar/>
+
+        {currentUser&& <NavBar/>}
       <div>
       <Route path="/" exact>
-      <Dashboard/>
-       <SignIn/>
+      {
+        currentUser?
+        <Dashboard/>:
+        <SignIn/>
+      }
+       
       </Route>
       <Route path="/portfolio-causal-model" exact>
         <CausalModelView/>
@@ -64,8 +73,6 @@ function App() {
         <UpdateCount/>
       </Route>
       </div>
-      </AuthProvider>
-      </NavbarProvider>
       </Router>
   );
 }

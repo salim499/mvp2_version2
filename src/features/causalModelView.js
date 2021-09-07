@@ -45,7 +45,7 @@ function CausalModelView() {
     // useState
     const [selectedFactors, setSelectedFactors] = useState([])
     const [selectedRelations, setSelectedRelations] = useState([])
-    const [currentSelectedAction, setCurrentSelectedAction] = useState("deleteFactor")
+    const [currentSelectedAction, setCurrentSelectedAction] = useState(null)
     const [previewVisibility, setPreviewVisibility] = useState("visible")
     const [nextVisibility, setNextVisibility] = useState("visible")
     const [showModalApplyConstraints, setShowModalApplyConstraints] = useState(false)
@@ -163,6 +163,7 @@ function CausalModelView() {
 
     const handleAddRelation = useCallback((from, to)=>{
         console.log(from, to)
+        console.log(currentSelectedAction)
         if(currentSelectedAction==="addRelation"){
             console.log(from, to)
             return
@@ -171,7 +172,7 @@ function CausalModelView() {
             console.log(from, to)
             return
         }
-    },[])
+    },[currentSelectedAction])
 
     // get model data
     useEffect(async()=>{
@@ -204,6 +205,7 @@ function CausalModelView() {
 
     return (
         <>
+        {console.log(currentSelectedAction)}
         <div className={navBarState?"App":"App2"}>
             <Timeline timelineLevel={timelineLevel}/>
             <CreatePortfolioNavbar

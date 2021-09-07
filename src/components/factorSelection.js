@@ -16,6 +16,8 @@ function FactorSelection(props) {
     // useState
     const [selectedFactors, setSelectedFactors] = useState([])
 
+
+    // useCallback
     const handleAddRelation = useCallback ((from, to) => {
         console.log(from, to)
         props.handleAddRelation(from, to)

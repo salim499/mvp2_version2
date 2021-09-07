@@ -42,20 +42,17 @@ function NavBar(props) {
     return (
     <div className={!showSideBar ? 'navbar' : 'navbar2'}>
         <IconContext.Provider value={{ color: '#081C4D' }}>
-        <div className="nav-header" style={{height: showSideBar&&'0px'}}>
+        <div className="nav-header" style={{height: !showSideBar&&'0px'}}>
         <div className="nav-menu-user">  
         </div>
-        {
-          currentUser!=null&&
           <div className="menu-bars-toggle">
           <Link to="#" className="menu-bars">
           <FaBars onClick={handleShowSideBar}/>
           </Link> 
           </div>
-        }
         </div>
         </IconContext.Provider>
-        <nav className={showSideBar && currentUser!=null ? 'nav-menu active' : 'nav-menu'}>
+        <nav className={showSideBar ? 'nav-menu active' : 'nav-menu'}>
           <ul className='nav-menu-items'>
             <li className='navbar-toggle'>
               <IconContext.Provider value={{ color: '#fff' }}>
