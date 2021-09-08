@@ -10,7 +10,7 @@ import './App.css'
 // Import components
 import NavBar from './components/navbar'
 import Signup from './components/signup'
-import SignIn from './components/signIn'
+import Login from './components/Login'
 import UpdateCount from './components/updateCount'
 
 import Portal from './components/modalNewItem'
@@ -27,17 +27,16 @@ import CausalModelView from './features/causalModelView'
 import { AuthProvider } from "./contexts/user"
 import { NavbarProvider} from "./contexts/navbar"
 
-function App() {
-
+ function App() {
   return (
+    <div className="App">
       <Router>
       <NavbarProvider>
       <AuthProvider>
-      <NavBar/>
-      <div>
+      {/* <NavBar/> */}
       <Route path="/" exact>
       <Dashboard/>
-       <SignIn/>
+       <Login/>
       </Route>
       <Route path="/portfolio-causal-model" exact>
         <CausalModelView/>
@@ -57,16 +56,16 @@ function App() {
       <Route path="/signup" exact>
         <Signup/>
       </Route>
-      <Route path="/sign_in" exact> 
-        <SignIn/>
+      <Route path="/login" exact> 
+        <Login/>
       </Route>
       <Route path="/update-count" exact> 
         <UpdateCount/>
       </Route>
-      </div>
       </AuthProvider>
       </NavbarProvider>
       </Router>
+      </div>
   );
 }
 

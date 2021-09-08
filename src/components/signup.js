@@ -3,9 +3,6 @@ import React, {useRef, useState} from 'react'
 // Import from libraries
 import {Link} from 'react-router-dom'
 
-// Import css files 
-import '../css/signup.css'
-
 // Import icons
 import emailIcon from '../assets/icons/email.svg'
 import passwordIcon from '../assets/icons/password.svg'

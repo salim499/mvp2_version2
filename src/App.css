@@ -1,5 +1,26 @@
+/*Importing css files */
+@import "index.css";
+@import "./css/Login.css";
+
+/*Importing Fonts(Overpass + Montserrat) */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Overpass:wght@300;400;700&display=swap");
+
+/* ---------------- */
+/* - Commun Rules - */
+/* ---------------- */
+
+:root {
+  --background: #f5fafd;
+  --background-blue: #081c4d;
+  --green: #2ec4b6;
+  --dark-grey: #cbd2d0;
+  --light-grey: #cbd2d0;
+  --input-grey: #9b9b9b;
+  --yellow: #ffce31;
+}
+
 .App {
-  margin-left: 301px;
+  /* margin-left: 301px;
   min-height: 100vh;
   display: flex;
   flex-wrap: wrap;
@@ -7,10 +28,10 @@
   justify-content: space-around;
   align-items: center;
   font-size: calc(10px + 2vmin);
-  background: #F5FAFD;
-  background-size: cover;
+  background: #f5fafd;
+  background-size: cover; */
 }
-.App2 {
+/* .App2 {
   min-height: 100vh;
   display: flex;
   flex-wrap: wrap;
@@ -18,12 +39,73 @@
   justify-content: space-around;
   align-items: center;
   font-size: calc(10px + 2vmin);
-  background:#E5E5E5;
+  background: #e5e5e5;
   background-size: cover;
-}
+} */
 
-
-.App-link {
+/* .App-link {
   color: #61dafb;
+} */
+
+.App {
+  /* letter-spacing: 0.03em;
+  width: 100%;
+  height: 100vh;
+  background: var(--background); */
+
+  font-family: "Overpass", sans-serif;
+  background: var(--background);
+  /* font-size: 18px;
+  font-weight: 400;
+  line-height: 25px; */
+  letter-spacing: 0.05em;
+  /* color: var(--medium-blue); */
+  width: 100%;
+  height: 100vh;
+}
+/* .main-container {
+  flex: 1;
+  background: var(--background);
+  min-height: 100vh;
+  margin-left: 293px;
+} */
+
+/* .loader-container {
+  flex: 1;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+/* h1 {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 50px;
+  letter-spacing: 0.05em;
+  font-family: "Overpass", sans-serif;
 }
 
+h2 {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 25px;
+  color: var(--green);
+  margin-bottom: 70px;
+}
+
+h3 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 25px;
+}
+
+p {
+  margin: unset;
+}
+
+.error {
+  color: red;
+}
+ */
