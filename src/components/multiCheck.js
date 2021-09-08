@@ -17,44 +17,21 @@ function MultiCheck(props) {
         props.showSection&&
         <>
         <div className="model-apply_constraints-body-actions-categories-text">
-        Categories
+        {props.multiCheckName}
     </div>
-    <div className="model-apply_constraints-body-actions-categories-item">
-        <input type="checkbox" className="model-apply_constraints-body-actions-categories-item-input"
-        data-name="Category1"
+    {
+    props.items.map((item, index)=>(
+      <div key={item} className="model-apply_constraints-body-actions-categories-item">
+        <input type="checkbox" defaultChecked={true} className="model-apply_constraints-body-actions-categories-item-input"
+        data-name={item}
         onClick={handleChosenItems}>
         </input>
         <div className="model-apply_constraints-body-actions-categories-item-label">
-            Category
+            {item}
         </div>
-    </div>
-    <div className="model-apply_constraints-body-actions-categories-item">
-        <input type="checkbox" className="model-apply_constraints-body-actions-categories-item-input"
-        data-name="Category2"
-        onClick={handleChosenItems}>
-        </input>
-        <div className="model-apply_constraints-body-actions-categories-item-label">
-            Category
-        </div>
-    </div>
-    <div className="model-apply_constraints-body-actions-categories-item">
-        <input type="checkbox" className="model-apply_constraints-body-actions-categories-item-input"
-        data-name="Category3"
-        onClick={handleChosenItems}>
-        </input>
-        <div className="model-apply_constraints-body-actions-categories-item-label">
-            Category
-        </div>
-    </div>
-    <div className="model-apply_constraints-body-actions-categories-item">
-        <input type="checkbox" className="model-apply_constraints-body-actions-categories-item-input"
-        data-name="Category4"
-        onClick={handleChosenItems}>
-        </input>
-        <div className="model-apply_constraints-body-actions-categories-item-label">
-            Category
-        </div>
-    </div>
+      </div>
+    ))
+    }
     </>
         }
         </div>

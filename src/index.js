@@ -3,10 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// Import contexts
+import { AuthProvider } from "./contexts/user"
+import { NavbarProvider} from "./contexts/navbar"
 
 ReactDOM.render(
   <React.StrictMode>
+    <NavbarProvider>
+    <AuthProvider>
     <App />
+    </AuthProvider>
+    </NavbarProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

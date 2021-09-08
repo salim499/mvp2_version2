@@ -151,7 +151,6 @@ function Dashboard() {
     const [assetsGraphData, setAssetsGraphData] = useState(dataFromBackend)
 
     return (
-        currentUser!=null &&
         <div className={navBarState?"App":"App2"}>
             <div className="user_information">
                 <div className="user_information-user_name">

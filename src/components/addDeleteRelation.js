@@ -15,7 +15,7 @@ function AddDeleteRelation(props) {
     const [from, setFrom] = useState(null)
     const [to, setTo] = useState(null)
 
-    // function 
+    // functions 
     const handleFrom = (event) => {
 
         // case of destination factor already existing
