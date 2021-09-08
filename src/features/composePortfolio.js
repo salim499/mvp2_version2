@@ -136,7 +136,7 @@ function ComposePortfolio() {
     }
 
     return (
-      <div className={navBarState?"App":"App2"}>
+      <div className={navBarState?"container-with-margin":"container-without-margin"}>
         <Timeline timelineLevel={timelineLevel}/>
         <DataSetContainer/>
         <DragDropContext 

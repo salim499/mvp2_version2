@@ -151,7 +151,7 @@ function Dashboard() {
     const [assetsGraphData, setAssetsGraphData] = useState(dataFromBackend)
 
     return (
-        <div className={navBarState?"App":"App2"}>
+        <div className={navBarState?"container-with-margin ":"container-without-margin"}>
             <div className="user_information">
                 <div className="user_information-user_name">
                     Cheikh Ljama3

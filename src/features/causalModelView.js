@@ -223,7 +223,7 @@ function CausalModelView() {
     return (
         <>
         {console.log(relationsToAdd)}
-        <div className={navBarState?"App":"App2"}>
+        <div className={navBarState?"container-with-margin":"container-without-margin"}>
             <Timeline timelineLevel={timelineLevel}/>
             <CreatePortfolioNavbar
             width='100%'

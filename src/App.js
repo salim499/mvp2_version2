@@ -39,7 +39,6 @@ function App() {
     <div className="App">
       <Router>
         {currentUser&& <NavBar/>}
-   
       <Route path="/" exact>
       {
         currentUser?

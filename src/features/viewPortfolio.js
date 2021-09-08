@@ -18,7 +18,7 @@ function ViewPortfolio() {
     const {navBarState, setNavBarState} = useNavBar()
 
     return (
-        <div className={navBarState?"App":"App2"}>
+        <div className={navBarState?"container-with-margin":"container-without-margin"}>
             <CreatePortfolioNavbar/>
             <div className="graphs_portfolio">
                <div className="graphs_portfolio-plot">
