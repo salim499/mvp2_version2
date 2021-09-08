@@ -39,12 +39,12 @@ function App() {
     <div className="App">
       <Router>
         {currentUser&& <NavBar/>}
-      <div>
+   
       <Route path="/" exact>
       {
         currentUser?
         <Dashboard/>:
-        <SignIn/>
+        <Login/>
       }
       </Route>
       <Route path="/portfolio-causal-model" exact>
@@ -71,7 +71,7 @@ function App() {
       <Route path="/update-count" exact> 
         <UpdateCount/>
       </Route>
-      </div>
+   
       </Router>
       </div>
   );
