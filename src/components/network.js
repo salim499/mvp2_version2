@@ -100,6 +100,19 @@ function NetworkGraph(props) {
     const [edges, setEdges] = useState([])
 
     // useEffect
+
+    // setInitialDataNetwork
+    useEffect(()=>{
+
+      if(props.dataNetwork!=null){
+        props.dataNetwork.nodes.forEach(element => {
+          element.label=element.name
+        }) 
+        setNodes(props.dataNetwork.nodes)
+        setEdges(props.dataNetwork.edges)
+      }
+    },[props.dataNetwork])
+
     // create the initial network    
     useEffect(()=>{
         // create network 
@@ -107,13 +120,7 @@ function NetworkGraph(props) {
 
         // network click event
         network.current.on('click', function (properties){
-          console.log(network.current)
-          console.log(network.current.getScale())
-          network.current.moveTo({
-            position: {x: 0, y: 0},
-            offset: {x: 1, y: 0},
-            scale: network.current.getScale()*0.98,
-        })
+
           const node = network.current.body.nodes[properties['nodes']['0']]
           const edge = network.current.body.edges[properties['edges']['0']]
           // case of node click
@@ -128,37 +135,45 @@ function NetworkGraph(props) {
         })
     },[nodes, edges])
 
-    // filter te network depends on factorEntropyValue
+    // filter network 
     useEffect(()=>{
       if(props.dataNetwork!=null){
-        setNodes(props.dataNetwork.nodes.filter(node=>node.entropy>props.factorEntropyValue))
+        // filter by factor entropy value
+        const nodesFilterFactorEntropy = props.dataNetwork.nodes.filter(node=>node.entropy>props.factorEntropyValue)
+        // filter by relation entropy value
+        const edgesFilterFactorEntropy = props.dataNetwork.edges.filter(edge=>edge.entropy>props.relationEntropyValue)   
+        // filter by categories
+        const resultNodesByCategories = nodesFilterFactorEntropy.filter(node=>props.chosenCategories.includes(node.category))
+        // update nodes and edges 
+        setNodes(resultNodesByCategories)
+        setEdges(edgesFilterFactorEntropy)
       } 
-    },[props.factorEntropyValue])
+    },[props.factorEntropyValue, props.relationEntropyValue, props.chosenCategories])
 
-    // filter te network depends on relationEntropyValue
     useEffect(()=>{
-      if(props.dataNetwork!=null){
-        setEdges(props.dataNetwork.edges.filter(edge=>edge.entropy>props.relationEntropyValue))
-      } 
-    },[props.relationEntropyValue])
+     if(props.zoomIn != null){ 
+      network.current.moveTo({
+          position: {x: 0, y: 0},
+          offset: {x: 1, y: 0},
+          scale: network.current.getScale()*1.02,
+      })
+    } 
+    },[props.zoomIn])
 
-    // setInitialDataNetwork
     useEffect(()=>{
-      console.log(props.dataNetwork)
-      if(props.dataNetwork!=null){
-        props.dataNetwork.nodes.forEach(element => {
-          element.label=element.name
-        }) 
-        setNodes(props.dataNetwork.nodes)
-        setEdges(props.dataNetwork.edges)
-      }
-    },[props.dataNetwork])
+     if(props.zoomOut != null){ 
+      network.current.moveTo({
+          position: {x: 0, y: 0},
+          offset: {x: 1, y: 0},
+          scale: network.current.getScale()*0.98,
+      })
+    }
+    },[props.zoomOut])
 
     return (
         <div ref={dom} style={{height: '1266px',  
         border: '1px solid #444444',
-        backgroundColor: '#FFFFFF'}}>
-            
+        backgroundColor: '#FFFFFF'}}>      
         </div>
     )
 }

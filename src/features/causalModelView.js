@@ -30,6 +30,8 @@ import { useNavBar } from "../contexts/navbar"
 
 // Constants
 const timelineLevel=4
+const categories = ["category1", "category2", "category3", "category4"]
+const multiCheckName="Categories"
 
 function CausalModelView() {
 
@@ -51,7 +53,7 @@ function CausalModelView() {
     const [showModalApplyConstraints, setShowModalApplyConstraints] = useState(false)
     const [factorSliderValue, setFactorSliderValue] = useState(0)
     const [relationSliderValue, setRelationSliderValue] = useState(0)
-    const [chosenCategories, setChosenCategories] = useState([])
+    const [chosenCategories, setChosenCategories] = useState(categories)
     const [factorsToDelete, setFactorsToDelete] = useState([])
     const [relationsToDelete, setRelationsToDelete] = useState([])
     const [relationsToAdd, setRelationsToAdd] = useState([])
@@ -63,6 +65,8 @@ function CausalModelView() {
     const [maxFactorSliderValue, setMaxFactorSliderValue] = useState(null)
     const [maxRelationSliderValue, setMaxRelationSliderValue] = useState(null)
     const [showFilterCategorySection, setShowFilterCategorySection] = useState(true)
+    const [zoomIn, setZoomIn] = useState(null)
+    const [zoomOut, setZoomOut] = useState(null)
 
     // preview button
     const handlePreview = useCallback (()=>{
@@ -90,7 +94,19 @@ function CausalModelView() {
 
     // save the current selected action from model model actions
     const handleSelectAction = useCallback ((action)=>{
+        console.log(action)
         setCurrentSelectedAction(action)
+        // case ZoomIn
+        if(action==="zoomIn"){
+           setZoomIn(Math.random()) 
+           return
+        }
+        if(action==="zoomOut"){
+           setZoomOut(Math.random())   
+           return
+        }
+        // case ZoomOut
+
     },[])
 
     // show or hide the modal to apply constraints 
@@ -112,6 +128,7 @@ function CausalModelView() {
     },[relationSliderValue])
 
     const handleChosenCategories = useCallback ((chosenCategoryName, toAdd)=>{
+        console.log(chosenCategories)
         if(toAdd){
             setChosenCategories(chosenCategories=> [...chosenCategories,chosenCategoryName])
             return
@@ -154,31 +171,31 @@ function CausalModelView() {
             return
         }
         if(currentSelectedAction==="filterFactor"){
-            console.log(factorsFilters)
-            console.log(factorId)
             setFactorsFilters(factorsFilters.filter(factor=>factor.id!=parseInt(factorId)))
             return
         }
     },[factorsOrders, factorsFilters, currentSelectedAction])
 
     const handleAddRelation = useCallback((from, to)=>{
-        console.log(from, to)
-        console.log(currentSelectedAction)
+        console.log(relationsToAdd)
         if(currentSelectedAction==="addRelation"){
-            console.log(from, to)
+            setRelationsToAdd(relationsToAdd=>[...relationsToAdd, {src:from, dest:to}])
             return
         }
         if(currentSelectedAction==="deleteRelation"){
-            console.log(from, to)
+            setRelationsToDelete(relationsToDelete=>[...relationsToDelete, {src:from, dest:to}])
             return
         }
-    },[currentSelectedAction])
+    },[[...relationsToAdd]])
 
     // get model data
     useEffect(async()=>{
         try{
           // set data network
           const res=await post(`http://86.238.208.39:8081/models-mock-1`)
+          res.data.network.factors.forEach(factor=>{
+              factor.category=categories[Math.floor(Math.random() * categories.length)]
+          })
           setDataNetwork(
               {
                   nodes:res.data.network.factors,
@@ -205,7 +222,7 @@ function CausalModelView() {
 
     return (
         <>
-        {console.log(currentSelectedAction)}
+        {console.log(relationsToAdd)}
         <div className={navBarState?"App":"App2"}>
             <Timeline timelineLevel={timelineLevel}/>
             <CreatePortfolioNavbar
@@ -224,6 +241,8 @@ function CausalModelView() {
                     currentFilterState={handleShowFilterCategorySection}
                     />
                     <ModelFilterCategories
+                    multiCheckName={multiCheckName}
+                    items={categories}
                     handleChosenItems={handleChosenCategories}
                     showSection={showFilterCategorySection}
                     />
@@ -244,6 +263,9 @@ function CausalModelView() {
                             handleClickEdge={handleSelectRelation}
                             factorEntropyValue={factorSliderValue}
                             relationEntropyValue={relationSliderValue}
+                            chosenCategories={chosenCategories}
+                            zoomIn={zoomIn}
+                            zoomOut={zoomOut}
                             />
                          </div>
                     </div>

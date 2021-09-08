@@ -18,10 +18,10 @@ function FactorSelection(props) {
 
 
     // useCallback
-    const handleAddRelation = useCallback ((from, to) => {
+    const handleAddRelation = (from, to) => {
         console.log(from, to)
         props.handleAddRelation(from, to)
-    },[])
+    }
 
     // useEffect
     // reset selected factors to an empty array on change of the current action
