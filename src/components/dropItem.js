@@ -18,17 +18,17 @@ function DropItem(props) {
         <div style={{backgroundColor:props.backgroundP, minHeight: '147px'}}>
         <div className="item-header">
         <div className="item-header-label">
-            {props.item&&props.item.name}
+            {props.itemsCategory}
         </div>
         <div className="item-header-icon" onClick={()=>props.handleDeleteItem(props.item.name)}>
             <img src={Trash} />
         </div>
         </div>
         {
-          props.item&&props.item.factors.map((factor, index) => (
+          props.items.map((item, index) => (
             <div className="item-factor" style={{
               backgroundColor:props.color
-            }}>{factor.name}</div>
+            }}>{item.name}</div>
           ))
         }
     </div>

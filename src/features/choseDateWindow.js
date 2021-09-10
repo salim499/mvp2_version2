@@ -3,7 +3,7 @@ import React, {useState, useCallback, useEffect} from 'react';
 
 // Import from libraries
 import { useHistory, useLocation } from 'react-router-dom';
-import { get } from 'axios';
+import { post } from 'axios';
 
 // Import components
 import Timeline from '../components/timeline'
@@ -175,12 +175,27 @@ const ChoseDateWindow = () => {
     },[])
   
     // next button 
-    const handleNext = useCallback (()=>{
-        history.push({
+    const handleNext = async()=>{
+        try{
+          location.state.selectedDateInterval={startDate: startDate, endDate: endDate}
+          console.log(location.state)
+          console.log(localStorage.getItem('token'))
+          const res=await post (`${process.env.REACT_APP_URL_MASTER}/portfolios`,
+          location.state,
+          {
+            headers:{
+                token: localStorage.getItem('token')
+            }
+          })
+          console.log(res)
+        /*  history.push({
             pathname : '/portfolio-causal-model',
-            state : location.state
-        }) 
-    },[])
+        }) */
+        }
+        catch (err){
+          console.log(err)
+        }
+    }
 
     // set datesInterval 
     const handleSetDatesInterval = useCallback ((startD, endD)=>{
@@ -203,6 +218,11 @@ const ChoseDateWindow = () => {
           console.log(e)
       }
     },[])*/
+
+    // function 
+    const handleCreatePortfolio = () => {
+      
+    }
 
     return(
         <div className={navBarState?"container-with-margin":"container-without-margin"}>

@@ -45,6 +45,9 @@ function ComposePortfolio() {
     const [previewVisibility, setPreviewVisibility] = useState("visible")
     const [nextVisibility, setNextVisibility] = useState("visible")
     const [currentDropIndex, setCurrentDropIndex] = useState(null)
+    const [dataSourceId, setDataSourceId] = useState(null)
+    const [portfolioName, setPortfolioName] = useState(null)
+    const [portfolioDescription, setPortfolioDescription] = useState(null)
 
     // useCallback
     // show or hide the modal to create a new category 
@@ -54,15 +57,15 @@ function ComposePortfolio() {
      
     // create a new category
     const handleCreateNewCategory = useCallback ((categoryName)=>{
-        setCategories(categories=>[...categories, {name:categoryName, factors:[]}])
+        setCategories(categories=>[...categories, categoryName])
     },[categories])
     // remove category from categories
     const handleDeleteCategory = useCallback ((categoryName)=>{
         // move factors of the deleted category to drag section
-        const categoryToRemove = categories.find(category=>category.name === categoryName)
+        const categoryToRemove = categories.find(category=>category === categoryName)
         setFactors(factors.concat(categoryToRemove.factors))
         // remove category from categories state
-        setCategories(categories.filter(category=>category.name!=categoryName))
+        setCategories(categories.filter(category=>category!=categoryName))
     },[categories, factors])
 
     // preview button
@@ -76,9 +79,15 @@ function ComposePortfolio() {
     const handleNext = useCallback (()=>{
         history.push({
             pathname : '/chose-date-window',
-            state : location.state
+            state : {
+                datasourceId:dataSourceId, 
+                name:"portfolio1", 
+                description:"cheikh ljama3", 
+                categories: categories, 
+                factors: factors, 
+                }
         }) 
-    },[location.state])
+    },[location.state, dataSourceId, categories, factors])
 
     // useEffect 
     useEffect(async()=>{
@@ -90,8 +99,11 @@ function ComposePortfolio() {
             }
         }
         )
+        // set data source id
+        setDataSourceId(res.data.id)
+        // set factors
         res.data.columns.forEach(column => {
-            setFactors(factors=>[...factors, {name:column}])
+            setFactors(factors=>[...factors, {name:column, category:null}])
         })
       }
       catch (e) {
@@ -119,12 +131,8 @@ function ComposePortfolio() {
         if (result.source.droppableId==='factors'){
         // remove factor from drag Container
         const factorsLocal = [...factors]
-        const [factor] = factorsLocal.splice(result.source.index, 1)
+        factorsLocal[result.source.index].category=categories[result.destination.index]
         setFactors(factorsLocal)
-        //add factor to category container 
-        const categoriesLocal = [...categories]
-        categoriesLocal[result.destination.index].factors.push(factor)
-        setCategories([...categoriesLocal])
         }
     }
     
@@ -137,6 +145,7 @@ function ComposePortfolio() {
 
     return (
       <div className={navBarState?"container-with-margin":"container-without-margin"}>
+          {console.log(categories,factors)}
         <Timeline timelineLevel={timelineLevel}/>
         <DataSetContainer/>
         <DragDropContext 
@@ -152,13 +161,14 @@ function ComposePortfolio() {
                     {
                         categories.map((category, index)=>(
                             <Draggable 
-                            key={category.name} 
-                            draggableId={category.name} 
+                            key={category} 
+                            draggableId={category} 
                             index={index} 
                             >
                              {(provided2) => (
                             <Category 
-                            item={category} 
+                            itemsCategory={category} 
+                            items={factors.filter(factor=>factor.category===category)}
                             provided={provided2} 
                             color={colorPallet[index]} 
                             backgroundP={currentDropIndex===index?'lightblue':'#FFFFFF'}  

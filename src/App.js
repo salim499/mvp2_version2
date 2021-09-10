@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 // Import from libraries
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import axios from 'axios'
+
 // Import css files
 import './App.css'
 
@@ -22,6 +23,7 @@ import Dashboard from './features/dashboard'
 import ViewPortfolio from './features/viewPortfolio'
 import ChoseDateWindow from './features/choseDateWindow'
 import CausalModelView from './features/causalModelView'
+import TableView from './features/TableView'
 
 // Import contexts
 import { useAuth } from "./contexts/user"
@@ -38,13 +40,16 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {currentUser&& <NavBar/>}
+    {/*    {currentUser&& <NavBar/>}
       <Route path="/" exact>
       {
         currentUser?
         <Dashboard/>:
         <Login/>
       }
+      </Route>*/}
+      <Route path="/" exact>
+        <TableView/>
       </Route>
       <Route path="/portfolio-causal-model" exact>
         <CausalModelView/>

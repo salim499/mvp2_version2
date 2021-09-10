@@ -14,6 +14,7 @@ function dragSection(props) {
     {(provided) => (
     <div className="list_items" {...provided.droppableProps} ref={provided.innerRef}>
     {
+        console.log(props.factors),
          props.factors.map((factor, index)=>(
             <Draggable key={factor.name} draggableId={factor.name} index={index}>
             {(provided) => (

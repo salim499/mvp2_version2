@@ -29,7 +29,7 @@ function SelectDndFile(props) {
   // useCallback
   const onDrop = useCallback(acceptedFiles => {
 
-    if(acceptedFiles[0].type==='application/vnd.ms-excel'){
+ //   if(acceptedFiles[0].type==='application/vnd.ms-excel'){
       // set background of dnd div to default
       selectDndDiv.current.style=null
       // remove error message of dnd and select actions
@@ -55,8 +55,8 @@ function SelectDndFile(props) {
       })
       */
       return
-    }
-    setErrorMessage(typeError)
+    //}
+    //setErrorMessage(typeError)
   }, [])
 
   // useDropzone
