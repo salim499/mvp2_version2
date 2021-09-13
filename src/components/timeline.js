@@ -45,7 +45,7 @@ const Timeline = ({timelineLevel}) => {
                 }}
                 >2</div>
                 <div style={{ color: timelineLevel>1? "#081c4d" : "#C4C4C4",
-                              textAlign:"center" }}>Compose Portfolio</div>
+                              textAlign:"center" }}>Explore dataset</div>
             </div>
             <div className="line-container">
             <div className="line"
@@ -69,7 +69,7 @@ const Timeline = ({timelineLevel}) => {
                 }}
                  >3</div>
                 <div style={{ color: timelineLevel>2? "#081c4d" : "#C4C4C4",
-                              textAlign:"center" }}>Chose Date</div>
+                              textAlign:"center" }}>Chose Target</div>
             </div>
             <div className="line-container">
             <div className="line"
@@ -93,7 +93,7 @@ const Timeline = ({timelineLevel}) => {
                 }}
                 >4</div>
                 <div style={{ color: timelineLevel>3? "#081c4d" : "#C4C4C4",
-                              textAlign:"center" }}>Portfolio & CM</div>
+                              textAlign:"center" }}>Predict</div>
             </div>
     </div>
   );

@@ -1,0 +1,7 @@
+.deleted_items_container {
+    min-height: 134px;
+    width: 95%;
+    margin-top: 45px;
+    background-color: #ffffff;
+    display: flex;
+}

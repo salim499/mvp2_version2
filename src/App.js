@@ -23,7 +23,7 @@ import Dashboard from './features/dashboard'
 import ViewPortfolio from './features/viewPortfolio'
 import ChoseDateWindow from './features/choseDateWindow'
 import CausalModelView from './features/causalModelView'
-import TableView from './features/TableView'
+import ExploreDataset from './features/exploreDataset'
 
 // Import contexts
 import { useAuth } from "./contexts/user"
@@ -48,8 +48,8 @@ function App() {
         <Login/>
       }
       </Route>
-      <Route path="/compose-portfolio" exact>
-        <TableView/>
+      <Route path="/explore-dataset" exact>
+        <ExploreDataset/>
       </Route>
       <Route path="/portfolio-causal-model" exact>
         <CausalModelView/>
