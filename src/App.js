@@ -40,15 +40,15 @@ function App() {
   return (
     <div className="App">
       <Router>
-    {/*    {currentUser&& <NavBar/>}
+      {currentUser&& <NavBar/>}
       <Route path="/" exact>
       {
         currentUser?
         <Dashboard/>:
         <Login/>
       }
-      </Route>*/}
-      <Route path="/" exact>
+      </Route>
+      <Route path="/compose-portfolio" exact>
         <TableView/>
       </Route>
       <Route path="/portfolio-causal-model" exact>
@@ -57,7 +57,7 @@ function App() {
       <Route path="/view-portfolio" exact>
         <ViewPortfolio/>
       </Route>
-      <Route path="/compose-portfolio" exact>
+      <Route path="/compose-portfolioidxli" exact>
         <ComposePortfolio/>
       </Route>
       <Route path="/create-portfolio" exact>

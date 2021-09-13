@@ -1,6 +1,13 @@
 // Import from react
 import React from 'react'
 
+// Import icons 
+import warning from '../assets/icons/warning.svg'
+
+// Import from components 
+import Histogram from './histogram'
+
+// Constants
 const typesFilter=['type1', 'type2', 'type3','type4', 'type5', 'type6']
 const statusFilter=['status1', 'status2', 'status3','status4', 'status5', 'status6']
 const clDropLayoutFactorsContextValue=
@@ -13,6 +20,7 @@ const clDropLayoutFactorsContextValue=
  {name:'factor6',type:'integer',isTarget:true},
 ]
 const types=['type1', 'type2', 'type3','type4', 'type5', 'type6']
+
 function Table() {
     return (
         <section>
@@ -23,7 +31,8 @@ function Table() {
           <tr className="factors-table-header" >
             <th className="val-1">Factor name</th>
             <th className="val-2">Type</th>
-            <th className="val-3">Target</th>
+            <th className="val-3"></th>
+            <th className="val-4"></th>
           </tr>
           <br/>
           <br/>
@@ -31,7 +40,7 @@ function Table() {
             <th className="val-1">
               <input type="text" ></input>
               </th>
-            <th className="val-1">
+            <th className="val-2">
               <select name="models" id="models-choices">
               {typesFilter.map((type, index) => (
                 <option key={type}>{type}</option>
@@ -39,13 +48,11 @@ function Table() {
               }
           </select>
             </th>
-            <th className="val-1"> 
-              <select name="models" id="models-choices">
-              {statusFilter.map((state, index) => (
-                <option key={state}>{state}</option>
-              ))
-              }
-          </select>
+            <th className="val-3"> 
+            <span>Discretization</span>
+            </th>
+            <th className="val-4"> 
+            <span>Stationary</span>
             </th>
           </tr>
           </thead>
@@ -55,22 +62,20 @@ function Table() {
             .map((factor,index)=>(
            <tr className="factor-row table-factors-select" id="dz" key={factor.name}>
             <td className="val-1" key={factor.name}>{factor.name}</td>
-            <td className="val-1" key={factor.name?factor.name+"name":Math.random()}>
+            <td className="val-2" key={factor.name?factor.name+"name":Math.random()}>
               <select name="models" id="models-choices"
               defaultValue={factor.type?factor.type:null}>
               {types.map((type, index) => (
                 <option key={type}>{type}</option>
               ))
-              }
+          }
           </select>
             </td>
-            <td className="val-1" key={factor.isTarget?factor.isTarget.toString():null}>
-            <label class="switch">
-            <input type="checkbox" id="toggle" className="toggle--checkbox" defaultChecked ={factor.isTarget}/>
-            <span class="slider round"></span>
-            </label>
+            <td className="val-3" key={factor.isTarget?factor.isTarget.toString():null}>
+            <Histogram/>
             <br/><br/>
             </td>
+            <td className="val-4">not stationary<img src={warning}/></td>
             <div className="close">
 
             </div>

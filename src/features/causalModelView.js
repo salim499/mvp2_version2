@@ -222,7 +222,6 @@ function CausalModelView() {
 
     return (
         <>
-        {console.log(relationsToAdd)}
         <div className={navBarState?"container-with-margin":"container-without-margin"}>
             <Timeline timelineLevel={timelineLevel}/>
             <CreatePortfolioNavbar
