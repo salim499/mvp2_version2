@@ -4,6 +4,7 @@ import React, {useState, useEffect, useCallback} from 'react'
 // Import from libraries
 import {get, post} from 'axios'
 import { useHistory } from 'react-router-dom'
+import {parse} from 'papaparse'
 
 // Import css files 
 import '../css/choseDataset.css'
@@ -25,6 +26,8 @@ import { useNavBar } from "../contexts/navbar"
 const dndText="Or drag and drop it here"
 const selectText="Select a CSV file to import"
 const envelopeText="Before you upload your files below, make sure your file is ready to be imported"
+const dateError="You have to choose a csv file which contains a date field"
+const noErrors="the dataset is uploaded successfully"
 const timelineLevel=1
 
     function ChoseDataset() {
@@ -41,6 +44,7 @@ const timelineLevel=1
     const [chosenDataSetId, setChosenDataSetId] = useState(null)
     const [previewVisibility, setPreviewVisibility] = useState("hidden")
     const [nextVisibility, setNextVisibility] = useState("hidden")
+    const [nextMessage, setNextMessage] = useState("")
 
     // useEffect 
     /* get user datasources names */
@@ -75,21 +79,37 @@ const timelineLevel=1
         } 
         // case choosing and upload an new file 
         try {
-            const formData = new FormData()
-            formData.append("files", file)
-            const res =await post(
-                `${process.env.REACT_APP_URL_MASTER}/datasources`,
-                    formData,
-                    {
-                        headers:{
-                            token: localStorage.getItem('token')
-                        }
+            // check if the csv contains a date field
+            let containDate=false
+            parse(file, {
+                download: true,
+                step: function(row) {
+                    if(row.data.find(rowElment=>rowElment.toLowerCase()==="date")){
+                        containDate=true
                     }
-                )
-            history.push({
-                pathname : '/compose-portfolio',
-                state : res.data.id
-            })
+                },
+                complete: async function () {
+                    if(!containDate){
+                        setNextMessage(dateError)
+                        return
+                    }
+                    const formData = new FormData()
+                    formData.append("files", file)
+                    const res =await post(
+                        `${process.env.REACT_APP_URL_MASTER}/datasources`,
+                            formData,
+                            {
+                                headers:{
+                                    token: localStorage.getItem('token')
+                                }
+                            }
+                        )
+                    history.push({
+                        pathname : '/compose-portfolio',
+                        state : res.data.id
+                    })
+                }
+            });
         }
         catch {
             console.log("error")
@@ -124,11 +144,6 @@ const timelineLevel=1
                 handleUploadFile={handleUploadFile}
                 />
             </div>
-            <div className="second_div">
-            <Envelope
-            envelopeText={envelopeText}
-            />
-            </div>
         </div>
         <div className="start_from_existing_files"> 
         <div className="start_from_existing_files-label">
@@ -145,6 +160,7 @@ const timelineLevel=1
         nextVisibility={nextVisibility}
         previewVisibility={previewVisibility}
         />
+        <span>{nextMessage}</span>
       </div>
     )
 }
