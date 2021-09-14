@@ -234,5 +234,15 @@
 .rebalance_item-graph {
     height: 50%
 }
+.user_information-details {
+    height: 50px;
+    width: 15%;
+    margin-left: 80%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 36px;
+    background-color: rgb(141, 143, 141);
+    text-align: center;
+}
 
 

@@ -120,7 +120,7 @@ const MODAL_STYLES = {
 function ModalNewItem(props) {
 
     // useContext
-    const {navBarState, setNavBarState} = useNavBar()
+    const {navBarState} = useNavBar()
 
     // useRef
     const itemNameRef = useRef()

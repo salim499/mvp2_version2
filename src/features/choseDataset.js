@@ -18,6 +18,8 @@ import SelectDndFile from '../components/selectDndFile'
 import Envelope from '../components/envelope'
 import UserCsvFiles from '../components/horizontalFlexItems'
 import NextPreview from '../components/nextPreview'
+import ModalWarning from '../components/modalWarning'
+import ModalOk from '../components/modalOk'
 
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
@@ -45,6 +47,10 @@ const timelineLevel=1
     const [previewVisibility, setPreviewVisibility] = useState("hidden")
     const [nextVisibility, setNextVisibility] = useState("hidden")
     const [nextMessage, setNextMessage] = useState("")
+    const [cvsOk, setCsvOk] = useState(false)
+    const [openModal, setOpenModal] = useState(false)
+    const [startDate, setStartDate] = useState()
+    const [endDate, setEndDate] = useState()
 
     // useEffect 
     /* get user datasources names */
@@ -72,44 +78,28 @@ const timelineLevel=1
         // case choosing an existing file 
         if(chosenDataSetId!=null){
             history.push({
-                pathname : '/compose-portfolio',
+                pathname : '/explore-dataset',
                 state : chosenDataSetId
             })   
             return         
         } 
         // case choosing and upload an new file 
         try {
-            // check if the csv contains a date field
-            let containDate=false
-            parse(file, {
-                download: true,
-                step: function(row) {
-                    if(row.data.find(rowElment=>rowElment.toLowerCase()==="date")){
-                        containDate=true
-                    }
-                },
-                complete: async function () {
-                    if(!containDate){
-                        setNextMessage(dateError)
-                        return
-                    }
-                    const formData = new FormData()
-                    formData.append("files", file)
-                    const res =await post(
-                        `${process.env.REACT_APP_URL_MASTER}/datasources`,
-                            formData,
-                            {
-                                headers:{
-                                    token: localStorage.getItem('token')
-                                }
-                            }
-                        )
-                    history.push({
-                        pathname : '/compose-portfolio',
-                        state : res.data.id
-                    })
+            const formData = new FormData()
+            formData.append("files", file)
+            const res =await post(
+                `${process.env.REACT_APP_URL_MASTER}/datasources`,
+                    formData,
+                    {
+                        headers:{
+                            token: localStorage.getItem('token')
+                        }
                 }
-            });
+            )
+            history.push({
+                pathname : '/compose-portfolio',
+                state : res.data.id
+            })
         }
         catch {
             console.log("error")
@@ -124,15 +114,50 @@ const timelineLevel=1
     },[])
     // case upload a new csv file 
     const handleUploadFile = useCallback((uploadedFile) => {
-        console.log(uploadedFile)
-        setFile(uploadedFile)
-        setChosenDataSetId(null)
-        setNextVisibility('visible')
+        // check if the csv contains a date field
+        let containDate=false
+        parse(uploadedFile, {
+            download: true,
+            step: function(row) {
+                if(row.data.find(rowElment=>rowElment.toLowerCase()==="date")){
+                    containDate=true
+                }
+            },
+            complete: async function () {
+                if(!containDate){
+                    console.log("no contain")
+                    setCsvOk(false)
+                    setOpenModal(true) 
+                    return
+                }
+                if(containDate){
+                    console.log("contain")
+                    setCsvOk(true)
+                    setOpenModal(true) 
+                    setFile(uploadedFile)
+                    setChosenDataSetId(null)
+                    setNextVisibility('visible')
+                    return
+                }              
+            }
+        });
+    },[])
+
+    const handleHideModal = useCallback(() => {
+        setOpenModal(false)
+    },[])
+
+    const handleChoseDates = useCallback((dateFrom, dateTo) => {
+        console.log(dateFrom, dateTo)
+        setStartDate(dateFrom)
+        setEndDate(dateTo)
+        setOpenModal(false) 
     },[])
 
     return (
+        <>
       <div className={navBarState?"container-with-margin ":"container-without-margin"}>
-            <Timeline timelineLevel={timelineLevel}/>
+        <Timeline timelineLevel={timelineLevel}/>
         <div className="start_from_scratch">
             <div className="first_div">
                 <div className="first_div-label">
@@ -160,8 +185,17 @@ const timelineLevel=1
         nextVisibility={nextVisibility}
         previewVisibility={previewVisibility}
         />
-        <span>{nextMessage}</span>
       </div>
+      {
+      openModal && !cvsOk &&
+      <ModalWarning handleHideModal={handleHideModal}/>
+      }   
+      {
+      openModal&& cvsOk &&
+      <ModalOk handleHideModal={handleHideModal}
+      handleChoseDates={handleChoseDates}/>
+      }    
+    </>
     )
 }
 

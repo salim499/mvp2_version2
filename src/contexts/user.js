@@ -39,11 +39,19 @@ export function AuthProvider({ children }) {
     }
 
     const logout = async () => {
+    /*    const res = await axios.post(`${process.env.REACT_APP_URL_MASTER}/signout`,
+        {
+            headers:{
+                token: localStorage.getItem('token')
+            }
+        })
+        console.log(res)*/
+        localStorage.setItem('token',null)
         setCurrentUser(null)
     }
 
     const updateCount = async (userName, password, token, id) => {
-        console.log(token)
+
         const res=await axios.put(`${process.env.REACT_APP_URL_MASTER}/users/${id}`,
         { name: userName, password: password },
         {
@@ -61,6 +69,7 @@ export function AuthProvider({ children }) {
         signup,
         logout,
         updateCount,
+        logout
       }
 
     return (

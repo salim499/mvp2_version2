@@ -1,5 +1,8 @@
 import React, {useState} from 'react'
 
+// Import from libraries 
+import post from 'axios'
+
 // Import css files 
 import '../css/dashboard.css'
 
@@ -145,10 +148,22 @@ const dataFromBackend =[
 
 function Dashboard() {
  
-    const { currentUser } = useAuth()
+    // useContext
+    const { currentUser, logout } = useAuth()
     const {navBarState} = useNavBar()
 
+    // useState
     const [assetsGraphData, setAssetsGraphData] = useState(dataFromBackend)
+    const [showUserProfile, setShowUserProfile] = useState(false)
+    // functions
+    const handleShowUserProfile = () => {
+      setShowUserProfile(!showUserProfile)
+    }
+
+    const handleUserLogOut = async () => {
+      console.log("logout")
+      console.log(logout())
+    }
 
     return (
         <div className={navBarState?"container-with-margin ":"container-without-margin"}>
@@ -156,10 +171,16 @@ function Dashboard() {
                 <div className="user_information-user_name">
                     Cheikh Ljama3
                 </div>
-                <div>
+                <div onClick={handleShowUserProfile}>
                     <img src={user_profile} />
                 </div>
             </div>
+            {showUserProfile&&
+              <div className="user_information-details"
+              onClick={handleUserLogOut}>
+                LogOut
+              </div>
+            }
             <div className="dashboard_header">
                 <div className="dashboard_header-text">
                 Hi John, Welcome back !<br/><br/>
