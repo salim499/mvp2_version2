@@ -54,35 +54,17 @@ function App() {
       <Route path="/dashboard">
           <Dashboard/>
       </Route>
-      <Route path="/choose-target">
-        <ChooseTarget/>
-      </Route>
-      <Route path="/explore-dataset">
-        <ExploreDataset/>
-      </Route>
-      <Route path="/portfolio-causal-model">
-        <CausalModelView/>
-      </Route>        
-      <Route path="/view-portfolio">
-        <ViewPortfolio/>
-      </Route>
-      <Route path="/compose-portfolioidxli">
-        <ComposePortfolio/>
-      </Route>
       <Route path="/choose-dataset">
         <ChooseDataset/>
       </Route>
-      <Route path="/chose-date-window">
-        <ChoseDateWindow/>
-      </Route>
-      <Route path="/signup">
-        <Signup/>
+      <Route path="/explore-dataset">
+        <ExploreDataset/>
+      </Route> 
+      <Route path="/choose-target">
+        <ChooseTarget/>
       </Route>
       <Route path="/login"> 
         <Login/>
-      </Route>
-      <Route path="/update-count"> 
-        <UpdateCount/>
       </Route>
       </Router>
       </div>

@@ -2,7 +2,7 @@
 import React from 'react'
 
 // Import components
-import Timeline from '../components/timeline'
+import Timeline from '../components/Timeline'
 
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
@@ -18,6 +18,7 @@ const ChooseTarget = () => {
         <>
       <div className={navBarState?"container-with-margin ":"container-without-margin"}>
         <Timeline timelineLevel={timelineLevel}/>
+        <div className="edit-model-container"></div>
        </div>
     </>
     )

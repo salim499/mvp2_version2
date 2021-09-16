@@ -1,6 +1,7 @@
 /*Importing css files */
 @import "index.css";
 @import "./css/Login.css";
+@import "./css/Timeline.css";
 
 /*Importing Fonts(Overpass + Montserrat) */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Overpass:wght@300;400;700&display=swap");
@@ -25,6 +26,11 @@
   letter-spacing: 0.05em;
   width: 100%;
   min-height: 100vh;
+
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 25px;
+  letter-spacing: 0.05em;
 }
 
 .error {
@@ -38,7 +44,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  font-size: calc(10px + 2vmin);
+  /* font-size: calc(10px + 2vmin); */
 }
 .container-without-margin {
   display: flex;
@@ -46,12 +52,20 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  font-size: calc(10px + 2vmin);
+  /* font-size: calc(10px + 2vmin); */
 }
 
 .App-link {
   color: #61dafb;
 }
 
-
-  
+.edit-model-container {
+  width: 90%;
+  margin: auto;
+  padding: 30px 30px;
+  box-sizing: border-box;
+  background-color: white;
+  box-shadow: inset 0px 4px 4px rgb(0 0 0 / 25%);
+  border-radius: 5px;
+  margin-bottom: 40px;
+}

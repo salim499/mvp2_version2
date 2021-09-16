@@ -10,7 +10,7 @@ import { useLocation, useHistory } from 'react-router-dom'
 import '../css/composePortfolio.css'
 
 // Import components
-import Timeline from '../components/timeline'
+import Timeline from '../components/Timeline'
 import DataSetContainer from '../components/dataSetContainer'
 import ListFactorsContainer from '../components/dragSection'
 import AddCategory from '../components/addItem'

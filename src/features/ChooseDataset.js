@@ -13,7 +13,7 @@ import '../css/choseDataset.css'
 import select_csv from '../assets/icons/select_csv.svg'
 
 // Import components
-import Timeline from '../components/timeline'
+import Timeline from '../components/Timeline'
 import SelectDndFile from '../components/selectDndFile'
 import Envelope from '../components/envelope'
 import UserCsvFiles from '../components/horizontalFlexItems'
@@ -158,7 +158,7 @@ const timelineLevel=1
         <>
       <div className={navBarState?"container-with-margin ":"container-without-margin"}>
         <Timeline timelineLevel={timelineLevel}/>
-        <div className="start_from_scratch">
+        <div className="edit-model-container">
             <div className="first_div">
                 <div className="first_div-label">
                     Start from scratch
@@ -170,7 +170,7 @@ const timelineLevel=1
                 />
             </div>
         </div>
-        <div className="start_from_existing_files"> 
+        <div className="edit-model-container"> 
         <div className="start_from_existing_files-label">
         Or choose from existing Files
         </div>
