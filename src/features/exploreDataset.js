@@ -9,12 +9,16 @@ import { useLocation, useHistory } from 'react-router-dom'
 import '../css/exploreDataset.css'
 
 // Import components 
+import Timeline from '../components/Timeline'
 import Table from '../components/Table'
 import DeletedFactors from '../components/deletedItems'
 import NextPreview from '../components/nextPreview'
 
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
+
+// Constants
+const timelineLevel=2
 
 function ExploreDataset() {
 
@@ -68,6 +72,7 @@ function ExploreDataset() {
         }
     return (
         <div className={navBarState?"container-with-margin":"container-without-margin"}>
+            <Timeline timelineLevel={timelineLevel}/>
             <DeletedFactors factorsDeleted={factorsDeleted}/>
             <Table factorsTable={factorsTable}/>
             <NextPreview 

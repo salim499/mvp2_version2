@@ -25,7 +25,7 @@ import Dashboard from './features/dashboard'
 import ViewPortfolio from './features/viewPortfolio'
 import ChoseDateWindow from './features/choseDateWindow'
 import CausalModelView from './features/causalModelView'
-import ExploreDataset from './features/exploreDataset'
+import ExploreDataset from './features/ExploreDataset'
 
 // Import contexts
 import { useAuth } from "./contexts/user"
