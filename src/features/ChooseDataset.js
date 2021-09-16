@@ -32,7 +32,7 @@ const dateError="You have to choose a csv file which contains a date field"
 const noErrors="the dataset is uploaded successfully"
 const timelineLevel=1
 
-    function ChoseDataset() {
+    function ChooseDataset() {
 
     // useHistory
     const history = useHistory()
@@ -199,4 +199,4 @@ const timelineLevel=1
     )
 }
 
-export default ChoseDataset
+export default ChooseDataset

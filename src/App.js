@@ -17,7 +17,7 @@ import UpdateCount from './components/updateCount'
 import Portal from './components/modalNewItem'
 
 // Import features 
-import ChoseDataset from './features/choseDataset'
+import ChooseDataset from './features/ChooseDataset'
 import ComposePortfolio from './features/composePortfolio'
 import Dashboard from './features/dashboard'
 import ViewPortfolio from './features/viewPortfolio'
@@ -60,8 +60,8 @@ function App() {
       <Route path="/compose-portfolioidxli" exact>
         <ComposePortfolio/>
       </Route>
-      <Route path="/create-portfolio" exact>
-        <ChoseDataset/>
+      <Route path="/choose-dataset" exact>
+        <ChooseDataset/>
       </Route>
       <Route path="/chose-date-window" exact>
         <ChoseDateWindow/>
