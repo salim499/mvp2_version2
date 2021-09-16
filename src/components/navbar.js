@@ -73,7 +73,7 @@ function NavBar(props) {
             </div>
             <div className='navbar-texts'>
                 <li key="newmodel"  className="nav-text">
-                  <Link to="/create-portfolio">
+                  <Link to="/choose-dataset">
                     <img src={newModel_navbar}/>
                     <span style={{color:pathname=="/create-model"&&"rgb(46,196,182)"}}>New Model</span>
                   </Link>
@@ -84,23 +84,6 @@ function NavBar(props) {
                   <Link to="/analysis">
                     <img src={analysis_navbar} style={{color:pathname==="/analysis"&&"rgb(46,196,182)"}}/>
                     <span>Analysis</span>
-                  </Link>
-                </li>
-            </div>
-            <div className='navbar-texts'>
-                <li key="pdfReport"  className="nav-text">
-                  <Link to="#">
-                    <span className="navbar-pdfReport-label">PDF Report</span>
-                  </Link>
-                </li>
-                <div className="navbar-pdfReport-text">
-                  download pdf monthly
-                </div>
-            </div>
-            <div className='navbar-texts'>
-                <li key="newmodel"  className="nav-text">
-                  <Link to="new-model">
-                   <button className="btn-download">Download</button>
                   </Link>
                 </li>
             </div>

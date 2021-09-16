@@ -169,7 +169,7 @@ function Dashboard() {
         <div className={navBarState?"container-with-margin ":"container-without-margin"}>
             <div className="user_information">
                 <div className="user_information-user_name">
-                    Cheikh Ljama3
+                    User
                 </div>
                 <div onClick={handleShowUserProfile}>
                     <img src={user_profile} />

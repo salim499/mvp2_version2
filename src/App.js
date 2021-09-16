@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react'
 
 // Import from libraries
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+// React-router
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from 'axios'
 
 // Import css files
@@ -17,6 +18,7 @@ import UpdateCount from './components/updateCount'
 import Portal from './components/modalNewItem'
 
 // Import features 
+import ChooseTarget from "./features/ChooseTarget";
 import ChooseDataset from './features/ChooseDataset'
 import ComposePortfolio from './features/composePortfolio'
 import Dashboard from './features/dashboard'
@@ -47,35 +49,41 @@ function App() {
         <Dashboard/>:
         <Login/>
       }
+      </Route> 
+    {/* Dashboard */}
+      <Route path="/dashboard">
+          <Dashboard/>
       </Route>
-      <Route path="/explore-dataset" exact>
+      <Route path="/choose-target">
+        <ChooseTarget/>
+      </Route>
+      <Route path="/explore-dataset">
         <ExploreDataset/>
       </Route>
-      <Route path="/portfolio-causal-model" exact>
+      <Route path="/portfolio-causal-model">
         <CausalModelView/>
       </Route>        
-      <Route path="/view-portfolio" exact>
+      <Route path="/view-portfolio">
         <ViewPortfolio/>
       </Route>
-      <Route path="/compose-portfolioidxli" exact>
+      <Route path="/compose-portfolioidxli">
         <ComposePortfolio/>
       </Route>
-      <Route path="/choose-dataset" exact>
+      <Route path="/choose-dataset">
         <ChooseDataset/>
       </Route>
-      <Route path="/chose-date-window" exact>
+      <Route path="/chose-date-window">
         <ChoseDateWindow/>
       </Route>
-      <Route path="/signup" exact>
+      <Route path="/signup">
         <Signup/>
       </Route>
-      <Route path="/login" exact> 
+      <Route path="/login"> 
         <Login/>
       </Route>
-      <Route path="/update-count" exact> 
+      <Route path="/update-count"> 
         <UpdateCount/>
       </Route>
-   
       </Router>
       </div>
   );

@@ -11,11 +11,15 @@ import '../css/exploreDataset.css'
 // Import components 
 import Table from '../components/Table'
 import DeletedFactors from '../components/deletedItems'
+import NextPreview from '../components/nextPreview'
 
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
 
 function ExploreDataset() {
+
+    // useHistory
+    const history = useHistory()
 
     // useLocations 
     const location = useLocation()
@@ -55,10 +59,20 @@ function ExploreDataset() {
         }
     },[])
 
+        // useCallback 
+    // case post csv
+    const handleNext=()=>{        
+            history.push({
+                pathname : '/choose-target'
+            })   
+        }
     return (
         <div className={navBarState?"container-with-margin":"container-without-margin"}>
             <DeletedFactors factorsDeleted={factorsDeleted}/>
             <Table factorsTable={factorsTable}/>
+            <NextPreview 
+        handleNext={handleNext}
+        />
         </div>
     )
 }
