@@ -23,12 +23,10 @@ function App() {
 
   const { currentUser } = useAuth()
   const {navBarState} =useNavBar()
-
-  console.log(currentUser)
-  console.log(navBarState)
-
+     
 
   return (
+    currentUser!=null?
     <div className="App">
       <Router>
       {currentUser&& <NavBar/>}
@@ -64,6 +62,7 @@ function App() {
       </Route>   
       </Router>
       </div>
+      :<Login/>
   );
 }
 
