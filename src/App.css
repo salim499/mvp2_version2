@@ -38,6 +38,12 @@
   color: red;
 }
 
+button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
 .container-with-margin {
   margin-left: 301px;
   display: flex;

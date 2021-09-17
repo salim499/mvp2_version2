@@ -1,28 +1,28 @@
 // Import from react
-import React from 'react'
+import React, {useState} from 'react'
 
 // Import from libraries
 import { useHistory } from 'react-router-dom'
 
-// Import components
-import Timeline from '../components/Timeline'
-import NextPreview from '../components/nextPreview'
-
-// Import Icons
-import predict from '../assets/icons/predict.svg'
-
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
+
+// Import components
+import PredictionHorizonModal from '../components/PredictionHorizonModal';
+import Timeline from '../components/Timeline'
+import NextPreview from '../components/nextPreview'
+// Import Icons
+import predict from '../assets/icons/predict.svg'
 
 // constants
 const timelineLevel=3
 
-
-
 const ChooseTarget = () => {
+
+  const[isOpen, setIsOpen]=useState(false);
+
   // useHistory
   const history = useHistory();
-
   // useContext
   const {navBarState} = useNavBar();
 
@@ -32,14 +32,15 @@ const ChooseTarget = () => {
     })      
   } 
 
-
     return (
         <>
       <div className={navBarState?"container-with-margin ":"container-without-margin"}>
         <Timeline timelineLevel={timelineLevel}/>
         <div className="choose-target-container">
         <div className="edit-model-container">
-          <div><span>datasets/</span><span>"dataset.name"</span></div>
+          <div>
+            <span>datasets/</span><span>"dataset.name"</span>
+          </div>
         </div>
         <div className="edit-model-container">
           <div className="section-title">
@@ -94,7 +95,10 @@ const ChooseTarget = () => {
         <div className="edit-model-container">
         <div className="section-title" style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
           <div>Prediction Horizon</div>
-          <button style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+          <button 
+          style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}
+          onClick={()=>setIsOpen(true)}
+          >
             <div>Choose Prediction Horizon</div>
             <img src={predict} alt="predict icon"/>
           </button>
@@ -108,6 +112,12 @@ const ChooseTarget = () => {
         handleNext={handleNext}
         />
        </div>
+       {/* Prediction Horizon Modal - Popup */}
+       <PredictionHorizonModal
+        open={isOpen}
+        setIsOpen={setIsOpen}
+        onClose={() => setIsOpen(false)}
+        />
     </>
     )
 }

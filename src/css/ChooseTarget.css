@@ -123,3 +123,42 @@
   line-height: 25px;
   color: var(--background-blue);
 }
+
+.prediction-horizon-inputs {
+  display: flex;
+  justify-content: center;
+}
+
+.prediction-horizon-inputs > input:first-child {
+  margin-right: 20px;
+  width: 50px;
+  text-align: center;
+  border: inherit;
+  background-color: var(--light-grey);
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.popup-buttons > button {
+  width: 95px;
+  height: 34px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 25px;
+  text-align: center;
+}
+
+.popup-buttons > button:first-child {
+  background: #c4c4c4;
+  color: white;
+}
+
+.popup-buttons > button:last-child {
+  background: var(--background-blue);
+  color: white;
+}
