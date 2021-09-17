@@ -10,7 +10,9 @@ import {Link, useLocation} from 'react-router-dom'
 
 // Import icons
 import dashboard_navbar from '../assets/icons/dashboard_navbar.svg'
+import dashboard_navbar_selected from '../assets/icons/dashboard_navbar_selected.svg'
 import newModel_navbar from '../assets/icons/model_navbar.svg'
+import newModel_navbar_selected from '../assets/icons/model_navbar_selected.svg'
 import analysis_navbar from '../assets/icons/analysis_navbar.svg'
 import scalnyx_logo from '../assets/icons/scalnyx_logo.svg'
 
@@ -34,9 +36,13 @@ function NavBar(props) {
         setNavBarState(!navBarState)
     }
     // useLocation
-    const { pathname } = useLocation();
+    const  pathname  = useLocation();
     // useState
     const [showSideBar, setShowSideBar]=useState(false)
+
+    useEffect(()=>{
+      console.log(pathname)
+    },[pathname])
 
 
     return (
@@ -62,45 +68,29 @@ function NavBar(props) {
               </IconContext.Provider>
             </li>
             <img src={scalnyx_logo} className="nav-scalnyx-logo"/>
-
             <div className='navbar-texts'>
                 <li key="dashboard" className="nav-text">
-                  <Link to="/dashboard" style={{color:pathname=="/dashboard"&&"rgb(46,196,182)"}}>
+                  <Link to="/dashboard" style={{color:pathname.pathname=="/dashboard"&&"#fff"}}>
+                  {
+                    pathname.pathname=="/dashboard"?
+                    <img src={dashboard_navbar_selected}/>
+                    :
                     <img src={dashboard_navbar}/>
+                  }  
                     <span>Dashboard</span>
                   </Link>
                 </li>
             </div>
             <div className='navbar-texts'>
-                <li key="newmodel"  className="nav-text">
-                  <Link to="/create-portfolio">
-                    <img src={newModel_navbar}/>
-                    <span style={{color:pathname=="/create-model"&&"rgb(46,196,182)"}}>New Model</span>
-                  </Link>
-                </li>
-            </div>
-            <div className='navbar-texts'>
-                <li key="analysis"  className="nav-text">
-                  <Link to="/analysis">
-                    <img src={analysis_navbar} style={{color:pathname==="/analysis"&&"rgb(46,196,182)"}}/>
-                    <span>Analysis</span>
-                  </Link>
-                </li>
-            </div>
-            <div className='navbar-texts'>
-                <li key="pdfReport"  className="nav-text">
-                  <Link to="#">
-                    <span className="navbar-pdfReport-label">PDF Report</span>
-                  </Link>
-                </li>
-                <div className="navbar-pdfReport-text">
-                  download pdf monthly
-                </div>
-            </div>
-            <div className='navbar-texts'>
-                <li key="newmodel"  className="nav-text">
-                  <Link to="new-model">
-                   <button className="btn-download">Download</button>
+                <li key="newModel"  className="nav-text">
+                  <Link to="/choose-dataset" style={{color:pathname.pathname=="/choose-dataset"&&"#fff"}}>
+                    {
+                      pathname.pathname=="/choose-dataset"?
+                      <img src={newModel_navbar_selected}/>
+                      :
+                      <img src={newModel_navbar}/>
+                    }
+                    <span style={{color:pathname=="/choose-dataset"&&"rgb(46,196,182)"}}>New Model</span>
                   </Link>
                 </li>
             </div>

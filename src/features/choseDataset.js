@@ -15,21 +15,21 @@ import select_csv from '../assets/icons/select_csv.svg'
 // Import components
 import Timeline from '../components/timeline'
 import SelectDndFile from '../components/selectDndFile'
-import Envelope from '../components/envelope'
 import UserCsvFiles from '../components/horizontalFlexItems'
 import NextPreview from '../components/nextPreview'
+import UserProfile from '../components/userProfile'
 import ModalWarning from '../components/modalWarning'
 import ModalOk from '../components/modalOk'
 
+
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
+import { useAuth } from "../contexts/user"
 
 // Constants
 const dndText="Or drag and drop it here"
 const selectText="Select a CSV file to import"
-const envelopeText="Before you upload your files below, make sure your file is ready to be imported"
-const dateError="You have to choose a csv file which contains a date field"
-const noErrors="the dataset is uploaded successfully"
+const modifyText="Modify the selected file"
 const timelineLevel=1
 
     function ChoseDataset() {
@@ -38,6 +38,7 @@ const timelineLevel=1
     const history = useHistory()
 
     // useContext
+    const { currentUser} = useAuth()
     const {navBarState} = useNavBar()
 
     // useState 
@@ -56,12 +57,12 @@ const timelineLevel=1
     /* get user datasources names */
     useEffect(async ()=>{
       try {
-
+        console.log(currentUser)
         const res= await get(
             `${process.env.REACT_APP_URL_MASTER}/datasources`,
             {
                 headers:{
-                    token: localStorage.getItem('token')
+                    token: currentUser.token
                 }
             }
            )
@@ -70,7 +71,7 @@ const timelineLevel=1
       catch {
 
       }
-    },[])   
+    },[currentUser])   
 
     // useCallback 
     // case post csv
@@ -114,6 +115,7 @@ const timelineLevel=1
     },[])
     // case upload a new csv file 
     const handleUploadFile = useCallback((uploadedFile) => {
+
         // check if the csv contains a date field
         let containDate=false
         parse(uploadedFile, {
@@ -157,6 +159,7 @@ const timelineLevel=1
     return (
         <>
       <div className={navBarState?"container-with-margin ":"container-without-margin"}>
+        <UserProfile/>
         <Timeline timelineLevel={timelineLevel}/>
         <div className="start_from_scratch">
             <div className="first_div">
@@ -166,6 +169,7 @@ const timelineLevel=1
                 <SelectDndFile
                 dndText={dndText}
                 selectText={selectText}
+                modifyText={modifyText}
                 handleUploadFile={handleUploadFile}
                 />
             </div>

@@ -11,10 +11,8 @@ import { useNavBar } from "../contexts/navbar"
 
 const Login= () => {
 
-    // useContext
-    const {navBarState} = useNavBar()
-    // import sign_in function and current user state
-    const { sign_in, currentUser } = useAuth()
+    // import sign_in function 
+    const { sign_in} = useAuth()
 
     // useRef 
     const email=useRef()

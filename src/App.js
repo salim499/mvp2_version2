@@ -36,6 +36,8 @@ function App() {
   const { currentUser } = useAuth()
 
   console.log(currentUser)
+  console.log(navBarState)
+
 
   return (
     <div className="App">
@@ -47,35 +49,19 @@ function App() {
         <Dashboard/>:
         <Login/>
       }
+      </Route>   
+      <Route path="/choose-dataset" exact>
+        <ChoseDataset/>
       </Route>
       <Route path="/explore-dataset" exact>
         <ExploreDataset/>
-      </Route>
-      <Route path="/portfolio-causal-model" exact>
-        <CausalModelView/>
-      </Route>        
-      <Route path="/view-portfolio" exact>
-        <ViewPortfolio/>
-      </Route>
-      <Route path="/compose-portfolioidxli" exact>
-        <ComposePortfolio/>
-      </Route>
-      <Route path="/create-portfolio" exact>
-        <ChoseDataset/>
-      </Route>
-      <Route path="/chose-date-window" exact>
-        <ChoseDateWindow/>
       </Route>
       <Route path="/signup" exact>
         <Signup/>
       </Route>
       <Route path="/login" exact> 
         <Login/>
-      </Route>
-      <Route path="/update-count" exact> 
-        <UpdateCount/>
-      </Route>
-   
+      </Route>   
       </Router>
       </div>
   );

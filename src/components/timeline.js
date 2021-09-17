@@ -69,7 +69,7 @@ const Timeline = ({timelineLevel}) => {
                 }}
                  >3</div>
                 <div style={{ color: timelineLevel>2? "#081c4d" : "#C4C4C4",
-                              textAlign:"center" }}>Chose Target</div>
+                              textAlign:"center" }}>Choose Target</div>
             </div>
             <div className="line-container">
             <div className="line"
@@ -93,7 +93,7 @@ const Timeline = ({timelineLevel}) => {
                 }}
                 >4</div>
                 <div style={{ color: timelineLevel>3? "#081c4d" : "#C4C4C4",
-                              textAlign:"center" }}>Predict</div>
+                              textAlign:"center" }}>Predict results</div>
             </div>
     </div>
   );

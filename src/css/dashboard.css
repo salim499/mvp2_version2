@@ -1,20 +1,3 @@
-.user_information {
-    display: flex;
-    width: 90%;
-    justify-content: flex-end;
-    margin-bottom: 36px;
-}
-.user_information-user_name {
-    width: 104px;
-    height: 25px;
-    font-family: Overpass;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 25px;
-    /* identical to box height, or 104% */
-    color: #081C4D;
-}
 .dashboard_header {
     display: flex;
     width: 90%;
@@ -233,16 +216,6 @@
 }
 .rebalance_item-graph {
     height: 50%
-}
-.user_information-details {
-    height: 50px;
-    width: 15%;
-    margin-left: 80%;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 36px;
-    background-color: rgb(141, 143, 141);
-    text-align: center;
 }
 
 

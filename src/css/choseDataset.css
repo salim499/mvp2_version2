@@ -38,13 +38,13 @@
 .start_from_existing_files-label {
     width: 90%;
     height: 28px;
+    margin-top: 31px;
+    margin-bottom:50px;
     font-family: Overpass;
     font-style: normal;
     font-weight: normal;
     font-size: 24px;
     line-height: 25px;
     /* or 104% */
-    color: #ffffff;
-    margin-left: 23px;
-    margin-top: 13px;
+    margin-left: 26px;
 }

@@ -1,5 +1,5 @@
 // import from react''
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 
 // import from libraries
 import axios from 'axios'
@@ -25,7 +25,6 @@ export function AuthProvider({ children }) {
                 token: token
             }
         })
-        console.log(res)
         return res
     }
 
@@ -34,7 +33,7 @@ export function AuthProvider({ children }) {
         { name: userName, password: password })
         setCurrentUser(res.data)
         // save token on localStorage
-        localStorage.setItem('token', res.data.token)
+        localStorage.setItem('user', JSON.stringify(res.data))
         return res
     }
 
@@ -46,7 +45,7 @@ export function AuthProvider({ children }) {
             }
         })
         console.log(res)*/
-        localStorage.setItem('token',null)
+        localStorage.clear()
         setCurrentUser(null)
     }
 
@@ -62,6 +61,12 @@ export function AuthProvider({ children }) {
         setCurrentUser(res.data)
         return res
       }
+
+    useEffect(()=>{
+        if(localStorage.getItem('user')!=null){
+            setCurrentUser(JSON.parse(localStorage.getItem('user')))
+        }
+    },[])
 
     const value = {
         currentUser,

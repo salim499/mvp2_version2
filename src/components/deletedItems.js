@@ -2,30 +2,27 @@
 import React from 'react'
 
 
-function deletedItems() {
+function deletedItems(props) {
+
+    const handleRestartFactor = (factorName) => {
+        props.handleRestartFactor(factorName)
+    }
+
     return (
         <div className="deleted_items_container">
             <div className="deleted_items_container-title">
                 Eliminated factors
-            </div>
+            </div> 
             <div className="deleted_items_container-items">
-                <div className="deleted_items_container-items-item">
-                    Commo 1V
-                </div>
+            {props.factorsDeleted.map((factor)=>
                 <div className="deleted_items_container-items-item"
-                style={{backgroundColor:'#081C4D'}}>
-                    Commo 2V
+                onClick={()=>handleRestartFactor(factor.name)}>
+                {factor.name}
                 </div>
-                <div className="deleted_items_container-items-item">
-                    Commo 3V
-                </div>
-                <div className="deleted_items_container-items-item"
-                style={{backgroundColor:'#081C4D'}}>
-                    Commo 4V
-                </div>
+            )}  
             </div>           
         </div>
     )
 }
 
-export default deletedItems
+export default React.memo(deletedItems)

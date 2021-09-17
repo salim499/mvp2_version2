@@ -1,27 +1,41 @@
 // Import from react
-import React from 'react'
+import React, {useState} from 'react'
 
 // Import icons 
-import warning from '../assets/icons/warning.svg'
+import NotStationary from '../assets/icons/warning.svg'
+import Stationary from '../assets/icons/ok_green.svg'
+import TreatedByScalnyx from '../assets/icons/ok_blue.svg'
 
 // Import from components 
 import Histogram from './histogram'
 
-// Constants
-const typesFilter=['type1', 'type2', 'type3','type4', 'type5', 'type6']
-const statusFilter=['status1', 'status2', 'status3','status4', 'status5', 'status6']
-const clDropLayoutFactorsContextValue=
-[
- {name:'factor1',type:'integer',isTarget:true},
- {name:'factor2',type:'integer',isTarget:true},
- {name:'factor3',type:'integer',isTarget:true},
- {name:'factor4',type:'integer',isTarget:true},
- {name:'factor5',type:'integer',isTarget:true},
- {name:'factor6',type:'integer',isTarget:true},
-]
-const types=['type1', 'type2', 'type3','type4', 'type5', 'type6']
+// Constants 
+const types = ["All","Numerical", "Categorical", "Date"]
 
-function Table() {
+function Table(props) {
+
+    // useState
+    const [factorNameInputValue, setFactorNameInputValue] = useState("")
+    const [factorTypeSelectValue, setFactorTypeSelectValue] = useState("All")
+
+    // functions
+    const handleDeleteFactor = (factorName) => {
+      props.handleDeleteFactor(factorName)
+    }
+
+    const handleShowHistogram = (factorName) => {
+      props.handleShowHistogram(factorName)
+    }
+
+    const handleChangeFactorNameInputValue = (event) => {
+      setFactorNameInputValue(event.target.value)
+    }
+
+    const handleChangeFactorTypeSelectValue = (event) => {
+      console.log(event.target.value)
+      setFactorTypeSelectValue(event.target.value)
+    }
+
     return (
         <section>
         <table 
@@ -38,15 +52,17 @@ function Table() {
           <br/>
           <tr className="factors-table-header">
             <th className="val-1">
-              <input type="text" ></input>
-              </th>
+              <input type="text" 
+              onChange={handleChangeFactorNameInputValue}/>
+            </th>
             <th className="val-2">
-              <select name="models" id="models-choices">
-              {typesFilter.map((type, index) => (
-                <option key={type}>{type}</option>
+              <select onChange={handleChangeFactorTypeSelectValue}>
+              {
+              types.map(type=>(
+               <option>{type}</option>
               ))
               }
-          </select>
+              </select>
             </th>
             <th className="val-3"> 
             <span>Discretization</span>
@@ -58,28 +74,44 @@ function Table() {
           </thead>
           
           { 
-            clDropLayoutFactorsContextValue
+            props.factorsTable
             .map((factor,index)=>(
+            ((factor.name.startsWith(factorNameInputValue) 
+            || factorNameInputValue.length===0)
+            && (factor.type===factorTypeSelectValue || factorTypeSelectValue==="All")
+            ) &&
            <tr className="factor-row table-factors-select" id="dz" key={factor.name}>
-            <td className="val-1" key={factor.name}>{factor.name}</td>
-            <td className="val-2" key={factor.name?factor.name+"name":Math.random()}>
-              <select name="models" id="models-choices"
-              defaultValue={factor.type?factor.type:null}>
-              {types.map((type, index) => (
-                <option key={type}>{type}</option>
-              ))
-          }
-          </select>
+            <td className="val-1">
+            {factor.name}
             </td>
-            <td className="val-3" key={factor.isTarget?factor.isTarget.toString():null}>
-            <Histogram/>
+            <td className="val-2">
+            {factor.type}
+            </td>
+            <td className="val-3"
+            onClick={()=>handleShowHistogram(factor.name)}>
+            {factor.type==="Numerical"&&<Histogram histogram={factor.histogram}/>}
             <br/><br/>
             </td>
-            <td className="val-4">not stationary<img src={warning}/></td>
-            <div className="close">
-
+            <td className="val-4">
+            {
+              factor.stationaryState===2?
+              <>
+              <p>TreatedByScalnyx</p><img src={TreatedByScalnyx}/>
+              </>
+              :factor.stationaryState===true?
+              <>
+              <p>stationary</p><img src={Stationary}/>
+              </>
+              :
+              <>
+              not stationary<img src={NotStationary}/>
+              </>
+            }
+            </td>
+            <div className="close" 
+            onClick={()=>handleDeleteFactor(factor.name)}>
             </div>
-              </tr>                
+            </tr>                
             ))
           }
         </table>
@@ -87,4 +119,4 @@ function Table() {
     )
 }
 
-export default Table
+export default React.memo(Table)

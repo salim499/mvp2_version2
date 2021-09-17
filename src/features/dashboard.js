@@ -16,6 +16,8 @@ import duplicate_portfolio_blue from '../assets/icons/duplicate_select.svg'
 // Import components
 import Graph_portfolio from '../components/testChart2'
 import Circle_portfolio from '../components/Circle'
+import UserProfile from '../components/userProfile'
+
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
 import { useAuth } from "../contexts/user"
@@ -149,38 +151,16 @@ const dataFromBackend =[
 function Dashboard() {
  
     // useContext
-    const { currentUser, logout } = useAuth()
+    const { logout } = useAuth()
     const {navBarState} = useNavBar()
 
     // useState
     const [assetsGraphData, setAssetsGraphData] = useState(dataFromBackend)
-    const [showUserProfile, setShowUserProfile] = useState(false)
-    // functions
-    const handleShowUserProfile = () => {
-      setShowUserProfile(!showUserProfile)
-    }
 
-    const handleUserLogOut = async () => {
-      console.log("logout")
-      console.log(logout())
-    }
 
     return (
         <div className={navBarState?"container-with-margin ":"container-without-margin"}>
-            <div className="user_information">
-                <div className="user_information-user_name">
-                    Cheikh Ljama3
-                </div>
-                <div onClick={handleShowUserProfile}>
-                    <img src={user_profile} />
-                </div>
-            </div>
-            {showUserProfile&&
-              <div className="user_information-details"
-              onClick={handleUserLogOut}>
-                LogOut
-              </div>
-            }
+            <UserProfile/>
             <div className="dashboard_header">
                 <div className="dashboard_header-text">
                 Hi John, Welcome back !<br/><br/>

@@ -2,8 +2,11 @@
 import React, {useRef} from 'react'
 import ReactDom from 'react-dom'
 
+// Import components 
+import Histogram from './histogram'
+
 // Import icons 
-import Warning from '../assets/icons/warning_date.svg'
+import Delete from '../assets/icons/delete.svg'
 
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
@@ -15,8 +18,8 @@ const MODAL_STYLES = {
     transform: 'translate(-50%, -50%)',
     backgroundColor: '#FFF',
     zIndex: 1000,
-    height:'320px',
-    width:'460px',
+    height:'420px',
+    width:'75%',
     display: 'flex',
     flexDirection:'column',
     background: '#E5E5E5',
@@ -32,8 +35,8 @@ const MODAL_STYLES2 = {
     transform: 'translate(-50%, -50%)',
     backgroundColor: '#FFF',
     zIndex: 1000,
-    height:'320px',
-    width:'460px',
+    height:'420px',
+    width:'75%',
     display: 'flex',
     flexDirection:'column',
     background: '#E5E5E5',
@@ -153,8 +156,11 @@ const MODAL_TEXT2 = {
     marginTop:'18px',
     marginLeft:'100px'  
 }
-const DATES_STYLES = {
-    display: 'flex',
+const IMAGE_STYLES= {
+    height: '30px',
+    width:'30px',
+    marginLeft: '96%',
+    marginTop: '10px'
 }
 
 function ModalWarning(props) {
@@ -169,32 +175,12 @@ function ModalWarning(props) {
     return (
         ReactDom.createPortal(
             <>
+            {console.log("render")}
             <div style={OVERLAY_STYLES} />
             <div style={navBarState?MODAL_STYLES:MODAL_STYLES2}>
-            <div style={TEXT_STYLES}>
-                Would you like to adjust a date window for your prediction ?
-            </div>
-            <div style={DATES_STYLES}>
-            <input type="date" 
-                min="2018-01-01" 
-                max="2018-12-31"
-                ref={dateFrom} 
-                style={DATE_STYLE}/>
-            <input type="date" 
-                min="2018-01-01" 
-                max="2018-12-31" 
-                ref={dateTo} 
-                style={DATE_STYLE}/>
-            </div>
-            <div style={MODAL_BUTTONS}>
-            <button style={MODAL_BUTTONS_CANCEL}
-              onClick={()=>props.handleHideModal()}>Cancel</button>
-            <button style={MODAL_BUTTONS_APPLY}
-              onClick={()=>props.handleChoseDates(dateFrom.current.value,dateTo.current.value)}>Apply</button>
-            </div>
-            <div style={MODAL_TEXT2}>
-                Your dataset is between 2001 and 2009
-            </div>
+                <img src={Delete} style={IMAGE_STYLES}
+                onClick={props.handleHideHistogramModal}/>
+               <Histogram height={'400px'} histogram={props.histogramData}/>
             </div>
             </>,
         document.getElementById('portal')
@@ -202,4 +188,4 @@ function ModalWarning(props) {
     )
 }
 
-export default ModalWarning
+export default React.memo(ModalWarning)

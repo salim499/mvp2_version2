@@ -38,7 +38,7 @@ function Signup() {
             setErrorMessage(passwordsMatchError)
         }
         // send information to backend and try to signup  
-        signup(email.current.value,password.current.value, localStorage.getItem('token'))     
+        signup(email.current.value,password.current.value, JSON.parse(localStorage.getItem('user')).token)     
     }
 
     return (
