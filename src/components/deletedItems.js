@@ -9,7 +9,7 @@ function deletedItems(props) {
     }
 
     return (
-        <div className="deleted_items_container">
+        <div className="edit-model-container">
             <div className="deleted_items_container-title">
                 Eliminated factors
             </div> 

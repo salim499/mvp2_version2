@@ -1,37 +1,25 @@
-// Import from react
-import { useEffect, useState } from 'react'
-
-// Import from libraries
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import axios from 'axios'
+// React-router
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // Import css files
 import './App.css'
 
 // Import components
 import NavBar from './components/navbar'
-import Signup from './components/signup'
 import Login from './components/Login'
-import UpdateCount from './components/updateCount'
-
-import Portal from './components/modalNewItem'
 
 // Import features 
-import ChoseDataset from './features/choseDataset'
-import ComposePortfolio from './features/composePortfolio'
-import Dashboard from './features/dashboard'
-import ViewPortfolio from './features/viewPortfolio'
-import ChoseDateWindow from './features/choseDateWindow'
-import CausalModelView from './features/causalModelView'
-import ExploreDataset from './features/exploreDataset'
+import Predict from "./features/Predict";
+import ChooseTarget from "./features/ChooseTarget";
+import ChooseDataset from './features/ChooseDataset';
+import Dashboard from './features/dashboard';
+import ExploreDataset from './features/ExploreDataset';
 
 // Import contexts
 import { useAuth } from "./contexts/user"
 import { useNavBar } from "./contexts/navbar"
 
 function App() {
-
-  const {navBarState, setNavBarState} = useNavBar()
 
   const { currentUser } = useAuth()
 
@@ -49,17 +37,28 @@ function App() {
         <Dashboard/>:
         <Login/>
       }
-      </Route>   
-      <Route path="/choose-dataset" exact>
-        <ChoseDataset/>
+      </Route> 
+    {/* Dashboard */}
+      <Route path="/dashboard">
+          <Dashboard/>
       </Route>
-      <Route path="/explore-dataset" exact>
+    {/* Choose Dataset */}
+      <Route path="/choose-dataset">
+        <ChooseDataset/>
+      </Route>
+      {/* Explore Dataset */}
+      <Route path="/explore-dataset">
         <ExploreDataset/>
       </Route>
-      <Route path="/signup" exact>
-        <Signup/>
+      {/* Choose Target */} 
+      <Route path="/choose-target">
+        <ChooseTarget/>
       </Route>
-      <Route path="/login" exact> 
+      {/* Predict */} 
+      <Route path="/predict">
+        <Predict/>
+      </Route>
+      <Route path="/login"> 
         <Login/>
       </Route>   
       </Router>

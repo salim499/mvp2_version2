@@ -1,29 +1,37 @@
 .timeline-container {
-    display: flex;
-    align-items: center;
-    margin-top: 69px;
-    width: 90%;
-    margin-bottom: 30px;
-  } 
-  .square-container {
-    height:110px;
-    width: 10%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .square-container > .square {
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-  }
-  .line-container {
-    height:110px;
-    width: 20%;
-  }
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 72px;
+}
 
-  .line {
-    margin-top: 18px;
-  }
-  
+.timeline-container > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--dark-grey);
+}
+
+.timeline-container > div > .square {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: var(--dark-grey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.timeline-container > .line {
+  width: 157px;
+  border: 1px solid var(--dark-grey);
+  background-color: var(--dark-grey);
+}
+
+.timeline-highlight > .div {
+  color: var(--background-blue);
+}

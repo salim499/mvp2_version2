@@ -1,12 +1,12 @@
 .reporting-table-table-auto {
-    width: 100%;
-    background-color: #ffffff;
+  width: 100%;
+  background-color: #ffffff;
 }
 tr {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    overflow-wrap: anywhere;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  overflow-wrap: anywhere;
 }
 
 td {
@@ -19,10 +19,10 @@ th {
   width: 24%;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 .val5 {
-  width:4%;
+  width: 4%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,38 +33,38 @@ select {
   height: 37px;
   background: #ffffff;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25),
-  inset 0px 2px 2px rgba(0, 0, 0, 0.25);
+    inset 0px 2px 2px rgba(0, 0, 0, 0.25);
   padding: 10px;
 }
 .close {
-    width: 30px;
-    height: 30px;
-    opacity: 0.3;
-  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    margin: 15px 5px 10px 0px;
-    cursor: pointer;
-  }
-  .close:hover {
-    opacity: 1;
-  }
-  .close:before,
-  .close:after {
-    content: " ";
-    height: 33px;
-    width: 2px;
-    background-color: #333;
-  }
-  .close:before {
-    transform: rotate(45deg);
-  }
-  .close:after {
-    transform: rotate(-45deg);
-  }
-  /* The switch - the box around the slider */
+  width: 30px;
+  height: 30px;
+  opacity: 0.3;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin: 15px 5px 10px 0px;
+  cursor: pointer;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before,
+.close:after {
+  content: " ";
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+/* The switch - the box around the slider */
 .switch {
   position: relative;
   display: inline-block;
@@ -88,8 +88,8 @@ select {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider:before {
@@ -101,15 +101,15 @@ select {
   bottom: 1px;
   /* top: 1px; */
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: rgb(8,28,77);
+  background-color: rgb(8, 28, 77);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px rgb(8,28,77);
+  box-shadow: 0 0 1px rgb(8, 28, 77);
 }
 
 input:checked + .slider:before {
@@ -128,7 +128,7 @@ input:checked + .slider:before {
 }
 
 section {
-  width: 95%;
+  width: 90%;
   margin-top: 45px;
   align-content: center;
   justify-content: center;
@@ -143,14 +143,14 @@ section {
   flex-direction: column;
 }
 .deleted_items_container-title {
-  height:50px;
+  height: 50px;
   font-family: Overpass;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 25px;
   /* or 139% */
-  color: #081C4D;
+  color: #081c4d;
   display: flex;
   align-items: center;
   margin-left: 5%;
@@ -159,12 +159,12 @@ section {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  margin-left:5%;
+  margin-left: 5%;
   min-height: 84px;
 }
 .deleted_items_container-items-item {
   height: 32px;
-  background: #C4C4C4;
+  background: #c4c4c4;
   border-radius: 2px;
   font-family: Overpass;
   font-style: normal;
@@ -172,7 +172,7 @@ section {
   font-size: 18px;
   line-height: 25px;
   /* identical to box height, or 139% */
-  color: #FFFFFF;
+  color: #ffffff;
   display: flex;
   align-items: center;
   margin-right: 14px;

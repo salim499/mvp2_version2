@@ -1,0 +1,164 @@
+.choose-target-container {
+  width: 100%;
+}
+.choose-target-container > .edit-model-container > .section-title {
+  margin-bottom: 20px;
+}
+
+.choose-target-container
+  > .edit-model-container
+  > .section-title
+  > div:first-child {
+  font-family: Overpass;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 25px;
+  color: var(--background-blue);
+}
+
+.choose-target-container > .edit-model-container > .section-title > .info {
+  font-family: Overpass;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 25px;
+  color: #c4c4c4;
+}
+
+.choose-target-container > .edit-model-container > .section-title > button {
+  width: 304px;
+  height: 45px;
+  background: var(--background-blue);
+  border: 2px solid var(--background-blue);
+  box-sizing: border-box;
+  border-radius: 2px;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 10px;
+  /* or 56% */
+
+  color: #ffffff;
+}
+
+.choose-target-container > .edit-model-container > .section-boxes {
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+}
+
+.choose-target-container
+  > .edit-model-container
+  > .section-boxes
+  > .factors-box {
+  width: 45%;
+  background: rgba(229, 229, 229, 0.5);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.choose-target-container
+  > .edit-model-container
+  > .section-boxes
+  > .targets-box {
+  width: 45%;
+  background: rgba(255, 214, 10, 0.5);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.choose-target-container
+  > .edit-model-container
+  > .section-boxes
+  > .factors-box
+  > .title,
+.choose-target-container
+  > .edit-model-container
+  > .section-boxes
+  > .targets-box
+  > .title {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.choose-target-container
+  > .edit-model-container
+  > .section-boxes
+  > .factors-box
+  > .tags {
+  width: 99%;
+  margin: 0px auto;
+  display: flex;
+  align-content: stretch;
+  flex-wrap: wrap;
+}
+
+.choose-target-container
+  > .edit-model-container
+  > .section-boxes
+  > .factors-box
+  > .tags
+  > .tag-box {
+  background-color: #c4c4c4;
+  border-radius: 2px;
+  width: fit-content;
+  color: white;
+  text-transform: capitalize;
+  margin: 5px;
+  padding: 10px;
+}
+
+.choose-target-container
+  > .edit-model-container
+  > .section-boxes
+  > .factors-box
+  > .title,
+.choose-target-container
+  > .edit-model-container
+  > .section-boxes
+  > .targets-box
+  > .title {
+  font-family: Overpass;
+  font-size: 24px;
+  line-height: 25px;
+  color: var(--background-blue);
+}
+
+.prediction-horizon-inputs {
+  display: flex;
+  justify-content: center;
+}
+
+.prediction-horizon-inputs > input:first-child {
+  margin-right: 20px;
+  width: 50px;
+  text-align: center;
+  border: inherit;
+  background-color: var(--light-grey);
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.popup-buttons > button {
+  width: 95px;
+  height: 34px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 25px;
+  text-align: center;
+}
+
+.popup-buttons > button:first-child {
+  background: #c4c4c4;
+  color: white;
+}
+
+.popup-buttons > button:last-child {
+  background: var(--background-blue);
+  color: white;
+}

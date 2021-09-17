@@ -10,7 +10,7 @@ import '../css/causalModelView.css'
 
 // Import components
 import CreatePortfolioNavbar from '../components/createPortfolioNavbar'
-import Timeline from '../components/timeline'
+import Timeline from '../components/Timeline'
 import Network from '../components/network'
 import ModelActions from '../components/actions'
 import ModelDirections from '../components/directions'

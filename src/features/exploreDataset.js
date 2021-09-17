@@ -9,11 +9,16 @@ import { useLocation, useHistory } from 'react-router-dom'
 import '../css/exploreDataset.css'
 
 // Import components 
+import Timeline from '../components/Timeline'
 import Table from '../components/Table'
 import DeletedFactors from '../components/deletedItems'
+<<<<<<< HEAD
 import Timeline from '../components/timeline'
 import UserProfile from '../components/userProfile'
 import ModalHistogram from '../components/modalHistogram'
+=======
+import NextPreview from '../components/nextPreview'
+>>>>>>> choose-target
 
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
@@ -22,6 +27,9 @@ import { useNavBar } from "../contexts/navbar"
 const timelineLevel=2
 
 function ExploreDataset() {
+
+    // useHistory
+    const history = useHistory()
 
     // useLocations 
     const location = useLocation()
@@ -63,6 +71,7 @@ function ExploreDataset() {
         }
     },[])
 
+<<<<<<< HEAD
     // useCallback
     const handleDeleteFactor = useCallback((factorName) => {
         // add the factor to eliminated factors 
@@ -110,6 +119,23 @@ function ExploreDataset() {
             histogramData={histogramData}
             handleHideHistogramModal={handleHideHistogramModal}/>
             }
+=======
+        // useCallback 
+    // case post csv
+    const handleNext=()=>{        
+            history.push({
+                pathname : '/choose-target'
+            })   
+        }
+    return (
+        <div className={navBarState?"container-with-margin":"container-without-margin"}>
+            <Timeline timelineLevel={timelineLevel}/>
+            <DeletedFactors factorsDeleted={factorsDeleted}/>
+            <Table factorsTable={factorsTable}/>
+            <NextPreview 
+        handleNext={handleNext}
+        />
+>>>>>>> choose-target
         </div>
     )
 }

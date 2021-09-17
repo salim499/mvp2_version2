@@ -6,7 +6,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { post } from 'axios';
 
 // Import components
-import Timeline from '../components/timeline'
+import Timeline from '../components/Timeline'
 import DataSetContainer from '../components/dataSetContainer'
 import NextPreview from '../components/nextPreview'
 import DateInterval from '../components/dateInterval'
