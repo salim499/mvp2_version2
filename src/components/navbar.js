@@ -82,7 +82,6 @@ function NavBar(props) {
                 </li>
             </div>
             <div className='navbar-texts'>
-<<<<<<< HEAD
                 <li key="newModel"  className="nav-text">
                   <Link to="/choose-dataset" style={{color:pathname.pathname=="/choose-dataset"&&"#fff"}}>
                     {
@@ -92,20 +91,6 @@ function NavBar(props) {
                       <img src={newModel_navbar}/>
                     }
                     <span style={{color:pathname=="/choose-dataset"&&"rgb(46,196,182)"}}>New Model</span>
-=======
-                <li key="newmodel"  className="nav-text">
-                  <Link to="/choose-dataset">
-                    <img src={newModel_navbar}/>
-                    <span style={{color:pathname=="/create-model"&&"rgb(46,196,182)"}}>New Model</span>
-                  </Link>
-                </li>
-            </div>
-            <div className='navbar-texts'>
-                <li key="analysis"  className="nav-text">
-                  <Link to="/analysis">
-                    <img src={analysis_navbar} style={{color:pathname==="/analysis"&&"rgb(46,196,182)"}}/>
-                    <span>Analysis</span>
->>>>>>> choose-target
                   </Link>
                 </li>
             </div>

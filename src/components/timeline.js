@@ -24,12 +24,8 @@ const Timeline = ({timelineLevel}) => {
                 className="square"
                 style={{ backgroundColor: timelineLevel===3 ? "#081c4d" : "#C4C4C4" }}
                  >3</div>
-<<<<<<< HEAD
                 <div style={{ color: timelineLevel>2? "#081c4d" : "#C4C4C4",
                               textAlign:"center" }}>Choose Target</div>
-=======
-                <div style={{ color: timelineLevel===3? "#081c4d" : "#C4C4C4" }}>Choose Target</div>
->>>>>>> choose-target
             </div>
             <div className="line"></div>
             <div>
@@ -37,12 +33,8 @@ const Timeline = ({timelineLevel}) => {
                 className="square"
                 style={{ backgroundColor: timelineLevel===4 ? "#081c4d" : "#C4C4C4" }}
                 >4</div>
-<<<<<<< HEAD
                 <div style={{ color: timelineLevel>3? "#081c4d" : "#C4C4C4",
                               textAlign:"center" }}>Predict results</div>
-=======
-                <div style={{ color: timelineLevel===4? "#081c4d" : "#C4C4C4" }}>Predict</div>
->>>>>>> choose-target
             </div>
     </div>
   );

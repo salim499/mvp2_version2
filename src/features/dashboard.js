@@ -160,24 +160,7 @@ function Dashboard() {
 
     return (
         <div className={navBarState?"container-with-margin ":"container-without-margin"}>
-<<<<<<< HEAD
             <UserProfile/>
-=======
-            <div className="user_information">
-                <div className="user_information-user_name">
-                    User
-                </div>
-                <div onClick={handleShowUserProfile}>
-                    <img src={user_profile} />
-                </div>
-            </div>
-            {showUserProfile&&
-              <div className="user_information-details"
-              onClick={handleUserLogOut}>
-                LogOut
-              </div>
-            }
->>>>>>> choose-target
             <div className="dashboard_header">
                 <div className="dashboard_header-text">
                 Hi John, Welcome back !<br/><br/>

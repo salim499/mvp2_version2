@@ -13,7 +13,7 @@ import Predict from "./features/Predict";
 import ChooseTarget from "./features/ChooseTarget";
 import ChooseDataset from './features/ChooseDataset';
 import Dashboard from './features/dashboard';
-import ExploreDataset from './features/ExploreDataset';
+import ExploreDataset from './features/exploreDataset';
 
 // Import contexts
 import { useAuth } from "./contexts/user"
@@ -22,6 +22,7 @@ import { useNavBar } from "./contexts/navbar"
 function App() {
 
   const { currentUser } = useAuth()
+  const {navBarState} =useNavBar()
 
   console.log(currentUser)
   console.log(navBarState)

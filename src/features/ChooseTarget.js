@@ -9,7 +9,7 @@ import { useNavBar } from "../contexts/navbar"
 
 // Import components
 import PredictionHorizonModal from '../components/PredictionHorizonModal';
-import Timeline from '../components/Timeline'
+import Timeline from '../components/timeline'
 import NextPreview from '../components/nextPreview'
 // Import Icons
 import predict from '../assets/icons/predict.svg'

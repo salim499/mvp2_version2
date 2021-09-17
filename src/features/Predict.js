@@ -5,7 +5,7 @@ import React, {useState} from 'react'
 import { useNavBar } from "../contexts/navbar"
 
 // Import components
-import Timeline from '../components/Timeline'
+import Timeline from '../components/timeline'
 
 // Import Icons
 import arrowUp from '../assets/icons/arrowUp.svg'
