@@ -33,7 +33,7 @@ const Predict = () => {
                         <span>Prediction Horizon:</span><span style={{color:'#c4c4c4'}}>"+24h"</span>
                     </div>
                     </div>
-                    <div className="edit-model-container" className="predict-table-container">
+                    <div className="predict-table-container">
                         <table>
                               <tr>
                                 <th>Targets</th>
@@ -87,6 +87,7 @@ const Predict = () => {
                         </table>
                     </div>
                 </div>
+                <div className="edit-model-container"></div>
             </div>
         </>
     )
