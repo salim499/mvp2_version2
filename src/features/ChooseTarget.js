@@ -39,7 +39,7 @@ const ChooseTarget = () => {
         <div className="choose-target-container">
         <div className="edit-model-container">
           <div>
-            <span>datasets/</span><span>"dataset.name"</span>
+            <span>Datasets/</span><span style={{color:'#cbd2d0'}}>"dataset.name"</span>
           </div>
         </div>
         <div className="edit-model-container">

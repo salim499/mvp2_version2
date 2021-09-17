@@ -1,0 +1,97 @@
+.predict-container {
+  width: 100%;
+}
+
+.predict-table-container {
+  width: 90%;
+  margin: auto;
+  padding: 30px 30px;
+  box-sizing: border-box;
+  background-color: white;
+  box-shadow: inset 0px 4px 4px rgb(0 0 0 / 25%);
+  border-radius: 5px;
+  margin-bottom: 40px;
+}
+
+.predict-table-container > table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.predict-table-container > table > tr {
+  margin-bottom: 5px;
+}
+
+.predict-table-container > table > tr:first-child {
+  height: 70px;
+}
+
+.predict-table-container > table > tr:first-child > th {
+  font-family: "Overpass", sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  color: var(--background-blue);
+}
+
+.predict-table-container > table > tr > th:first-child,
+.predict-table-container > table > tr > td:first-child {
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.predict-table-container > table > tr > td:first-child > div {
+  width: 300px;
+  height: 58px;
+  background: var(--yellow);
+  border-radius: 2px;
+}
+
+.predict-table-container > table > tr > td:first-child > div > p {
+  padding-left: 10px;
+}
+.predict-table-container > table > tr > th:nth-child(2),
+.predict-table-container > table > tr > td:nth-child(2) {
+  width: 32%;
+  display: flex;
+  justify-content: flex-start;
+}
+.predict-table-container > table > tr > th:last-child,
+.predict-table-container > table > tr > td:last-child {
+  width: 32%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.predict-table-container > table > tr > td:nth-child(2) > div {
+  width: 86px;
+  height: 38px;
+
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.predict-table-container > table > tr > td:nth-child(2) > div > p,
+.predict-table-container > table > tr > td:last-child > div > p {
+  font-family: "Overpass";
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  color: #ffffff;
+  margin-left: 10px;
+}
+
+.predict-table-container > table > tr > td:last-child > div {
+  width: 68px;
+  height: 38px;
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
