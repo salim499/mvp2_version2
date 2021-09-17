@@ -1,5 +1,5 @@
 // Import from react
-import React, {useState} from 'react'
+import React, {useState, useCallback} from 'react'
 
 // Import from libraries
 import { useHistory } from 'react-router-dom'
@@ -19,18 +19,29 @@ const timelineLevel=3
 
 const ChooseTarget = () => {
 
-  const[isOpen, setIsOpen]=useState(false);
 
   // useHistory
   const history = useHistory();
   // useContext
   const {navBarState} = useNavBar();
 
-  const handleNext =()=>{
+  // useStates
+  const [previewVisibility, setPreviewVisibility] = useState("visible")
+  const [nextVisibility, setNextVisibility] = useState("visible")
+  const[isOpen, setIsOpen]=useState(false);
+
+  // useCallback
+  const handleNext = useCallback(()=>{
     history.push({
         pathname : '/predict'
     })      
-  } 
+  },[]) 
+
+  const handlePreview = useCallback(()=>{
+    history.push({
+        pathname : '/explore-dataset'
+    })      
+  },[]) 
 
     return (
         <>
@@ -110,6 +121,9 @@ const ChooseTarget = () => {
        </div>
        <NextPreview 
         handleNext={handleNext}
+        handlePreview={handlePreview}
+        nextVisibility={nextVisibility}
+        previewVisibility={previewVisibility}
         />
        </div>
        {/* Prediction Horizon Modal - Popup */}

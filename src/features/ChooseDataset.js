@@ -62,7 +62,7 @@ const timelineLevel=1
             `${process.env.REACT_APP_URL_MASTER}/datasources`,
             {
                 headers:{
-                    token: currentUser.token
+                    token: JSON.parse(localStorage.getItem('user')).token
                 }
             }
            )
@@ -93,7 +93,7 @@ const timelineLevel=1
                     formData,
                     {
                         headers:{
-                            token: localStorage.getItem('token')
+                            token: JSON.parse(localStorage.getItem('user')).token
                         }
                 }
             )

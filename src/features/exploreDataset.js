@@ -14,6 +14,7 @@ import Table from '../components/Table'
 import DeletedFactors from '../components/deletedItems'
 import UserProfile from '../components/userProfile'
 import ModalHistogram from '../components/modalHistogram'
+import NextPreview from '../components/nextPreview'
 
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
@@ -33,6 +34,8 @@ function ExploreDataset() {
     const {navBarState} = useNavBar()
 
     // useState
+    const [previewVisibility, setPreviewVisibility] = useState("visible")
+    const [nextVisibility, setNextVisibility] = useState("visible")
     const [factorsTable, setFactorsTable] = useState([])
     const [factorsDeleted, setFactorsDeleted] = useState([])
     const [nameHistogramModal, setNameHistogramModal] = useState(null)
@@ -94,6 +97,20 @@ function ExploreDataset() {
         setNameHistogramModal(null)
     },[])
 
+    const handleNext = useCallback(()=>{
+        history.push({
+            pathname : '/choose-target',
+            state : null
+        })
+    },[])
+
+    const handlePreview = useCallback(()=>{
+        history.push({
+            pathname : '/choose-dataset',
+            state : null
+        })
+    },[])
+
     return (
         <div className={navBarState?"container-with-margin":"container-without-margin"}>
             <UserProfile/>
@@ -113,6 +130,12 @@ function ExploreDataset() {
             histogramData={histogramData}
             handleHideHistogramModal={handleHideHistogramModal}/>
             }
+        <NextPreview 
+        handleNext={handleNext}
+        handlePreview={handlePreview}
+        nextVisibility={nextVisibility}
+        previewVisibility={previewVisibility}
+        />
         </div>
     )
 }

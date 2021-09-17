@@ -175,7 +175,6 @@ function ModalWarning(props) {
     return (
         ReactDom.createPortal(
             <>
-            {console.log("render")}
             <div style={OVERLAY_STYLES} />
             <div style={navBarState?MODAL_STYLES:MODAL_STYLES2}>
                 <img src={Delete} style={IMAGE_STYLES}

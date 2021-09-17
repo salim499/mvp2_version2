@@ -34,7 +34,7 @@ function App() {
       {currentUser&& <NavBar/>}
       <Route path="/" exact>
       {
-        currentUser?
+        currentUser!=null?
         <Dashboard/>:
         <Login/>
       }
