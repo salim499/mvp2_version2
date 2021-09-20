@@ -3,8 +3,7 @@
 }
 
 .navbar {
-  background-color: #e5e5e5;
-  height: 80px;
+  height: 40px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -60,38 +59,35 @@
 
 .nav-text {
   display: flex;
-  justify-content: start;
-  align-items: center;
-  padding: 8px 0px 8px 16px;
-  list-style: none;
-  height: 70px;
 }
 
 .nav-text a {
   text-decoration: none;
-  color: rgb(46,196,182);
+  color: rgb(46, 196, 182);
   font-size: 20px;
-  width: 98%;
-  height: 100%;
+  width: 100%;
+  height: 60px;
   display: flex;
 
   align-items: center;
-  padding: 0 16px;
   border-radius: 4px;
+  padding-left: 40px;
 }
 
 .nav-text a:hover {
-  background-color: #1a83ff;
+  background-color: #061437;
 }
 
 .nav-menu-items {
   width: 100%;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .navbar-toggle {
   background-color: var(--navbar-background);
   width: 100%;
-  height: 80px;
+  height: 40px;
   display: flex;
   justify-content: start;
 }
@@ -119,8 +115,10 @@ ul {
   list-style-type: none;
 }
 .nav-scalnyx-logo {
-  margin-right: 16px;
+  width: 100%;
+  margin: 0 auto;
 }
+
 .navbar-pdfReport-label {
   font-family: Overpass;
   font-style: normal;
