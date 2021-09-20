@@ -50,8 +50,8 @@ const timelineLevel=1
     const [nextMessage, setNextMessage] = useState("")
     const [cvsOk, setCsvOk] = useState(false)
     const [openModal, setOpenModal] = useState(false)
-    const [startDate, setStartDate] = useState()
-    const [endDate, setEndDate] = useState()
+    const [startDate, setStartDate] = useState(null)
+    const [endDate, setEndDate] = useState(null)
 
     // useEffect 
     /* get user datasources names */
@@ -118,22 +118,29 @@ const timelineLevel=1
 
         // check if the csv contains a date field
         let containDate=false
+        let dates =[]
         parse(uploadedFile, {
-            download: true,
+           // download: true,
             step: function(row) {
+                console.log(row)
                 if(row.data.find(rowElment=>rowElment.toLowerCase()==="date")){
                     containDate=true
+                    return
+                }
+                if(containDate){
+                    dates.push(row.data[0])
                 }
             },
-            complete: async function () {
+            complete: async function (data) {
+                console.log(dates)
                 if(!containDate){
-                    console.log("no contain")
                     setCsvOk(false)
                     setOpenModal(true) 
                     return
                 }
                 if(containDate){
-                    console.log("contain")
+                    setStartDate(dates[0])
+                    setEndDate(dates[dates.length-1]!=""? dates[dates.length-1]:  dates[dates.length-2])
                     setCsvOk(true)
                     setOpenModal(true) 
                     setFile(uploadedFile)
@@ -196,7 +203,10 @@ const timelineLevel=1
       }   
       {
       openModal&& cvsOk &&
-      <ModalOk handleHideModal={handleHideModal}
+      <ModalOk 
+      startDate={startDate}
+      endDate={endDate}
+      handleHideModal={handleHideModal}
       handleChoseDates={handleChoseDates}/>
       }    
     </>
