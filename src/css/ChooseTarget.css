@@ -96,10 +96,37 @@
 .choose-target-container
   > .edit-model-container
   > .section-boxes
+  > .targets-box
+  > .tags {
+  width: 99%;
+  margin: 0px auto;
+  display: flex;
+  align-content: stretch;
+  flex-wrap: wrap;
+}
+
+.choose-target-container
+  > .edit-model-container
+  > .section-boxes
   > .factors-box
   > .tags
   > .tag-box {
   background-color: #c4c4c4;
+  border-radius: 2px;
+  width: fit-content;
+  color: white;
+  text-transform: capitalize;
+  margin: 5px;
+  padding: 10px;
+}
+
+.choose-target-container
+  > .edit-model-container
+  > .section-boxes
+  > .targets-box
+  > .tags
+  > .tag-box {
+  background-color: rgb(8,29,76);
   border-radius: 2px;
   width: fit-content;
   color: white;

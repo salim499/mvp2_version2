@@ -52,7 +52,8 @@ const timelineLevel=1
     const [openModal, setOpenModal] = useState(false)
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
-
+    const [minDate, setMinDate] = useState(null)
+    const [maxDate, setMaxDate] = useState(null)
     // useEffect 
     /* get user datasources names */
     useEffect(async ()=>{
@@ -88,6 +89,11 @@ const timelineLevel=1
         try {
             const formData = new FormData()
             formData.append("files", file)
+            formData.append("dateInterval", {
+                startDate: startDate,
+                endDate: endDate
+            })
+            console.log(formData.values())
             const res =await post(
                 `${process.env.REACT_APP_URL_MASTER}/datasources`,
                     formData,
@@ -98,7 +104,7 @@ const timelineLevel=1
                 }
             )
             history.push({
-                pathname : '/compose-portfolio',
+                pathname : '/explore-dataset',
                 state : res.data.id
             })
         }
@@ -139,8 +145,8 @@ const timelineLevel=1
                     return
                 }
                 if(containDate){
-                    setStartDate(dates[0])
-                    setEndDate(dates[dates.length-1]!=""? dates[dates.length-1]:  dates[dates.length-2])
+                    setMinDate(dates[0])
+                    setMaxDate(dates[dates.length-1]!=""? dates[dates.length-1]:  dates[dates.length-2])
                     setCsvOk(true)
                     setOpenModal(true) 
                     setFile(uploadedFile)
@@ -162,6 +168,7 @@ const timelineLevel=1
         setEndDate(dateTo)
         setOpenModal(false) 
     },[])
+
 
     return (
         <>
@@ -204,8 +211,8 @@ const timelineLevel=1
       {
       openModal&& cvsOk &&
       <ModalOk 
-      startDate={startDate}
-      endDate={endDate}
+      minDate={minDate}
+      maxDate={maxDate}
       handleHideModal={handleHideModal}
       handleChoseDates={handleChoseDates}/>
       }    

@@ -3,8 +3,7 @@ import React, {useRef, useEffect} from 'react'
 import ReactDom from 'react-dom'
 
 // Import icons 
-import Warning from '../assets/icons/warning_date.svg'
-
+import FromTo from '../assets/icons/fromTo.svg'
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
 
@@ -156,6 +155,10 @@ const MODAL_TEXT2 = {
 const DATES_STYLES = {
     display: 'flex',
 }
+const IMAGE_STYLES = {
+    marginLeft: '35px',
+    marginTop: '50px',
+}
 
 function ModalWarning(props) {
 
@@ -172,6 +175,7 @@ function ModalWarning(props) {
         console.log(props.endDate)
     },[props.startDate, props.endDate])
 
+
     return (
         ReactDom.createPortal(
             <>
@@ -182,15 +186,18 @@ function ModalWarning(props) {
             </div>
             <div style={DATES_STYLES}>
             <input type="date" 
-                min={props.startDate !=null && (props.startDate)} 
-                max={props.endDate !=null && (props.endDate)}
+                min={props.minDate !=null && props.minDate} 
+                max={props.maxDate !=null && props.maxDate}
                 ref={dateFrom} 
-                style={DATE_STYLE}/>
+                style={DATE_STYLE}
+            />
+            <img src={FromTo} style={IMAGE_STYLES}/>
             <input type="date" 
-                min="2018-01-01" 
-                max="30-10-2018" 
+                min={props.minDate !=null && props.minDate} 
+                max={props.maxDate !=null && props.maxDate}
                 ref={dateTo} 
-                style={DATE_STYLE}/>
+                style={DATE_STYLE}
+            />
             </div>
             <div style={MODAL_BUTTONS}>
             <button style={MODAL_BUTTONS_CANCEL}

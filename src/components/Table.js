@@ -74,7 +74,7 @@ function Table(props) {
           </thead>
           
           { 
-            props.factorsTable
+            props.factorsTable.filter((factor, index)=>(props.chosenPaginationNumber-1)*10<=index && index<props.chosenPaginationNumber*10)
             .map((factor,index)=>(
             ((factor.name.startsWith(factorNameInputValue) 
             || factorNameInputValue.length===0)
