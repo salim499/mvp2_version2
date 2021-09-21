@@ -13,7 +13,7 @@ function NextPreview(props) {
           <button className="next_preview-preview"
           style={{visibility: props.previewVisibility}}
           onClick={()=>props.handlePreview()}>
-                Preview
+                Previous
           </button>
           <button className="next_preview-next"
           style={{visibility: props.nextVisibility}}
