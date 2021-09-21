@@ -4,6 +4,8 @@ import React, {useEffect, useState, useCallback} from 'react'
 // Import from libraries
 import {get} from 'axios'
 import { useLocation, useHistory } from 'react-router-dom'
+import Pagination from '@material-ui/lab/Pagination'
+import { makeStyles } from '@material-ui/core/styles'
 
 // Import css files 
 import '../css/exploreDataset.css'
@@ -40,6 +42,7 @@ function ExploreDataset() {
     const [factorsDeleted, setFactorsDeleted] = useState([])
     const [nameHistogramModal, setNameHistogramModal] = useState(null)
     const [histogramData, setHistogramData] = useState([])
+    const [chosenPaginationNumber, setChosenPaginationNumber] = useState(1)
 
     // useEffect 
     useEffect(async()=>{
@@ -111,6 +114,12 @@ function ExploreDataset() {
         })
     },[])
 
+    // functions
+    const handlePagination = (number) => {
+        setChosenPaginationNumber(number)
+        console.log(number)
+    }
+
     return (
         <div className={navBarState?"container-with-margin":"container-without-margin"}>
             <UserProfile/>
@@ -120,6 +129,7 @@ function ExploreDataset() {
             factorsDeleted={factorsDeleted}
             handleRestartFactor={handleRestartFactor}/>
             <Table 
+            chosenPaginationNumber={chosenPaginationNumber}
             factorsTable={factorsTable}
             handleDeleteFactor={handleDeleteFactor}
             handleShowHistogram={handleShowHistogram}
@@ -130,12 +140,16 @@ function ExploreDataset() {
             histogramData={histogramData}
             handleHideHistogramModal={handleHideHistogramModal}/>
             }
-        <NextPreview 
-        handleNext={handleNext}
-        handlePreview={handlePreview}
-        nextVisibility={nextVisibility}
-        previewVisibility={previewVisibility}
-        />
+            <Pagination
+            count={8}
+            onChange={(e, number)=>handlePagination(number)}
+            color="#081c4d"/>
+            <NextPreview 
+            handleNext={handleNext}
+            handlePreview={handlePreview}
+            nextVisibility={nextVisibility}
+            previewVisibility={previewVisibility}
+            />
         </div>
     )
 }
