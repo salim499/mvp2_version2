@@ -60,7 +60,7 @@ function ExploreDataset() {
                     name:res.data.columns[i],
                     type:res.data.dataType[i],
                     stationaryState:res.data.stationaryState[res.data.columns[i]],
-                    histogram:res.data.histograms.find(e=>e.name===res.data.columns[i])
+                    histogram:res.data.histograms[i]
                     }])
             }
         }
@@ -100,7 +100,7 @@ function ExploreDataset() {
     const handleNext = useCallback(()=>{
         history.push({
             pathname : '/choose-target',
-            state : null
+            state : location.state
         })
     },[])
 

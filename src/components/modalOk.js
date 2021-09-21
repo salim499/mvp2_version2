@@ -1,5 +1,5 @@
 // Import from react
-import React, {useRef} from 'react'
+import React, {useRef, useEffect} from 'react'
 import ReactDom from 'react-dom'
 
 // Import icons 
@@ -166,6 +166,12 @@ function ModalWarning(props) {
     const dateFrom = useRef()
     const dateTo = useRef()
 
+    // useEffect
+    useEffect(()=>{
+        console.log(props.startDate)
+        console.log(props.endDate)
+    },[props.startDate, props.endDate])
+
     return (
         ReactDom.createPortal(
             <>
@@ -176,13 +182,13 @@ function ModalWarning(props) {
             </div>
             <div style={DATES_STYLES}>
             <input type="date" 
-                min="2018-01-01" 
-                max="2018-12-31"
+                min={props.startDate !=null && (props.startDate)} 
+                max={props.endDate !=null && (props.endDate)}
                 ref={dateFrom} 
                 style={DATE_STYLE}/>
             <input type="date" 
                 min="2018-01-01" 
-                max="2018-12-31" 
+                max="30-10-2018" 
                 ref={dateTo} 
                 style={DATE_STYLE}/>
             </div>

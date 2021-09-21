@@ -17,20 +17,13 @@ function Histogram(props) {
 
     useEffect(()=>{
 
-        console.log(props.histogram)
-        const data2=[]
-        for(let i=0;i<props.histogram.n.length;i++){
-            data2.push({from:props.histogram.bins[i],
-                to:props.histogram.bins[i+1],
-                count:props.histogram.n[i]})
-        }
-        console.log(data2)
+        console.log(props)
         
         // Create chart instance
         chart.current = am4core.create(chartDiv.current, am4charts.XYChart);
         
         // Add data
-        chart.current.data = data2;
+        chart.current.data = props.histogram;
         
         // Create axes
         var categoryAxis = chart.current.xAxes.push(new am4charts.CategoryAxis());
