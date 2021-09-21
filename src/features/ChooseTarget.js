@@ -297,7 +297,7 @@ const ChooseTarget = () => {
 
         <div className="edit-model-container">
         <div className="section-title" style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-          <div>Prediction Horizon</div>
+          <div>Dataset Visualization</div>
           <button 
           style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}
           onClick={()=>setIsOpen(true)}
@@ -307,13 +307,13 @@ const ChooseTarget = () => {
           </button>
         </div>
         <div className="targets-observation-graph">
-          TARGETS OBSERVATION GRAPH
+        <GraphTarget
+       lineChartData={dataFromBackend}
+       />
         </div>
         </div>
        </div>
-       <GraphTarget
-       lineChartData={dataFromBackend}
-       />
+       
        <NextPreview 
         handleNext={handleNext}
         handlePreview={handlePreview}
