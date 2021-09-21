@@ -179,7 +179,7 @@ const ChooseTarget = () => {
   },[]) 
 
   // useEffect
-  useEffect(async()=>{
+  useEffect(async()=>{ 
     try {
       const res= await get(
           `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}`,

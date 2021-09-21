@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import ReactDom from 'react-dom';
 
 import predict from "../assets/icons/predict_blue.svg";
+import add from "../assets/icons/add_grey.svg";
 
 const MODAL_STYLES={
     position:'fixed',
@@ -34,24 +35,29 @@ const MODAL_STYLES={
 
 const PredictionHorizonModal = ({open, setIsOpen, onClose}) => {
   const [error, setError]=useState("");
- 
+  const [ newHorizon, setNewHorizon] = useState(false);
+
   const cancel = () => {
     setIsOpen(!open);
     }
 
+  const addHorizon = ()=>{
+    setNewHorizon(true)
+    setTimeout(() => {
+      setNewHorizon(false)
+    }, 3000);
+  }
     if(!open) return null
   return ReactDom.createPortal(
       <>
       <div onClick={onClose} style={OVERLAY_STYLES}/>
     <div style={MODAL_STYLES}>
-      {/* <button style={{backgroundColor:'inherit'}} onClick={()=>setIsOpen(!open)}>
-        <img src={close} alt="close icon"/>
-      </button> */}
       <div style={{display:'flex', alignItems:'baseline'}}>
       <div style={{fontFamily: 'Overpass',fontSize: '24px',linheight: '37px', margin:'0 20px 40px 0'}}>Please choose a prediction horizon</div>
       <img src={predict} alt="predict"/>
       </div>
       <div className="prediction-horizon-inputs">
+      <div className="one-horizon">
           <input
           type="number"
           min="1"
@@ -63,9 +69,33 @@ const PredictionHorizonModal = ({open, setIsOpen, onClose}) => {
             <option value="months">Months</option>
             <option value="years">Years</option>
         </select>
+        <button onClick={addHorizon}>
+          <img src={add} alt="add button"/>
+        </button>
+        </div>
+        {newHorizon===true ? 
+        <div className="one-horizon">
+          <input
+          type="number"
+          min="1"
+          max="100"
+          />
+        <select>
+            <option value="hours">Hours</option>
+            <option value="days" selected>Days</option>
+            <option value="months">Months</option>
+            <option value="years">Years</option>
+        </select>
+        <button onClick={addHorizon}>
+          <img src={add} alt="add button"/>
+        </button>
+        </div>
+        :
+        <></>  
+        }
       </div>
      <div className="popup-buttons">
-         <button>Cancel</button>
+         <button onClick={()=>setIsOpen(!open)}>Cancel</button>
          <button>Apply</button>
      </div>
      </div>

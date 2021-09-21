@@ -123,13 +123,16 @@
   line-height: 25px;
   color: var(--background-blue);
 }
-
 .prediction-horizon-inputs {
+  display: flex;
+  flex-direction: column;
+}
+.prediction-horizon-inputs > .one-horizon {
   display: flex;
   justify-content: center;
 }
 
-.prediction-horizon-inputs > input:first-child {
+.prediction-horizon-inputs > .one-horizon > input:first-child {
   margin-right: 20px;
   width: 50px;
   text-align: center;
