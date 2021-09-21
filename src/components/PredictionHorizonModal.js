@@ -43,9 +43,6 @@ const PredictionHorizonModal = ({open, setIsOpen, onClose}) => {
 
   const addHorizon = ()=>{
     setNewHorizon(true)
-    setTimeout(() => {
-      setNewHorizon(false)
-    }, 3000);
   }
     if(!open) return null
   return ReactDom.createPortal(
@@ -58,6 +55,7 @@ const PredictionHorizonModal = ({open, setIsOpen, onClose}) => {
       </div>
       <div className="prediction-horizon-inputs">
       <div className="one-horizon">
+        <div>Horizon 1</div>
           <input
           type="number"
           min="1"

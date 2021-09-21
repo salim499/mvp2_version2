@@ -130,6 +130,7 @@
 .prediction-horizon-inputs > .one-horizon {
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 .prediction-horizon-inputs > .one-horizon > input:first-child {
