@@ -126,7 +126,7 @@
   > .targets-box
   > .tags
   > .tag-box {
-  background-color: rgb(8,29,76);
+  background-color: rgb(8, 29, 76);
   border-radius: 2px;
   width: fit-content;
   color: white;
@@ -153,11 +153,15 @@
 .prediction-horizon-inputs {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .prediction-horizon-inputs > .one-horizon {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
+  width: 347px;
 }
 
 .prediction-horizon-inputs > .one-horizon > input:first-child {
