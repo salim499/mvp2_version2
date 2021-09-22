@@ -61,7 +61,7 @@ function ExploreDataset() {
             for (let i=0; i<res.data.columns.length; i++){
                 setFactorsTable(factorsTable=>[...factorsTable, {
                     name:res.data.columns[i],
-                    type:res.data.dataType[i],
+                    type:res.data.dataType[res.data.columns[i]],
                     stationaryState:res.data.stationaryState[res.data.columns[i]],
                     histogram:res.data.histograms[i]
                     }])

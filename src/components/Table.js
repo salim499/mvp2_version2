@@ -7,12 +7,14 @@ import Stationary from '../assets/icons/ok_green.svg'
 import TreatedByScalnyx from '../assets/icons/ok_blue.svg'
 
 // Import from components 
-import Histogram from './histogram'
+import Histogram from './binaryChart'
 
 // Constants 
 const types = ["All","Numerical", "Categorical", "Date"]
 
 function Table(props) {
+
+    console.log(props)
 
     // useState
     const [factorNameInputValue, setFactorNameInputValue] = useState("")
