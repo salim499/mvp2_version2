@@ -190,12 +190,12 @@ const ChooseTarget = () => {
           </button>
         </div>
         <div className="targets-observation-graph">
+        <GraphTarget
+       lineChartData={targetsObservationData}
+       />
         </div>
         </div>
        </div>
-       <GraphTarget
-       lineChartData={targetsObservationData}
-       />
        <NextPreview 
         handleNext={handleNext}
         handlePreview={handlePreview}
