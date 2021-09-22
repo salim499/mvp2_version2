@@ -190,9 +190,6 @@ const ChooseTarget = () => {
           </button>
         </div>
         <div className="targets-observation-graph">
-        <GraphTarget
-       lineChartData={dataFromBackend}
-       />
         </div>
         </div>
        </div>
