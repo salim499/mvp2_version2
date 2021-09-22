@@ -1,8 +1,11 @@
 import React, {useState} from "react";
 import ReactDom from 'react-dom';
 
-import predict from "../assets/icons/predict_blue.svg";
+import Horizon from "../components/Horizon.js";
+
 import add from "../assets/icons/add_grey.svg";
+import predict from "../assets/icons/predict_blue.svg";
+
 
 const MODAL_STYLES={
     position:'fixed',
@@ -35,7 +38,7 @@ const MODAL_STYLES={
 
 const PredictionHorizonModal = ({open, setIsOpen, onClose}) => {
   const [error, setError]=useState("");
-  const [ horizons, setHorizons] = useState([{}]);
+  const [ horizons, setHorizons] = useState([{duration:"1", timeUnit:"days"}]);
 
   const cancel = () => {
     setIsOpen(!open);
@@ -43,9 +46,16 @@ const PredictionHorizonModal = ({open, setIsOpen, onClose}) => {
 
   const addHorizon = ()=>{
     if(horizons.length <3){
-      setHorizons([...horizons, {}])  
+      setHorizons([...horizons, {duration:"1", timeUnit:"days"}])  
     }  
   }
+
+  const changeHorizon =(index, horizon)=>{
+    const newHorizons = [...horizons]
+    newHorizons[index]=horizon
+    setHorizons(newHorizons)
+  }
+
     if(!open) return null
   return ReactDom.createPortal(
       <>
@@ -58,25 +68,18 @@ const PredictionHorizonModal = ({open, setIsOpen, onClose}) => {
       <div className="prediction-horizon-inputs">
         {horizons.map((horizon, index)=>{
           return(
-            <div className="one-horizon">
-            <div>Horizon {index+1}</div>
-              <input
-              type="number"
-              min="1"
-              max="100"
-              />
-            <select>
-                <option value="hours">Hours</option>
-                <option value="days" selected>Days</option>
-                <option value="months">Months</option>
-                <option value="years">Years</option>
-            </select>
+            <>
+            <Horizon 
+            horizon={horizon}
+            index={index}
+            changeHorizon={changeHorizon}
+            />
             {horizons.length <3 && index===horizons.length-1 &&
-            <button onClick={addHorizon}>
+              <button onClick={addHorizon}>
               <img src={add} alt="add button"/>
-            </button>
-            }
-            </div>
+              </button>
+              }
+            </>
           )
         })}
 
