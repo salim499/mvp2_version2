@@ -36,9 +36,8 @@ const MODAL_STYLES={
     zIndex:1000,    
   };
 
-const PredictionHorizonModal = ({open, setIsOpen, onClose}) => {
+const PredictionHorizonModal = ({open, setIsOpen, onClose, horizons, setHorizons, setHorizonsSummary, setEditMode}) => {
   const [error, setError]=useState("");
-  const [ horizons, setHorizons] = useState([{duration:"1", timeUnit:"days"}]);
 
   const cancel = () => {
     setIsOpen(!open);
@@ -56,6 +55,14 @@ const PredictionHorizonModal = ({open, setIsOpen, onClose}) => {
     setHorizons(newHorizons)
   }
 
+  const handleSubmit=(event)=>{
+    event.preventDefault(); 
+    setIsOpen(!open)
+    setHorizonsSummary(true);
+    setEditMode(true)
+   }
+
+
     if(!open) return null
   return ReactDom.createPortal(
       <>
@@ -65,6 +72,7 @@ const PredictionHorizonModal = ({open, setIsOpen, onClose}) => {
       <div style={{fontFamily: 'Overpass',fontSize: '24px',linheight: '37px', margin:'0 20px 40px 0'}}>Please choose a prediction horizon</div>
       <img src={predict} alt="predict"/>
       </div>
+      <form onSubmit={handleSubmit}>
       <div className="prediction-horizon-inputs">
         {horizons.map((horizon, index)=>{
           return(
@@ -82,12 +90,12 @@ const PredictionHorizonModal = ({open, setIsOpen, onClose}) => {
             </>
           )
         })}
-
       </div>
      <div className="popup-buttons">
          <button onClick={()=>setIsOpen(!open)}>Cancel</button>
-         <button>Apply</button>
+         <button type="submit">Confirm</button>
      </div>
+     </form>
      </div>
      </>,
      document.getElementById('portal')

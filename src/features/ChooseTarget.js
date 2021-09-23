@@ -16,6 +16,7 @@ import Timeline from '../components/timeline'
 import NextPreview from '../components/nextPreview'
 // Import Icons
 import predict from '../assets/icons/predict.svg'
+import predictBlue from '../assets/icons/predict_blue.svg'
 
 const timelineLevel=3
 
@@ -38,6 +39,10 @@ const ChooseTarget = () => {
   const [factorsNames, setFactorsNames] = useState([])
   const [targetsNames, setTargetsNames] = useState([])
   const [targetsObservationData, setTargetsObservationData] = useState([])
+
+  const [ horizons, setHorizons] = useState([{duration:"1", timeUnit:"days"}]);
+  const [horizonsSummary,setHorizonsSummary]= useState(false);
+  const [editMode, setEditMode]=useState(false);
 
   // useCallback
   const handleNext = useCallback(()=>{
@@ -64,7 +69,6 @@ const ChooseTarget = () => {
           }
          )
       // build json object from backend data
-
       setFactorsNames(res.data.columns)
 
   }
@@ -182,10 +186,14 @@ const ChooseTarget = () => {
         <div className="section-title" style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
           <div>Dataset Visualization</div>
           <button 
-          style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}
+          style={{display:'flex', justifyContent:'center', alignItems:'center'}}
           onClick={()=>setIsOpen(true)}
-          >
-            <div>Choose Prediction Horizon</div>
+          >  
+            {
+            editMode ? <div style={{marginRight:'10px'}}>Edit Prediction Horizon</div>
+            :
+            <div style={{marginRight:'10px'}}>Choose Prediction Horizon</div>
+            }
             <img src={predict} alt="predict icon"/>
           </button>
         </div>
@@ -194,6 +202,20 @@ const ChooseTarget = () => {
        lineChartData={targetsObservationData}
        />
         </div>
+        {horizonsSummary===true &&
+        <div className="horizons-chosen">
+          {horizons.map((horizon, index)=>{
+            return(
+              <div className="horizon-chosen">
+            <div>{horizon.duration}&nbsp;</div>
+            <div>{horizon.timeUnit.charAt().toUpperCase()+ horizon.timeUnit.slice(1)}</div>
+            <br/><br/>
+            <img src={predictBlue} alt="predict"/>
+            </div>
+            )
+          })}       
+        </div>
+        }
         </div>
        </div>
        <NextPreview 
@@ -208,6 +230,10 @@ const ChooseTarget = () => {
         open={isOpen}
         setIsOpen={setIsOpen}
         onClose={() => setIsOpen(false)}
+        horizons={horizons}
+        setHorizons={setHorizons}
+        setHorizonsSummary={setHorizonsSummary}
+        setEditMode={setEditMode}
         />
     </DragDropContext>
     </>

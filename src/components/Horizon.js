@@ -2,8 +2,7 @@
 import React, {useState} from 'react'
 
 const Horizon =({horizon, index, changeHorizon})=>{
-
-
+    
     const handleChangeDuration = (event)=>{
         changeHorizon(index, {duration:event.target.value, timeUnit:horizon.timeUnit})
     }
