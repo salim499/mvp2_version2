@@ -28,7 +28,7 @@ const Predict = () => {
 
     // useState
     const [previewVisibility, setPreviewVisibility] = useState("visible")
-    const [nextVisibility, setNextVisibility] = useState("hidden")
+    const [nextVisibility, setNextVisibility] = useState("visible")
 
     // useCallback
     const handlePreview = useCallback(()=>{
@@ -36,8 +36,9 @@ const Predict = () => {
             pathname : '/choose-target'
         })      
     },[]) 
-    return(
 
+
+    return(
     <div className={navBarState?"container-with-margin ":"container-without-margin"}>
         <Timeline timelineLevel={timelineLevel}/>
         <div className="predict-container">
@@ -111,6 +112,8 @@ const Predict = () => {
             handlePreview={handlePreview}
             nextVisibility={nextVisibility}
             previewVisibility={previewVisibility}
+            text="Save"
+            className="save-button"
             />
     </div>
     )

@@ -91,7 +91,7 @@ function Table(props) {
             </td>
             <td className="val-3"
             onClick={()=>handleShowHistogram(factor.name)}>
-            {factor.type==="Numerical"&&<Histogram histogram={factor.histogram}/>}
+            {factor.type==="numerical"&&<Histogram histogram={factor.histogram}/>}
             <br/><br/>
             </td>
             <td className="val-4">

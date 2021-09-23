@@ -72,7 +72,7 @@ const ChooseTarget = () => {
          )
       // build json object from backend data
       console.log(res.data)
-      setFactorsNames(res.data.columns.filter(factorName=>res.data.dataType[factorName]==="Numerical"))
+      setFactorsNames(res.data.columns.filter(factorName=>res.data.dataType[factorName]==="numerical"))
 
   }
   catch(err){
@@ -94,7 +94,7 @@ const ChooseTarget = () => {
         targetsNames.forEach(targetName => {
           columnsStr +=`columns=${targetName}&`
         })
-        columnsStr +=`columns=${factorsNames[results.source.index]}&columns=Date`
+        columnsStr +=`columns=${factorsNames[results.source.index]}&columns=date`
         console.log(columnsStr)
         console.log(`${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}?${columnsStr}`)
         const res= await get(
@@ -126,7 +126,7 @@ const ChooseTarget = () => {
           columnsStr +=`columns=${targetName}&`
           }
         })
-        columnsStr +=`columns=Date`
+        columnsStr +=`columns=date`
         console.log(columnsStr)
         console.log(`${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}?${columnsStr}`)
         const res= await get(

@@ -30,3 +30,23 @@
 .next_preview-next:hover {
   background: #081c4d;
 }
+
+.save-button {
+  width: 130px;
+  height: 64px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "Montserrat";
+  font-weight: bold;
+  font-size: 18px;
+  color: #ffffff;
+
+  background: rgba(23, 161, 55, 0.5);
+}
+
+.save-button:hover {
+  background-color: #17a137;
+}
