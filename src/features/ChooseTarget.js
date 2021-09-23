@@ -14,6 +14,8 @@ import GraphTarget from '../components/testChart2'
 import PredictionHorizonModal from '../components/PredictionHorizonModal';
 import Timeline from '../components/timeline'
 import NextPreview from '../components/nextPreview'
+
+
 // Import Icons
 import predict from '../assets/icons/predict.svg'
 import predictBlue from '../assets/icons/predict_blue.svg'
@@ -69,7 +71,8 @@ const ChooseTarget = () => {
           }
          )
       // build json object from backend data
-      setFactorsNames(res.data.columns)
+      console.log(res.data)
+      setFactorsNames(res.data.columns.filter(factorName=>res.data.dataType[factorName]==="Numerical"))
 
   }
   catch(err){
@@ -116,6 +119,30 @@ const ChooseTarget = () => {
       && results.source.droppableId==='targetFactors'){     
       setFactorsNames(factorsNames=>[...factorsNames, targetsNames[results.source.index]])
       setTargetsNames(targetsNames.filter((targetName, index)=>index!=results.source.index))
+      try {
+        let columnsStr=""
+        targetsNames.forEach(targetName => {
+          if(targetName!=targetsNames[results.source.index]){
+          columnsStr +=`columns=${targetName}&`
+          }
+        })
+        columnsStr +=`columns=Date`
+        console.log(columnsStr)
+        console.log(`${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}?${columnsStr}`)
+        const res= await get(
+            `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}?${columnsStr}`,
+            {
+                headers:{
+                    token: JSON.parse(localStorage.getItem('user')).token
+                }
+            }
+           )
+           setTargetsObservationData(res.data.rows)
+           console.log(res.data)
+      }
+      catch(err){
+        console.log(err)
+      }
       return
     }
   }

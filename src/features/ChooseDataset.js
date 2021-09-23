@@ -21,7 +21,6 @@ import UserProfile from '../components/userProfile'
 import ModalWarning from '../components/modalWarning'
 import ModalOk from '../components/modalOk'
 
-
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
 import { useAuth } from "../contexts/user"
@@ -87,13 +86,11 @@ const timelineLevel=1
         } 
         // case choosing and upload an new file 
         try {
+            console.log(JSON.stringify({endDate:'25-07-2007',startDate:'23-07-2007'}))
             const formData = new FormData()
             formData.append("files", file)
-            formData.append("dateInterval", {
-                startDate: startDate,
-                endDate: endDate
-            })
-            console.log(formData.values())
+            formData.append("name","file.name")
+            formData.append("dateInterval",JSON.stringify({endDate:'25-07-2007',startDate:'23-07-2007'}))
             const res =await post(
                 `${process.env.REACT_APP_URL_MASTER}/datasources`,
                     formData,
