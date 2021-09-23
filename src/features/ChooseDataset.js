@@ -46,18 +46,18 @@ const timelineLevel=1
     const [chosenDataSetId, setChosenDataSetId] = useState(null)
     const [previewVisibility, setPreviewVisibility] = useState("hidden")
     const [nextVisibility, setNextVisibility] = useState("hidden")
-    const [nextMessage, setNextMessage] = useState("")
     const [cvsOk, setCsvOk] = useState(false)
     const [openModal, setOpenModal] = useState(false)
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
     const [minDate, setMinDate] = useState(null)
     const [maxDate, setMaxDate] = useState(null)
+
     // useEffect 
     /* get user datasources names */
     useEffect(async ()=>{
       try {
-        console.log(currentUser)
+
         const res= await get(
             `${process.env.REACT_APP_URL_MASTER}/datasources`,
             {
@@ -86,11 +86,9 @@ const timelineLevel=1
         } 
         // case choosing and upload an new file 
         try {
-            console.log(JSON.stringify({endDate:'25-07-2007',startDate:'23-07-2007'}))
             const formData = new FormData()
             formData.append("files", file)
-            formData.append("name","file.name")
-            formData.append("dateInterval",JSON.stringify({endDate:'25-07-2007',startDate:'23-07-2007'}))
+            formData.append("dateInterval",JSON.stringify({endDate:endDate,startDate:startDate}))
             const res =await post(
                 `${process.env.REACT_APP_URL_MASTER}/datasources`,
                     formData,
@@ -98,7 +96,7 @@ const timelineLevel=1
                         headers:{
                             token: JSON.parse(localStorage.getItem('user')).token
                         }
-                }
+                    }
             )
             history.push({
                 pathname : '/explore-dataset',
@@ -125,7 +123,6 @@ const timelineLevel=1
         parse(uploadedFile, {
            // download: true,
             step: function(row) {
-                console.log(row)
                 if(row.data.find(rowElment=>rowElment.toLowerCase()==="date")){
                     containDate=true
                     return
@@ -143,7 +140,9 @@ const timelineLevel=1
                 }
                 if(containDate){
                     setMinDate(dates[0])
-                    setMaxDate(dates[dates.length-1]!=""? dates[dates.length-1]:  dates[dates.length-2])
+                    setMaxDate(dates[dates.length-1])
+                    setStartDate(dates[0])
+                    setEndDate(dates[dates.length-1])
                     setCsvOk(true)
                     setOpenModal(true) 
                     setFile(uploadedFile)
@@ -160,7 +159,6 @@ const timelineLevel=1
     },[])
 
     const handleChoseDates = useCallback((dateFrom, dateTo) => {
-        console.log(dateFrom, dateTo)
         setStartDate(dateFrom)
         setEndDate(dateTo)
         setOpenModal(false) 

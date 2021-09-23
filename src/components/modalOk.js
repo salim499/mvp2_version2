@@ -171,9 +171,9 @@ function ModalWarning(props) {
 
     // useEffect
     useEffect(()=>{
-        console.log(props.startDate)
-        console.log(props.endDate)
-    },[props.startDate, props.endDate])
+        console.log(props.minDate)
+        console.log(props.maxDate)
+    },[props.minDate, props.maxDate])
 
 
     return (
@@ -186,15 +186,17 @@ function ModalWarning(props) {
             </div>
             <div style={DATES_STYLES}>
             <input type="date" 
-                min={props.minDate !=null && props.minDate} 
-                max={props.maxDate !=null && props.maxDate}
+                min={props.minDate} 
+                max={props.maxDate}
+                defaultValue={props.minDate}
                 ref={dateFrom} 
                 style={DATE_STYLE}
             />
             <img src={FromTo} style={IMAGE_STYLES}/>
             <input type="date" 
-                min={props.minDate !=null && props.minDate} 
-                max={props.maxDate !=null && props.maxDate}
+                min={props.minDate} 
+                max={props.maxDate}
+                defaultValue={props.maxDate}
                 ref={dateTo} 
                 style={DATE_STYLE}
             />
