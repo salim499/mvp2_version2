@@ -40,31 +40,39 @@
   align-items: flex-end;
   position: static;
   padding-bottom: 5px;
+  margin: -40px 0 40px 0;
 }
 
 #arrow {
   height: 20px;
   background-color: transparent;
-  color: var(--font);
+  color: var(--background-blue);
   cursor: pointer;
   outline: 0;
   font-size: 30px;
-  margin: 0 30px 0 15px;
+  margin: 0px 30px 0 15px;
 }
 .user-header-area {
   display: flex;
   align-items: center;
+  width: 175px;
+  display: absolute;
+  position: absolute;
+  right: 30px;
+  border-radius: 5px 5px 0 0;
 }
+
 .dropdown {
   position: absolute;
   background: var(--background);
-  top: 70px;
+  top: 60px;
   right: 30px;
-  width: 150px;
+  width: 175px;
   z-index: 3;
-  border-radius: 0 05px 5px;
+  border-radius: 0 0 5px 5px;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-top: 2px solid var(--dark-grey);
 }
 .dropdown ul {
   list-style: none;
@@ -75,20 +83,21 @@
 .disconnect-link {
   padding: 12px 12px;
   font-family: "Overpass", sans-serif;
-  font-weight: bold;
-  font-size: 24px;
   line-height: 25px;
+  font-size: 18px;
+  font-weight: 700;
 
   display: flex;
   align-items: center;
-  color: var(--green);
+  color: rgba(8, 28, 77, 0.5);
 }
+
 .user-header-area:hover {
   cursor: pointer;
 }
 
 .disconnect-link:hover::after {
-  width: 100%;
+  width: 50%;
   transition: 0.1s;
 }
 .disconnect-link::after {
@@ -96,13 +105,31 @@
   display: block;
   width: 0;
   height: 2px;
-  background: var(--pink);
-  transition: 0.6s;
+  /* background: var(--pink);
+  transition: 0.6s; */
 }
 .user-header-name {
   font-size: 18px;
   font-weight: 700;
+  color: var(--background-blue);
 }
 .user-header-company {
   font-size: 16px;
+  color: var(--dark-grey);
+}
+
+.disconnect-link > div {
+  margin-left: 10px;
+  cursor: pointer;
+}
+.disconnect-link > img {
+  cursor: pointer;
+}
+
+.disconnect-link:hover > svg path {
+  fill-opacity: inherit;
+}
+
+.disconnect-link:hover > div {
+  color: var(--background-blue);
 }

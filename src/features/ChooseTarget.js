@@ -14,6 +14,7 @@ import GraphTarget from '../components/testChart2'
 import PredictionHorizonModal from '../components/PredictionHorizonModal';
 import Timeline from '../components/timeline'
 import NextPreview from '../components/nextPreview'
+import UserProfile from '../components/userProfile'
 
 
 // Import Icons
@@ -151,6 +152,7 @@ const ChooseTarget = () => {
         <>
       <DragDropContext onDragEnd={handleOnDragEnd}>
       <div className={navBarState?"container-with-margin ":"container-without-margin"}>
+      <UserProfile/>
         <Timeline timelineLevel={timelineLevel}/>
         <div className="choose-target-container">
         <div className="edit-model-container">

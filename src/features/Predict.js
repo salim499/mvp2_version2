@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom'
 // Import components
 import Timeline from '../components/timeline'
 import NextPreview from '../components/nextPreview'
+import UserProfile from '../components/userProfile'
 
 // Import Icons
 import arrowUp from '../assets/icons/arrowUp.svg'
@@ -40,6 +41,7 @@ const Predict = () => {
 
     return(
     <div className={navBarState?"container-with-margin ":"container-without-margin"}>
+        <UserProfile/>
         <Timeline timelineLevel={timelineLevel}/>
         <div className="predict-container">
             <div className="edit-model-container" style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
