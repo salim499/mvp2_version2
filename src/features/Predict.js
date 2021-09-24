@@ -67,7 +67,7 @@ const Predict = () => {
 
     // useState
     const [previewVisibility, setPreviewVisibility] = useState("visible")
-    const [nextVisibility, setNextVisibility] = useState("hidden")
+    const [nextVisibility, setNextVisibility] = useState("visible")
     const [dataBarChart, setDataBarChart] = useState([])
 
     // useEffect
