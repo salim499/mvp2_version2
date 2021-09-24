@@ -10,16 +10,14 @@ import TreatedByScalnyx from '../assets/icons/ok_blue.svg'
 import Histogram from './binaryChart'
 
 // Constants 
-const types = ["All","Numerical", "Categorical", "Date"]
+const types = ["All","numerical", "categorical", "date"]
 
 function Table(props) {
-
-    console.log(props)
 
     // useState
     const [factorNameInputValue, setFactorNameInputValue] = useState("")
     const [factorTypeSelectValue, setFactorTypeSelectValue] = useState("All")
-
+    
     // functions
     const handleDeleteFactor = (factorName) => {
       props.handleDeleteFactor(factorName)
@@ -34,7 +32,6 @@ function Table(props) {
     }
 
     const handleChangeFactorTypeSelectValue = (event) => {
-      console.log(event.target.value)
       setFactorTypeSelectValue(event.target.value)
     }
 
@@ -76,7 +73,8 @@ function Table(props) {
           </thead>
           
           { 
-            props.factorsTable.filter((factor, index)=>(props.chosenPaginationNumber-1)*10<=index && index<props.chosenPaginationNumber*10)
+            props.factorsTable.filter((factor)=>factor.type!="date")
+            .filter((factor, index)=>(props.chosenPaginationNumber-1)*10<=index && index<props.chosenPaginationNumber*10)
             .map((factor,index)=>(
             ((factor.name.startsWith(factorNameInputValue) 
             || factorNameInputValue.length===0)

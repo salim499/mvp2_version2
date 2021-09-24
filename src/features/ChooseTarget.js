@@ -4,7 +4,7 @@ import React, {useState, useCallback, useEffect} from 'react'
 // Import from libraries
 import { Droppable, Draggable, DragDropContext } from 'react-beautiful-dnd'
 import { useHistory, useLocation } from 'react-router-dom'
-import { get } from 'axios'
+import { get, post } from 'axios'
 
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
@@ -21,7 +21,69 @@ import UserProfile from '../components/userProfile'
 import predict from '../assets/icons/predict.svg'
 import predictBlue from '../assets/icons/predict_blue.svg'
 
+// Constants
 const timelineLevel=3
+
+let dataFromBackend = 
+{
+    'id': '8b9b74',
+    'modelId': 'idx3398hf19',
+    'user_query': 
+    [   
+        {
+        name: 'factorX',
+        value: 8765875.1
+        },
+        {
+        name: 'factor2',
+        value: 587.51
+        }
+    ],
+    'predictions': {
+   '24h':{
+    'prediction' :
+    [
+        {name:'name1', prediction:'+', confidence:'90%'},
+        {name:'name2', prediction:'+', confidence:'70%'},
+        {name:'name3', prediction:'-', confidence:'20%'}
+    ],
+    'explicativeFactors':
+    [
+        {name:'nameX', performanceAttribution:'+55%'},
+        {name:'nameY', performanceAttribution:'-22%'},
+        {name:'nameZ', performanceAttribution:'+10%'}
+    ]
+   },
+   '48h':{
+    'prediction' :
+    [
+        {name:'name1', prediction:'-', confidence:'-90%'},
+        {name:'name2', prediction:'-', confidence:'70%'},
+        {name:'name3', prediction:'-', confidence:'20%'}
+    ],
+    'explicativeFactors':
+    [
+        {name:'nameX', performanceAttribution:'+55%'},
+        {name:'nameY', performanceAttribution:'-22%'},
+        {name:'nameZ', performanceAttribution:'10%'}
+    ]
+   },
+   '72h':{
+    'prediction' :
+    [
+        {name:'name1', prediction:'+', confidence:'9%'},
+        {name:'name2', prediction:'-', confidence:'70%'},
+        {name:'name3', prediction:'+', confidence:'620%'}
+    ],
+    'explicativeFactors':
+    [
+        {name:'nameX', performanceAttribution:'+55%'},
+        {name:'nameY', performanceAttribution:'-22%'},
+        {name:'nameZ', performanceAttribution:'10%'}
+    ]
+   },
+}
+}
 
 const ChooseTarget = () => {
 
@@ -48,15 +110,48 @@ const ChooseTarget = () => {
   const [editMode, setEditMode]=useState(false);
 
   // useCallback
-  const handleNext = useCallback(()=>{
+  const handleNext = useCallback(async()=>{
+/*    try {
+      const res= await post(`${process.env.REACT_APP_URL_MASTER}/models`,
+      {
+        dataSourceId:location.state, 
+        targets:targetsNames,
+        predictionHorizon:horizons,
+      },
+      {
+          headers:{
+              token: localStorage.getItem('token')
+          },                      
+      }
+      )
+      const res2 = await post(`${process.env.REACT_APP_URL_MASTER}/model-predictions`,
+        {
+        modelId:res.data.id
+        },
+        {
+          headers:{
+              token: localStorage.getItem('token')
+          },                      
+        }
+        )
+      history.push({
+        pathname : '/predict',
+        state:dataFromBackend
+      })  
+    }
+    catch (err) {
+        console.log(err)
+    }  */
     history.push({
-        pathname : '/predict'
-    })      
-  },[]) 
+      pathname : '/predict',
+      state:{...dataFromBackend, horizons}
+    })   
+  },[targetsNames, horizons]) 
 
   const handlePreview = useCallback(()=>{
     history.push({
-        pathname : '/explore-dataset'
+        pathname : '/explore-dataset',
+        state:{id:location.state.id,name:location.state.name}
     })      
   },[]) 
 
@@ -64,7 +159,7 @@ const ChooseTarget = () => {
   useEffect(async()=>{ 
     try {
       const res= await get(
-          `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}`,
+          `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id}`,
           {
               headers:{
                   token: JSON.parse(localStorage.getItem('user')).token
@@ -72,7 +167,6 @@ const ChooseTarget = () => {
           }
          )
       // build json object from backend data
-      console.log(res.data)
       setFactorsNames(res.data.columns.filter(factorName=>res.data.dataType[factorName]==="numerical"))
 
   }
@@ -80,6 +174,7 @@ const ChooseTarget = () => {
       console.log(err)
   }
   },[])
+
 
   // functions 
   const handleOnDragEnd = async(results) => {
@@ -96,10 +191,8 @@ const ChooseTarget = () => {
           columnsStr +=`columns=${targetName}&`
         })
         columnsStr +=`columns=${factorsNames[results.source.index]}&columns=date`
-        console.log(columnsStr)
-        console.log(`${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}?${columnsStr}`)
         const res= await get(
-            `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}?${columnsStr}`,
+            `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id}?${columnsStr}`,
             {
                 headers:{
                     token: JSON.parse(localStorage.getItem('user')).token
@@ -107,7 +200,6 @@ const ChooseTarget = () => {
             }
            )
            setTargetsObservationData(res.data.rows)
-           console.log(res.data)
       }
       catch(err){
         console.log(err)
@@ -128,10 +220,8 @@ const ChooseTarget = () => {
           }
         })
         columnsStr +=`columns=date`
-        console.log(columnsStr)
-        console.log(`${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}?${columnsStr}`)
         const res= await get(
-            `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}?${columnsStr}`,
+            `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id}?${columnsStr}`,
             {
                 headers:{
                     token: JSON.parse(localStorage.getItem('user')).token
@@ -139,7 +229,6 @@ const ChooseTarget = () => {
             }
            )
            setTargetsObservationData(res.data.rows)
-           console.log(res.data)
       }
       catch(err){
         console.log(err)
@@ -157,7 +246,7 @@ const ChooseTarget = () => {
         <div className="choose-target-container">
         <div className="edit-model-container">
           <div>
-            <span>Datasets/</span><span style={{color:'#cbd2d0'}}>"dataset.name"</span>
+            <span>Datasets/</span><span style={{color:'#cbd2d0'}}>{location.state.name}</span>
           </div>
         </div>
         <div className="edit-model-container">
