@@ -80,7 +80,7 @@ const timelineLevel=1
         if(chosenDataSetId!=null){
             history.push({
                 pathname : '/explore-dataset',
-                state : chosenDataSetId
+                state : {id:chosenDataSetId}
             })   
             return         
         } 
@@ -98,10 +98,11 @@ const timelineLevel=1
                         }
                     }
             )
-            history.push({
+            console.log(res.data)
+            /*history.push({
                 pathname : '/explore-dataset',
-                state : res.data.id
-            })
+                state : {id:res.data.id}
+            })*/
         }
         catch {
             console.log("error")

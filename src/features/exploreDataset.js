@@ -45,12 +45,13 @@ function ExploreDataset() {
     const [chosenPaginationNumber, setChosenPaginationNumber] = useState(1)
     const [paginationNumber, setPaginationNumber] = useState(1)
     const [columnsToSave, setColumnsToSave] = useState([])
+    const [nameDataSet, setNameDataSet] = useState(null)
 
     // useEffect 
     useEffect(async()=>{
         try {
             const res= await get(
-                `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}`,
+                `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id}`,
                 {
                     headers:{
                         token: JSON.parse(localStorage.getItem('user')).token
@@ -58,7 +59,7 @@ function ExploreDataset() {
                 }
                )
             // build json object from backend data
-
+             
             console.log(res.data)
             for (let i=0; i<res.data.columns.length; i++){
                 setFactorsTable(factorsTable=>[...factorsTable, {
@@ -68,6 +69,8 @@ function ExploreDataset() {
                     histogram:res.data.histograms[i]
                     }])
             }
+            // setNameDataSet
+            setNameDataSet(res.data.name)
 
         }
         catch(err){
@@ -122,30 +125,30 @@ function ExploreDataset() {
     },[])
 
     const handleNext = useCallback(async()=>{
-        try{
-            /*const res= await put(
+        /*try{
+            const res= await put(
                 `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}`,
+                {columns:columnsToSave},
                 {
                     headers:{
                         token: JSON.parse(localStorage.getItem('user')).token
                     },
-                    columns:columnsToSave
-                }
-               )*/
-            history.push({
-                pathname : '/choose-target',
-                state : location.state
-            })
+                },
+               )
+               console.log(res)
         }
         catch(err){
             console.log(err)
-        }
-    },[columnsToSave])
+        }*/
+        history.push({
+            pathname : '/choose-target',
+            state : {id:location.state.id, name:nameDataSet}
+        })
+    },[columnsToSave, nameDataSet])
 
     const handlePreview = useCallback(()=>{
         history.push({
             pathname : '/choose-dataset',
-            state : null
         })
     },[])
 
@@ -160,6 +163,16 @@ function ExploreDataset() {
             <UserProfile/>
             <Timeline 
             timelineLevel={timelineLevel}/>
+            <div className="edit-model-container">
+                <div>
+                    <span>Datasets/</span><span style={{color:'#cbd2d0'}}>
+                        {
+                        nameDataSet!=null?nameDataSet:
+                        location.state.name&&location.state.name
+                        }
+                    </span>
+                </div>
+            </div>
             <DeletedFactors 
             factorsDeleted={factorsDeleted}
             handleRestartFactor={handleRestartFactor}/>

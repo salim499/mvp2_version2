@@ -42,13 +42,13 @@ const options2 = {
   }
 
   const data = {
-    labels: ["1", "2", "3", "4"],
+    labels: ["factor1", "factor2", "factor3", "factor4","factor5", "factor6", "factor7", "factor8","factor9", "factor10", "factor11", "factor12"],
     datasets: [
       {
         label: 'Dataset 1',
-        data: [1, 2, 3, 4],
-        borderColor: ['red','green','red','blue'],
-        backgroundColor:  ['red','green','red','blue'],
+        data: [10, 2, 3, -4, 15, -13, 5, -11, -9, 2, -12, 6],
+        borderColor: ['green','green','green','red', 'green','red','green','red','red','green', 'red', 'green'],
+        backgroundColor:  ['green','green','green','red', 'green','red','green','red','red','green', 'red', 'green'],
       }
     ]
   };
@@ -71,7 +71,7 @@ const Predict = () => {
 
     // useEffect
     useEffect(()=>{
-        console.log(location.state.predictions[Object.keys(location.state.predictions)[0]])
+        console.log(location.state)
         const data=[]
         const labels=[]
         const backgroundColor=[]
@@ -134,12 +134,26 @@ const Predict = () => {
                         </tr>
                         <tr>
                         <th style={{width:'43%', display:'flex',alignItems: 'center',justifyContent: 'center'}}></th>
-                        <th style={{width:'10%', display:'flex',alignItems: 'center',justifyContent: 'center'}}>24H</th>
-                        <th style={{width:'10%', display:'flex',alignItems: 'center',justifyContent: 'center'}}>48H</th>
-                        <th style={{width:'10%', display:'flex',alignItems: 'center',justifyContent: 'center'}}>72H</th>
-                        <th style={{width:'9%', display:'flex',alignItems: 'center',justifyContent: 'center'}}>24H</th>
-                        <th style={{width:'9%', display:'flex',alignItems: 'center',justifyContent: 'center'}}>48H</th>
-                        <th style={{width:'9%', display:'flex',alignItems: 'center',justifyContent: 'center'}}>72H</th>
+                        {
+                        [0,1,2].map((value,index)=>(
+                            <th style={{width:'10%', display:'flex',alignItems: 'center',justifyContent: 'center'}}>
+                                {
+                                location.state.horizons[index]&&
+                                location.state.horizons[index].duration+
+                                location.state.horizons[index].timeUnit
+                                }
+                            </th>
+                        ))  
+                        } 
+                        {
+                        [0,1,2].map((value,index)=>(
+                            <th style={{width:'10%', display:'flex',alignItems: 'center',justifyContent: 'center'}}>
+                                {location.state.horizons[index]&&
+                                location.state.horizons[index].duration+
+                                location.state.horizons[index].timeUnit}
+                            </th>
+                        ))  
+                        }                         
                         </tr>
                         {[0,1,2].map((i)=>(
                         <tr>
@@ -147,57 +161,40 @@ const Predict = () => {
                             <div><p>{location.state.predictions[Object.keys(location.state.predictions)[0]].prediction[i].name}</p></div>
                         </td>
                         {/* Mettre une condition pour verifier que la prediction est positive ou negative et afficher la bonne classe en fonction et l'icone */}
-                        <td>
                         {
-                            location.state.predictions[Object.keys(location.state.predictions)[0]].prediction[0].prediction==="+"?
-                            <div style={{backgroundColor:'#0000ff'}}>
-                            <img src={arrowUp} alt="arrow up"/> 
-                            </div>
-                            :
-                            <div style={{backgroundColor:'#F65656'}}>
-                            <img  src={arrowDown} alt="arrow down"/>
-                            </div>
+                        [0,1,2].map((j)=>(
+                            <td style={{width:'10%'}}>
+                            {
+                                location.state.predictions[Object.keys(location.state.predictions)[j]].prediction[i].prediction==="+"?
+                                <div style={{backgroundColor:'#0000ff'}}>
+                                <img src={arrowUp} alt="arrow up"/> 
+                                </div>
+                                :
+                                <div style={{backgroundColor:'#F65656'}}>
+                                <img  src={arrowDown} alt="arrow down"/>
+                                </div>
+                            }
+                            </td>
+                        ))
                         }
                         {
-                            location.state.predictions[Object.keys(location.state.predictions)[0]].prediction[1].prediction==="+"?
-                            <div style={{backgroundColor:'#0000ff'}}>
-                            <img src={arrowUp} alt="arrow up"/> 
-                            </div>
-                            :
-                            <div style={{backgroundColor:'#F65656'}}>
-                            <img  src={arrowDown} alt="arrow down"/>
-                            </div>
-                        }
-                        {
-                            location.state.predictions[Object.keys(location.state.predictions)[0]].prediction[2].prediction==="+"?
-                            <div style={{backgroundColor:'#0000ff'}}>
-                            <img src={arrowUp} alt="arrow up"/> 
-                            </div>
-                            :
-                            <div style={{backgroundColor:'#F65656'}}>
-                            <img  src={arrowDown} alt="arrow down"/>
-                            </div>
-                        }
-                        </td>
-                        {/* Mettre une condition pour afficher 4 niveaux differemys de vert */}
-                        <td>
-                            <div style={{backgroundColor:'#17A137'}}>
-                                <p>{location.state.predictions[Object.keys(location.state.predictions)[0]].prediction[0].confidence}</p>
-                            </div>
-                            <div style={{backgroundColor:'#17A137'}}>
-                                <p>{location.state.predictions[Object.keys(location.state.predictions)[0]].prediction[1].confidence}</p>
-                            </div>
-                            <div style={{backgroundColor:'#17A137'}}>
-                                <p>{location.state.predictions[Object.keys(location.state.predictions)[0]].prediction[2].confidence}</p>
-                            </div>
-                        </td>
+                        [0,1,2].map((j)=>(
+                            <td style={{width:'10%'}}>
+                            {
+                                <div style={{backgroundColor:'#17A137'}}>
+                                <p>{location.state.predictions[Object.keys(location.state.predictions)[j]].prediction[i].confidence}</p>
+                                </div>
+                            }
+                            </td>
+                        ))
+                        }               
                         </tr>
                         ))}            
                 </table>
             </div>
         </div>
         <div className="edit-model-container">
-        <Bar data={dataBarChart} options={options2}/>
+        <Bar data={data} options={options2}/>
         </div>
         <NextPreview 
             handlePreview={handlePreview}
