@@ -69,7 +69,7 @@ const timelineLevel=1
            setDataSources(res.data)
       }
       catch {
-
+        alert("An error occurred");
       }
     },[currentUser])   
 

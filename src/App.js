@@ -19,6 +19,12 @@ import ExploreDataset from './features/exploreDataset';
 import { useAuth } from "./contexts/user"
 import { useNavBar } from "./contexts/navbar"
 
+// Fontawsome
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {faAngleDown} from "@fortawesome/free-solid-svg-icons";
+
+library.add(faAngleDown);
+
 function App() {
 
   const { currentUser } = useAuth()
