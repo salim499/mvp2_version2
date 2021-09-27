@@ -17,6 +17,7 @@ import DeletedFactors from '../components/deletedItems'
 import UserProfile from '../components/userProfile'
 import ModalHistogram from '../components/modalHistogram'
 import NextPreview from '../components/nextPreview'
+import Loader from '../components/loader'
 
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
@@ -46,6 +47,7 @@ function ExploreDataset() {
     const [paginationNumber, setPaginationNumber] = useState(1)
     const [columnsToSave, setColumnsToSave] = useState([])
     const [nameDataSet, setNameDataSet] = useState(null)
+    const [showLoader, setShowLoader] = useState(true)
 
     // useEffect 
     useEffect(async()=>{
@@ -71,7 +73,7 @@ function ExploreDataset() {
             }
             // setNameDataSet
             setNameDataSet(res.data.name)
-
+            setShowLoader(false)
         }
         catch(err){
             console.log(err)
@@ -125,10 +127,10 @@ function ExploreDataset() {
     },[])
 
     const handleNext = useCallback(async()=>{
-        /*try{
+        try{
             const res= await put(
-                `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state}`,
-                {columns:columnsToSave},
+                `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id}`,
+                 {columns :columnsToSave},
                 {
                     headers:{
                         token: JSON.parse(localStorage.getItem('user')).token
@@ -136,15 +138,15 @@ function ExploreDataset() {
                 },
                )
                console.log(res)
+            history.push({
+            pathname : '/choose-target',
+            state : {id:location.state.id, id2:res.data.id, name:nameDataSet}
+        }) 
         }
         catch(err){
             console.log(err)
-        }*/
-        history.push({
-            pathname : '/choose-target',
-            state : {id:location.state.id, name:nameDataSet}
-        })
-    },[columnsToSave, nameDataSet])
+        }
+    },[columnsToSave, nameDataSet, location.state])
 
     const handlePreview = useCallback(()=>{
         history.push({
@@ -160,6 +162,8 @@ function ExploreDataset() {
 
     return (
         <div className={navBarState?"container-with-margin":"container-without-margin"}>
+        {!showLoader?
+            <>
             <UserProfile/>
             <Timeline 
             timelineLevel={timelineLevel}/>
@@ -198,6 +202,9 @@ function ExploreDataset() {
             nextVisibility={nextVisibility}
             previewVisibility={previewVisibility}
             />
+            </>
+            :<div style={{marginTop:'200px'}}><Loader/></div>
+        }           
         </div>
     )
 }

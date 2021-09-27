@@ -85,6 +85,8 @@ const timelineLevel=1
             return         
         } 
         // case choosing and upload an new file 
+        if(cvsOk){
+            console.log("ghgj")
         try {
             const formData = new FormData()
             formData.append("files", file)
@@ -98,16 +100,16 @@ const timelineLevel=1
                         }
                     }
             )
-            console.log(res.data)
-            /*history.push({
+            history.push({
                 pathname : '/explore-dataset',
                 state : {id:res.data.id}
-            })*/
+            })   
         }
         catch {
             console.log("error")
         }
-    },[file, chosenDataSetId])
+        }
+    },[file, chosenDataSetId, cvsOk])
 
     // case chose an existing csv file (dataset)
     const handleChoseDataset = useCallback((datasetId)=>{
@@ -181,6 +183,8 @@ const timelineLevel=1
                 selectText={selectText}
                 modifyText={modifyText}
                 handleUploadFile={handleUploadFile}
+                startDate={startDate}
+                endDate={endDate}
                 />
             </div>
         </div>

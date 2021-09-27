@@ -106,7 +106,8 @@ const Predict = () => {
     // useCallback
     const handlePreview = useCallback(()=>{
         history.push({
-            pathname : '/choose-target'
+            pathname : '/choose-target',
+            state:{name:location.state.name}
         })      
     },[]) 
 

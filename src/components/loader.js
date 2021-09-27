@@ -1,17 +1,13 @@
-   
-import React from "react";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 
-const Loader = () => {
-  return (
-    <div className="loading-container">
-    <div className="test-loader">
-      <div className="yellow"></div>
-      <div className="red"></div>
-      <div className="blue"></div>
-      <div className="violet"></div>
-    </div>
-    </div>
-  );
+function LoaderComponent(props) {
+    return (
+        <>
+        <Loader type="Grid" color="#00BFFF" height={150} width={150} />
+        
+        </>
+      )
 }
 
-export default Loader
+export default LoaderComponent

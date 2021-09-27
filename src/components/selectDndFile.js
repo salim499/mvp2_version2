@@ -48,7 +48,6 @@ function SelectDndFile(props) {
     selectDndDiv.current.style=null
   }
 
-
     return (
       <div {...getRootProps()}>
       <input {...getInputProps()} />
@@ -59,6 +58,11 @@ function SelectDndFile(props) {
       >
         <div>
         {fileName}
+        </div>
+        <br/>
+        <div>
+        {"from "+props.startDate}
+        {" to "+props.endDate}
         </div>
         <div className="first_div-csv_selection-icon">
           <img src={upload_csv}/>
