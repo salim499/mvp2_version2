@@ -72,7 +72,7 @@ const Predict = () => {
 
     // useEffect
     useEffect(()=>{
-        console.log(JSON.parse(localStorage.getItem('predictData')))
+        console.log(JSON.parse(localStorage.getItem("targets")))
         const data=[]
         const labels=[]
         const backgroundColor=[]
@@ -156,9 +156,10 @@ const Predict = () => {
                         }                         
                         </tr>
                         {[0,1,2].map((i)=>(
+                        JSON.parse(localStorage.getItem("targets"))[i]&&
                         <tr>
                         <td>
-                            <div><p>{JSON.parse(localStorage.getItem('predictData')).predictions[Object.keys(JSON.parse(localStorage.getItem('predictData')).predictions)[0]].prediction[i].name}</p></div>
+                            <div><p>{JSON.parse(localStorage.getItem("targets"))[i]}</p></div>
                         </td>
                         {/* Mettre une condition pour verifier que la prediction est positive ou negative et afficher la bonne classe en fonction et l'icone */}
                         {

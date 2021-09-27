@@ -113,6 +113,7 @@ const ChooseTarget = () => {
 
   // useCallback
   const handleNext = useCallback(async()=>{
+    localStorage.setItem("targets",JSON.stringify(targetsNames))
 /*    try {
       const res= await post(`${process.env.REACT_APP_URL_MASTER}/models`,
       {
@@ -228,7 +229,7 @@ const ChooseTarget = () => {
         })
         columnsStr +=`columns=date`
         const res= await get(
-            `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id2}?${columnsStr}`,
+            `${process.env.REACT_APP_URL_MASTER}/datasources/${localStorage.getItem('id2DataSet')}?${columnsStr}`,
             {
                 headers:{
                     token: JSON.parse(localStorage.getItem('user')).token
