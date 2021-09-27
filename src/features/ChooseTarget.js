@@ -15,6 +15,7 @@ import PredictionHorizonModal from '../components/PredictionHorizonModal';
 import Timeline from '../components/timeline'
 import NextPreview from '../components/nextPreview'
 import UserProfile from '../components/userProfile'
+import Loader from '../components/loader'
 
 
 // Import Icons
@@ -26,7 +27,7 @@ const timelineLevel=3
 
 let dataFromBackend = 
 {
-    'id': '8b9b74',
+    id: '8b9b74',
     'modelId': 'idx3398hf19',
     'user_query': 
     [   
@@ -108,6 +109,7 @@ const ChooseTarget = () => {
   const [ horizons, setHorizons] = useState([{duration:"1", timeUnit:"days"}]);
   const [horizonsSummary,setHorizonsSummary]= useState(false);
   const [editMode, setEditMode]=useState(false);
+  const [showLoader, setShowLoader] = useState(true)
 
   // useCallback
   const handleNext = useCallback(async()=>{
@@ -144,7 +146,7 @@ const ChooseTarget = () => {
     }  */
     history.push({
       pathname : '/predict',
-      state:{...dataFromBackend, horizons}
+      state:{...dataFromBackend, horizons,name:location.state.name}
     })   
   },[targetsNames, horizons]) 
 
@@ -159,7 +161,7 @@ const ChooseTarget = () => {
   useEffect(async()=>{ 
     try {
       const res= await get(
-          `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id}`,
+          `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id2}`,
           {
               headers:{
                   token: JSON.parse(localStorage.getItem('user')).token
@@ -168,7 +170,7 @@ const ChooseTarget = () => {
          )
       // build json object from backend data
       setFactorsNames(res.data.columns.filter(factorName=>res.data.dataType[factorName]==="numerical"))
-
+      setShowLoader(false)
   }
   catch(err){
       console.log(err)
@@ -192,13 +194,19 @@ const ChooseTarget = () => {
         })
         columnsStr +=`columns=${factorsNames[results.source.index]}&columns=date`
         const res= await get(
-            `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id}?${columnsStr}`,
+            `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id2}?${columnsStr}`,
             {
                 headers:{
                     token: JSON.parse(localStorage.getItem('user')).token
                 }
             }
            )
+           //console.log(res.data.rows)
+           /*setTargetsObservationData([])
+           const tab =[]
+           for(let i=0;i<res.data.rows.length-10;i=i+10){
+             tab.push(res.data.rows[i])
+           }*/
            setTargetsObservationData(res.data.rows)
       }
       catch(err){
@@ -221,7 +229,7 @@ const ChooseTarget = () => {
         })
         columnsStr +=`columns=date`
         const res= await get(
-            `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id}?${columnsStr}`,
+            `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id2}?${columnsStr}`,
             {
                 headers:{
                     token: JSON.parse(localStorage.getItem('user')).token
@@ -238,9 +246,12 @@ const ChooseTarget = () => {
   }
 
     return (
-        <>
+      <>
       <DragDropContext onDragEnd={handleOnDragEnd}>
       <div className={navBarState?"container-with-margin ":"container-without-margin"}>
+      {
+        !showLoader?
+        <>
       <UserProfile/>
         <Timeline timelineLevel={timelineLevel}/>
         <div className="choose-target-container">
@@ -341,7 +352,10 @@ const ChooseTarget = () => {
         handlePreview={handlePreview}
         nextVisibility={nextVisibility}
         previewVisibility={previewVisibility}
-        />
+        />        
+        </>
+        :<div style={{marginTop:'200px'}}><Loader/></div>
+      }
        </div>
        {/* Prediction Horizon Modal - Popup */}
        <PredictionHorizonModal
