@@ -27,6 +27,8 @@
   line-height: 25px;
   margin-left: 35px;
   margin-top: 32px;
+  color: var(--background-blue);
+  margin-bottom: 20px;
 }
 .start_from_existing_files {
   width: 90%;
@@ -48,4 +50,5 @@
   line-height: 25px;
   /* or 104% */
   margin-left: 26px;
+  color: var(--background-blue);
 }

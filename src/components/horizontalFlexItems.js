@@ -19,7 +19,7 @@ function HorizontalFlexItems(props) {
         <div className="horizontal-items"> 
           {props.datasets.map((dataset,index) => (
             <div className="horizontal-items-item" key={dataset.id}
-            style={{color:dataset.id===chosenDatasetId&&"#081CBC"}}
+            style={{color:dataset.id===chosenDatasetId&&"#081c4d"}}
             onClick={()=>handleChoseDataset(dataset.id)}>
               <img src={props.datasetIcon} />
               <div className="horizontal-items-item-title">            

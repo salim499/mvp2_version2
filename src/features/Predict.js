@@ -110,6 +110,8 @@ const Predict = () => {
         })      
     },[]) 
 
+    const predictions =JSON.parse(localStorage.getItem('predictData')).predictions;
+
     return(
     <div className={navBarState?"container-with-margin ":"container-without-margin"}>
         <UserProfile/>
@@ -131,7 +133,7 @@ const Predict = () => {
                         <th>Confidence Level</th>
                         </tr>
                         <tr>
-                        <th style={{width:'43%', display:'flex',alignItems: 'center',justifyContent: 'center'}}></th>
+                        <th style={{ display:'flex',alignItems: 'center', justifyContent: 'flex-end'}}></th>
                         {
                         [0,1,2].map((value,index)=>(
                             JSON.parse(localStorage.getItem('predictData')).horizons.length>index&&
@@ -184,8 +186,8 @@ const Predict = () => {
                             JSON.parse(localStorage.getItem('predictData')).horizons.length>j&&
                             <td style={{width:'10%'}}>
                             {
-                                <div style={{backgroundColor:'#17A137'}}>
-                                <p>{JSON.parse(localStorage.getItem('predictData')).predictions[Object.keys(JSON.parse(localStorage.getItem('predictData')).predictions)[j]].prediction[i].confidence}</p>
+                                <div style={{backgroundColor:predictions[Object.keys(predictions)[j]].prediction[i].confidence.substring(0, predictions[Object.keys(predictions)[j]].prediction[i].confidence.length-1) >50 ? "#17A137" : "rgba(23, 161, 55, 0.5)", color:'white'}}>
+                                <p>{predictions[Object.keys(predictions)[j]].prediction[i].confidence}</p>
                                 </div>
                             }
                             </td>

@@ -64,16 +64,19 @@
   justify-content: flex-start;
 }
 
-.predict-table-container > table > tr > td:nth-child(2) > div {
+.predict-table-container > table > tr > td > div {
   width: 86px;
   height: 38px;
-
   border-radius: 5px;
-
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-right: 20px;
+}
+
+.predict-table-container > table > tr > th {
+  margin-right: 20px;
 }
 
 .predict-table-container > table > tr > td:nth-child(2) > div > p,
@@ -90,7 +93,6 @@
   width: 68px;
   height: 38px;
   border-radius: 5px;
-
   display: flex;
   justify-content: center;
   align-items: center;
