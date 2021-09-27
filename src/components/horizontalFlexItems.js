@@ -21,10 +21,10 @@ function HorizontalFlexItems(props) {
             <div className="horizontal-items-item" key={dataset.id}
             style={{color:dataset.id===chosenDatasetId&&"#081CBC"}}
             onClick={()=>handleChoseDataset(dataset.id)}>
+              <img src={props.datasetIcon} />
               <div className="horizontal-items-item-title">            
               {dataset.name}
               </div>
-              <img src={props.datasetIcon} />
             </div>           
           ))}
         </div>
