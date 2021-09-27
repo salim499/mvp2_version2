@@ -122,9 +122,6 @@ const Predict = () => {
             <div>
                 <span>From</span><span style={{color:'#c4c4c4'}}>"11/09/2005"</span><span>to</span><span style={{color:'#c4c4c4'}}>"11/09/2020"</span>
             </div>
-            <div>
-                <span>Prediction Horizon:</span><span style={{color:'#c4c4c4'}}>"+24h"</span>
-            </div>
             </div>
             <div className="predict-table-container">
                 <table>

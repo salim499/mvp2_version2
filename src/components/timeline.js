@@ -34,7 +34,7 @@ const Timeline = ({timelineLevel}) => {
                 style={{ backgroundColor: timelineLevel===4 ? "#081c4d" : "#C4C4C4" }}
                 >4</div>
                 <div style={{ color: timelineLevel>3? "#081c4d" : "#C4C4C4",
-                              textAlign:"center" }}>Predict results</div>
+                              textAlign:"center" }}>Predict</div>
             </div>
     </div>
   );

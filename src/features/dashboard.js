@@ -173,7 +173,7 @@ function Dashboard() {
             <div className="portfolios">
                 <div className="portfolios-add_portfolio">
                     <div className="portfolios-add_portfolio-label">
-                        New Portfolio
+                        New Prediction Model
                     </div>
                     <div>
                         <img src={add_portfolio}/>
@@ -182,60 +182,66 @@ function Dashboard() {
                 <div className="portfolios-item">
                     <div className="portfolios-item-label"
                     >
-                        Portfolio 1 
+                        Prediction Model 1
                     </div>
                     <div className="portfolios-item-actions">
                         <div className="portfolios-item-actions-item1">
-
+                        <div>+1D</div>
                         </div>
                         <div className="portfolios-item-actions-duplicate">
-                            <img src={duplicate_portfolio_blue} />
+                            {/* <img src={duplicate_portfolio_blue} /> */}
+                            <div>+3M</div>
                         </div>
                         <div className="portfolios-item-actions-delete">
-                            <img src={trash_portfolio} />
+                            {/* <img src={trash_portfolio} /> */}
+                            <div>+5Y</div>
                         </div>
                     </div>
                 </div>
                 <div className="portfolios-item">
                     <div className="portfolios-item-label"
                     style={{color:"#2EC4B6"}}>
-                        Portfolio 2 
+                        Prediction Model 2 
                     </div>
                     <div className="portfolios-item-actions">
                         <div className="portfolios-item-actions-item1"
                         style={{backgroundColor:"#2EC4B6"}}>
-
+                          <div>+1D</div>
                         </div>
                         <div className="portfolios-item-actions-duplicate">
-                            <img src={duplicate_portfolio_green} />
+                            {/* <img src={duplicate_portfolio_green} /> */}
+                            <div>+3M</div>
                         </div>
                         <div className="portfolios-item-actions-delete"
                         style={{backgroundColor:"#2EC4B6"}}>
-                            <img src={trash_portfolio} />
+                            {/* <img src={trash_portfolio} /> */}
+                            <div>+5Y</div>
                         </div>
                     </div>
                 </div>
                 <div className="portfolios-item">
                     <div className="portfolios-item-label"
                     style={{color:"#2EC4B6"}}>
-                        Portfolio 3 
+                        Prediction Model 3
                     </div>
                     <div className="portfolios-item-actions">
                         <div className="portfolios-item-actions-item1"
                         style={{backgroundColor:"#2EC4B6"}}>
-
+                          <div>+1D</div>
                         </div>
                         <div className="portfolios-item-actions-duplicate">
-                            <img src={duplicate_portfolio_green} />
+                            {/* <img src={duplicate_portfolio_green} /> */}
+                            <div>+3M</div>
                         </div>
                         <div className="portfolios-item-actions-delete"
                         style={{backgroundColor:"#2EC4B6"}}>
-                            <img src={trash_portfolio} />
+                            {/* <img src={trash_portfolio} /> */}
+                            <div>+5Y</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="portfolio-values">
+            {/* <div className="portfolio-values">
                 <div className="portfolio-values-graph">
                     <Graph_portfolio
                     lineChartData={assetsGraphData}/>
@@ -292,7 +298,7 @@ function Dashboard() {
                     </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
