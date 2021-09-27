@@ -54,7 +54,24 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  cursor: pointer;
 }
+
+.portfolios-item-clicked {
+  width: 227px;
+  height: 168px;
+  background: #ffffff;
+  box-sizing: border-box;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+    inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 .portfolios-add_portfolio {
   width: 227px;
   height: 168px;
@@ -98,32 +115,41 @@
   justify-content: center;
   align-items: center;
 }
-.portfolios-item-actions-delete {
+.portfolios-item-actions > div {
   width: 33.33%;
   height: 100%;
-  border-radius: 0px 0px 30px 0px;
-  background-color: #081c4d;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: 700;
 }
+
+.portfolios-item:hover {
+  opacity: 0.5;
+}
+
+.portfolios-item-actions > div:first-child {
+  border-radius: 0px 0px 0px 30px;
+  background-color: var(--background-blue);
+  color: white;
+}
+
+.portfolios-item-actions > div:nth-child(2) {
+  border-radius: 0px 0px 0px 0px;
+  color: var(--background-blue);
+}
+
+.portfolios-item-actions > div:last-child {
+  border-radius: 0px 0px 30px 0px;
+  background-color: var(--background-blue);
+  color: white;
+}
+
 .portfolios-item-actions-delete img {
   width: 32px;
   height: 32px;
 }
-.portfolios-item-actions-duplicate {
-  width: 33.34%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.portfolios-item-actions-item1 {
-  width: 33.33%;
-  height: 100%;
-  border-radius: 0px 0px 0px 30px;
-  background-color: #081c4d;
-}
+
 .portfolio-values {
   width: 90%;
   display: flex;

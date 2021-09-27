@@ -1,21 +1,9 @@
 import React, {useState} from 'react'
 
-// Import from libraries 
-import post from 'axios'
-
-// Import css files 
-import '../css/dashboard.css'
-
 // Import icons
-import user_profile from '../assets/icons/user_profile.svg'
 import add_portfolio from '../assets/icons/add_portfolio.svg'
-import trash_portfolio from '../assets/icons/trash.svg'
-import duplicate_portfolio_green from '../assets/icons/duplicate.svg'
-import duplicate_portfolio_blue from '../assets/icons/duplicate_select.svg'
 
 // Import components
-import Graph_portfolio from '../components/testChart2'
-import Circle_portfolio from '../components/Circle'
 import UserProfile from '../components/userProfile'
 
 // Import contexts
@@ -157,7 +145,6 @@ function Dashboard() {
     // useState
     const [assetsGraphData, setAssetsGraphData] = useState(dataFromBackend)
 
-
     return (
         <div className={navBarState?"container-with-margin ":"container-without-margin"}>
             <UserProfile/>
@@ -167,13 +154,13 @@ function Dashboard() {
                 <div className="dashboard_header-label">dashboard</div>
                 </div>
                 <div>
-                    <input type="text" placeholder="               search" className="dashboard_header-search"/>
+                    <input type="text" placeholder="search" className="dashboard_header-search"/>
                 </div>
             </div>
             <div className="portfolios">
                 <div className="portfolios-add_portfolio">
                     <div className="portfolios-add_portfolio-label">
-                        New Prediction Model
+                        New Model
                     </div>
                     <div>
                         <img src={add_portfolio}/>
@@ -182,60 +169,48 @@ function Dashboard() {
                 <div className="portfolios-item">
                     <div className="portfolios-item-label"
                     >
-                        Prediction Model 1
+                        Model 1
                     </div>
                     <div className="portfolios-item-actions">
                         <div className="portfolios-item-actions-item1">
                         <div>+1D</div>
                         </div>
                         <div className="portfolios-item-actions-duplicate">
-                            {/* <img src={duplicate_portfolio_blue} /> */}
                             <div>+3M</div>
                         </div>
                         <div className="portfolios-item-actions-delete">
-                            {/* <img src={trash_portfolio} /> */}
                             <div>+5Y</div>
                         </div>
                     </div>
                 </div>
                 <div className="portfolios-item">
-                    <div className="portfolios-item-label"
-                    style={{color:"#2EC4B6"}}>
-                        Prediction Model 2 
+                    <div className="portfolios-item-label">
+                      Model 2 
                     </div>
                     <div className="portfolios-item-actions">
-                        <div className="portfolios-item-actions-item1"
-                        style={{backgroundColor:"#2EC4B6"}}>
+                        <div className="portfolios-item-actions-item1">
                           <div>+1D</div>
                         </div>
                         <div className="portfolios-item-actions-duplicate">
-                            {/* <img src={duplicate_portfolio_green} /> */}
                             <div>+3M</div>
                         </div>
-                        <div className="portfolios-item-actions-delete"
-                        style={{backgroundColor:"#2EC4B6"}}>
-                            {/* <img src={trash_portfolio} /> */}
+                        <div className="portfolios-item-actions-delete">
                             <div>+5Y</div>
                         </div>
                     </div>
                 </div>
-                <div className="portfolios-item">
-                    <div className="portfolios-item-label"
-                    style={{color:"#2EC4B6"}}>
-                        Prediction Model 3
+                  <div className="portfolios-item">
+                    <div className="portfolios-item-label">
+                        Model 3
                     </div>
                     <div className="portfolios-item-actions">
-                        <div className="portfolios-item-actions-item1"
-                        style={{backgroundColor:"#2EC4B6"}}>
+                        <div className="portfolios-item-actions-item1">
                           <div>+1D</div>
                         </div>
                         <div className="portfolios-item-actions-duplicate">
-                            {/* <img src={duplicate_portfolio_green} /> */}
                             <div>+3M</div>
                         </div>
-                        <div className="portfolios-item-actions-delete"
-                        style={{backgroundColor:"#2EC4B6"}}>
-                            {/* <img src={trash_portfolio} /> */}
+                        <div className="portfolios-item-actions-delete">
                             <div>+5Y</div>
                         </div>
                     </div>
