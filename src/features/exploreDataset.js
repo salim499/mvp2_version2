@@ -53,7 +53,7 @@ function ExploreDataset() {
     useEffect(async()=>{
         try {
             const res= await get(
-                `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id}`,
+                `${process.env.REACT_APP_URL_MASTER}/datasources/${localStorage.getItem('idDataSet')}`,
                 {
                     headers:{
                         token: JSON.parse(localStorage.getItem('user')).token
@@ -62,7 +62,7 @@ function ExploreDataset() {
                )
             // build json object from backend data
              
-            console.log(res.data)
+            localStorage.setItem('dateDataSet', JSON.stringify({startDate:res.data.dateInterval[0],endDate: res.data.dateInterval[1]}))
             for (let i=0; i<res.data.columns.length; i++){
                 setFactorsTable(factorsTable=>[...factorsTable, {
                     name:res.data.columns[i],
@@ -129,7 +129,7 @@ function ExploreDataset() {
     const handleNext = useCallback(async()=>{
         try{
             const res= await put(
-                `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id}`,
+                `${process.env.REACT_APP_URL_MASTER}/datasources/${localStorage.getItem('idDataSet')}`,
                  {columns :columnsToSave},
                 {
                     headers:{
@@ -138,15 +138,16 @@ function ExploreDataset() {
                 },
                )
                console.log(res)
+            localStorage.setItem('id2DataSet',res.data.id)
+            localStorage.setItem('nameDataSet',res.data.name)
             history.push({
             pathname : '/choose-target',
-            state : {id:location.state.id, id2:res.data.id, name:nameDataSet}
         }) 
         }
         catch(err){
             console.log(err)
         }
-    },[columnsToSave, nameDataSet, location.state])
+    },[columnsToSave, nameDataSet,])
 
     const handlePreview = useCallback(()=>{
         history.push({
@@ -172,7 +173,7 @@ function ExploreDataset() {
                     <span>Datasets/</span><span style={{color:'#cbd2d0'}}>
                         {
                         nameDataSet!=null?nameDataSet:
-                        location.state.name&&location.state.name
+                        localStorage.getItem('nameDataSet')&&localStorage.getItem('nameDataSet')
                         }
                     </span>
                 </div>

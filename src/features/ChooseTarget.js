@@ -144,16 +144,15 @@ const ChooseTarget = () => {
     catch (err) {
         console.log(err)
     }  */
+    localStorage.setItem('predictData', JSON.stringify({...dataFromBackend, horizons}))
     history.push({
-      pathname : '/predict',
-      state:{...dataFromBackend, horizons,name:location.state.name}
+      pathname : '/predict'
     })   
   },[targetsNames, horizons]) 
 
   const handlePreview = useCallback(()=>{
     history.push({
         pathname : '/explore-dataset',
-        state:{id:location.state.id,name:location.state.name}
     })      
   },[]) 
 
@@ -161,7 +160,7 @@ const ChooseTarget = () => {
   useEffect(async()=>{ 
     try {
       const res= await get(
-          `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id2}`,
+          `${process.env.REACT_APP_URL_MASTER}/datasources/${localStorage.getItem('id2DataSet')}`,
           {
               headers:{
                   token: JSON.parse(localStorage.getItem('user')).token
@@ -194,7 +193,7 @@ const ChooseTarget = () => {
         })
         columnsStr +=`columns=${factorsNames[results.source.index]}&columns=date`
         const res= await get(
-            `${process.env.REACT_APP_URL_MASTER}/datasources/${location.state.id2}?${columnsStr}`,
+            `${process.env.REACT_APP_URL_MASTER}/datasources/${localStorage.getItem('id2DataSet')}?${columnsStr}`,
             {
                 headers:{
                     token: JSON.parse(localStorage.getItem('user')).token
@@ -257,7 +256,7 @@ const ChooseTarget = () => {
         <div className="choose-target-container">
         <div className="edit-model-container">
           <div>
-            <span>Datasets/</span><span style={{color:'#cbd2d0'}}>{location.state.name}</span>
+            <span>Datasets/</span><span style={{color:'#cbd2d0'}}>{localStorage.getItem('nameDataSet')}</span>
           </div>
         </div>
         <div className="edit-model-container">

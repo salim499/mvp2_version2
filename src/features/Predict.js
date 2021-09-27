@@ -72,12 +72,12 @@ const Predict = () => {
 
     // useEffect
     useEffect(()=>{
-        console.log(location.state)
+        console.log(JSON.parse(localStorage.getItem('predictData')))
         const data=[]
         const labels=[]
         const backgroundColor=[]
         const borderColor=[]
-        location.state.predictions[Object.keys(location.state.predictions)[0]].explicativeFactors.forEach(element=>{
+        JSON.parse(localStorage.getItem('predictData')).predictions[Object.keys(JSON.parse(localStorage.getItem('predictData')).predictions)[0]].explicativeFactors.forEach(element=>{
             labels.push(element.name)
             data.push(parseFloat(element.performanceAttribution))
             backgroundColor.push('green')
@@ -107,7 +107,6 @@ const Predict = () => {
     const handlePreview = useCallback(()=>{
         history.push({
             pathname : '/choose-target',
-            state:{name:location.state.name}
         })      
     },[]) 
 
@@ -118,10 +117,10 @@ const Predict = () => {
         <div className="predict-container">
             <div className="edit-model-container" style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
             <div>
-                <span>Datasets/</span><span style={{color:'#c4c4c4'}}>"dataset.name"</span>
+                <span>Datasets/</span><span style={{color:'#c4c4c4'}}>{localStorage.getItem('nameDataSet')}</span>
             </div>
             <div>
-                <span>From</span><span style={{color:'#c4c4c4'}}>"11/09/2005"</span><span>to</span><span style={{color:'#c4c4c4'}}>"11/09/2020"</span>
+                <span>From</span><span style={{color:'#c4c4c4'}}>{JSON.parse(localStorage.getItem('dateDataSet')).startDate}</span><span>to</span><span style={{color:'#c4c4c4'}}>{JSON.parse(localStorage.getItem('dateDataSet')).endDate}</span>
             </div>
             </div>
             <div className="predict-table-container">
@@ -135,21 +134,23 @@ const Predict = () => {
                         <th style={{width:'43%', display:'flex',alignItems: 'center',justifyContent: 'center'}}></th>
                         {
                         [0,1,2].map((value,index)=>(
+                            JSON.parse(localStorage.getItem('predictData')).horizons.length>index&&
                             <th style={{width:'10%', display:'flex',alignItems: 'center',justifyContent: 'center'}}>
                                 {
-                                location.state.horizons[index]&&
-                                location.state.horizons[index].duration+
-                                location.state.horizons[index].timeUnit
+                                JSON.parse(localStorage.getItem('predictData')).horizons[index]&&
+                                JSON.parse(localStorage.getItem('predictData')).horizons[index].duration+
+                                JSON.parse(localStorage.getItem('predictData')).horizons[index].timeUnit
                                 }
                             </th>
                         ))  
                         } 
                         {
                         [0,1,2].map((value,index)=>(
+                            JSON.parse(localStorage.getItem('predictData')).horizons.length>index&&
                             <th style={{width:'10%', display:'flex',alignItems: 'center',justifyContent: 'center'}}>
-                                {location.state.horizons[index]&&
-                                location.state.horizons[index].duration+
-                                location.state.horizons[index].timeUnit}
+                                {JSON.parse(localStorage.getItem('predictData')).horizons[index]&&
+                                JSON.parse(localStorage.getItem('predictData')).horizons[index].duration+
+                                JSON.parse(localStorage.getItem('predictData')).horizons[index].timeUnit}
                             </th>
                         ))  
                         }                         
@@ -157,14 +158,15 @@ const Predict = () => {
                         {[0,1,2].map((i)=>(
                         <tr>
                         <td>
-                            <div><p>{location.state.predictions[Object.keys(location.state.predictions)[0]].prediction[i].name}</p></div>
+                            <div><p>{JSON.parse(localStorage.getItem('predictData')).predictions[Object.keys(JSON.parse(localStorage.getItem('predictData')).predictions)[0]].prediction[i].name}</p></div>
                         </td>
                         {/* Mettre une condition pour verifier que la prediction est positive ou negative et afficher la bonne classe en fonction et l'icone */}
                         {
                         [0,1,2].map((j)=>(
+                            JSON.parse(localStorage.getItem('predictData')).horizons.length>j&&
                             <td style={{width:'10%'}}>
                             {
-                                location.state.predictions[Object.keys(location.state.predictions)[j]].prediction[i].prediction==="+"?
+                                JSON.parse(localStorage.getItem('predictData')).predictions[Object.keys(JSON.parse(localStorage.getItem('predictData')).predictions)[j]].prediction[i].prediction==="+"?
                                 <div style={{backgroundColor:'#0000ff'}}>
                                 <img src={arrowUp} alt="arrow up"/> 
                                 </div>
@@ -178,10 +180,11 @@ const Predict = () => {
                         }
                         {
                         [0,1,2].map((j)=>(
+                            JSON.parse(localStorage.getItem('predictData')).horizons.length>j&&
                             <td style={{width:'10%'}}>
                             {
                                 <div style={{backgroundColor:'#17A137'}}>
-                                <p>{location.state.predictions[Object.keys(location.state.predictions)[j]].prediction[i].confidence}</p>
+                                <p>{JSON.parse(localStorage.getItem('predictData')).predictions[Object.keys(JSON.parse(localStorage.getItem('predictData')).predictions)[j]].prediction[i].confidence}</p>
                                 </div>
                             }
                             </td>

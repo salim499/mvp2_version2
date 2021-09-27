@@ -78,9 +78,9 @@ const timelineLevel=1
     const handleNext = useCallback(async()=>{
         // case choosing an existing file 
         if(chosenDataSetId!=null){
+            localStorage.setItem('idDataSet',chosenDataSetId)
             history.push({
                 pathname : '/explore-dataset',
-                state : {id:chosenDataSetId}
             })   
             return         
         } 
@@ -100,9 +100,9 @@ const timelineLevel=1
                         }
                     }
             )
+            localStorage.setItem('idDataSet',res.data.id)
             history.push({
                 pathname : '/explore-dataset',
-                state : {id:res.data.id}
             })   
         }
         catch {
