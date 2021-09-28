@@ -60,7 +60,7 @@ function TestChart(props) {
     //chart.scrollbarX = new am4core.Scrollbar();
     //chart.scrollbarY = new am4core.Scrollbar();
     
-    chart.current.cursor.behavior = "selectX";
+    chart.current.cursor.behavior = "zoomXY";
     chart.current.cursor.events.on("selectended", function(event) {
 
       var range = event.target.xRange;
@@ -68,7 +68,7 @@ function TestChart(props) {
       if(range && axis){
         var from = axis.getPositionLabel(axis.toAxisPosition(range.start));
         var to = axis.getPositionLabel(axis.toAxisPosition(range.end));
-        props.handleSetDatesInterval(from,to)
+        //props.handleSetDatesInterval(from,to)
         console.log("Selected from " + from + " to " + to);
       }
     })
