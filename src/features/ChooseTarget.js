@@ -114,7 +114,7 @@ const ChooseTarget = () => {
   // useCallback
   const handleNext = useCallback(async()=>{
     localStorage.setItem("targets",JSON.stringify(targetsNames))
-/*    try {
+/*  try {
       const res= await post(`${process.env.REACT_APP_URL_MASTER}/models`,
       {
         dataSourceId:location.state, 
@@ -179,75 +179,64 @@ const ChooseTarget = () => {
 
 
   // functions 
-  const handleOnDragEnd = async(results) => {
-    if (!results.destination || results.destination===null ) return
-
-    if (
-      results.destination.droppableId==='targetFactors'
-      && results.source.droppableId==='allFactors'){     
-      setTargetsNames(targetsNames=>[...targetsNames, factorsNames[results.source.index]])
-      setFactorsNames(factorsNames.filter((factorName, index)=>index!=results.source.index))
-      try {
-        let columnsStr=""
-        targetsNames.forEach(targetName => {
-          columnsStr +=`columns=${targetName}&`
-        })
-        columnsStr +=`columns=${factorsNames[results.source.index]}&columns=date`
-        const res= await get(
-            `${process.env.REACT_APP_URL_MASTER}/datasources/${localStorage.getItem('id2DataSet')}?${columnsStr}`,
-            {
-                headers:{
-                    token: JSON.parse(localStorage.getItem('user')).token
-                }
+   // select factors to show on the graph
+   const handleSelectFactor = async(event, factName) => {
+     console.log(event.target.style.color==="red")
+     if(event.target.style.color!="red"){
+     event.target.style.color='red'
+     console.log(factName)
+     setTargetsNames(targetsNames=>[...targetsNames, factName])
+     let columnsStr = ""
+     targetsNames.forEach(element=>{
+      columnsStr +=`columns=${element}&`
+     })
+     columnsStr +=`columns=${factName}&columns=date`
+     try{
+      const res= await get(
+        `${process.env.REACT_APP_URL_MASTER}/datasources/${localStorage.getItem('id2DataSet')}?${columnsStr }`,
+        {
+            headers:{
+                token: JSON.parse(localStorage.getItem('user')).token
             }
-           )
-           //console.log(res.data.rows)
-           /*setTargetsObservationData([])
-           const tab =[]
-           for(let i=0;i<res.data.rows.length-10;i=i+10){
-             tab.push(res.data.rows[i])
-           }*/
-           setTargetsObservationData(res.data.rows)
+        }
+       )
+     setTargetsObservationData(res.data.rows)
+     }
+     catch(err){
+       console.log(err)
+     } 
+     return
+    }
+    if(event.target.style.color==="red"){
+      event.target.style.color='white'
+      setTargetsNames(targetsNames.filter(factorName=>factorName!=factName))
+      let columnsStr = ""
+      targetsNames.forEach(element=>{
+        if(element!=factName){
+          columnsStr +=`columns=${element}&`
+        }
+      })
+      columnsStr +=`columns=date`
+      try{
+       const res= await get(
+         `${process.env.REACT_APP_URL_MASTER}/datasources/${localStorage.getItem('id2DataSet')}?${columnsStr }`,
+         {
+             headers:{
+                 token: JSON.parse(localStorage.getItem('user')).token
+             }
+         }
+        )
+      setTargetsObservationData(res.data.rows)
       }
       catch(err){
         console.log(err)
-      }
+      } 
       return
-    }
-
-    if(
-      results.destination.droppableId==='allFactors'
-      && results.source.droppableId==='targetFactors'){     
-      setFactorsNames(factorsNames=>[...factorsNames, targetsNames[results.source.index]])
-      setTargetsNames(targetsNames.filter((targetName, index)=>index!=results.source.index))
-      try {
-        let columnsStr=""
-        targetsNames.forEach(targetName => {
-          if(targetName!=targetsNames[results.source.index]){
-          columnsStr +=`columns=${targetName}&`
-          }
-        })
-        columnsStr +=`columns=date`
-        const res= await get(
-            `${process.env.REACT_APP_URL_MASTER}/datasources/${localStorage.getItem('id2DataSet')}?${columnsStr}`,
-            {
-                headers:{
-                    token: JSON.parse(localStorage.getItem('user')).token
-                }
-            }
-           )
-           setTargetsObservationData(res.data.rows)
-      }
-      catch(err){
-        console.log(err)
-      }
-      return
-    }
-  }
+     }
+   }
 
     return (
       <>
-      <DragDropContext onDragEnd={handleOnDragEnd}>
       <div className={navBarState?"container-with-margin ":"container-without-margin"}>
       {
         !showLoader?
@@ -263,51 +252,24 @@ const ChooseTarget = () => {
         <div className="edit-model-container">
           <div className="section-title">
           <div>Choose Targets</div>
-          <div className="info">Drag the factors you want us to consider as “target” into the column Targets*</div>
+          <div className="info">Select the factors you want us to consider as “target” into the column Targets*</div>
           </div>
           <div className="section-boxes">
-          <Droppable droppableId="allFactors">
-          {(provided) => (
-            <div className="factors-box" {...provided.droppableProps} ref={provided.innerRef}>
+
+            <div className="factors-box">
               <div className="title">
                 All Factors
               </div>
               <div className="tags">
-              {factorsNames.map((factorName, index)=>(
-            <Draggable key={factorName} draggableId={factorName} index={index}>
-            {(provided) => (
-                <div className="tag-box"  ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                <div>{factorName}</div>
+              {factorsNames.map((factorName, index)=>(       
+                <div className="tag-box">
+                  <div
+                  onClick={(event)=>handleSelectFactor(event, factorName)}>
+                    {factorName}</div>
                 </div>
-            )}
-            </Draggable>   
               ))}
-            {provided.placeholder}
               </div>
             </div>
-            )}
-            </Droppable>
-            <Droppable droppableId="targetFactors">
-            {(provided) => (
-            <div className="targets-box" {...provided.droppableProps} ref={provided.innerRef}>
-            <div className="title">
-                Targets
-            </div>
-            <div className="tags">
-            {targetsNames.map((factorName, index)=>(
-            <Draggable key={factorName} draggableId={factorName+factorName} index={index}>
-            {(provided) => (
-                <div className="tag-box"  ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                <div>{factorName}</div>
-                </div>
-            )}
-            </Draggable>   
-              ))}
-            {provided.placeholder}
-              </div>
-            </div>
-            )}
-            </Droppable>
           </div>
         </div>
 
@@ -367,7 +329,6 @@ const ChooseTarget = () => {
         setHorizonsSummary={setHorizonsSummary}
         setEditMode={setEditMode}
         />
-    </DragDropContext>
     </>
     )
 }

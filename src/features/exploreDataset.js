@@ -62,8 +62,8 @@ function ExploreDataset() {
                 }
                )
             // build json object from backend data
-             
             localStorage.setItem('dateDataSet', JSON.stringify({startDate:res.data.dateInterval[0],endDate: res.data.dateInterval[1]}))
+            console.log(res.data)
             for (let i=0; i<res.data.columns.length; i++){
                 setFactorsTable(factorsTable=>[...factorsTable, {
                     name:res.data.columns[i],
@@ -100,21 +100,17 @@ function ExploreDataset() {
         setFactorsDeleted(factorsDeleted=>[...factorsDeleted,deletedFactor])
         // remove the factor from factorsTable
         setFactorsTable(factorsTable.filter(factor=>factor.name!=factorName))
-        console.log(factorsTable.map(factor => factor.name).filter(element=>element!=factorName))
         // set columns to save
         setColumnsToSave(factorsTable.map(factor => factor.name).filter(element=>element!=factorName))
     },[factorsTable, factorsDeleted])
 
     const handleRestartFactor = useCallback((factorName) => {
-        console.log(factorName)
        // add the factor to eliminated factors 
        const deletedFactor = factorsDeleted.find(factor=>factor.name===factorName)
-       console.log(deletedFactor)
        setFactorsTable(factorsTable=>[...factorsTable,deletedFactor])
        // remove the factor from factorsTable
        setFactorsDeleted(factorsDeleted.filter(factor=>factor.name!=factorName))
        // set columns to save
-       console.log([...factorsTable.map(factor => factor.name),factorName])
        setColumnsToSave([...factorsTable.map(factor => factor.name),factorName])
     },[factorsTable, factorsDeleted])
 
@@ -138,7 +134,6 @@ function ExploreDataset() {
                     },
                 },
                )
-               console.log(res)
             localStorage.setItem('id2DataSet',res.data.id)
             localStorage.setItem('nameDataSet',res.data.name)
             history.push({
@@ -148,7 +143,7 @@ function ExploreDataset() {
         catch(err){
             console.log(err)
         }
-    },[columnsToSave, nameDataSet,])
+    },[columnsToSave, nameDataSet])
 
     const handlePreview = useCallback(()=>{
         history.push({
@@ -159,7 +154,6 @@ function ExploreDataset() {
     // functions
     const handlePagination = (number) => {
         setChosenPaginationNumber(number)
-        console.log(number)
     }
 
     return (
