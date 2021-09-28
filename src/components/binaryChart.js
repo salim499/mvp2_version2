@@ -28,8 +28,8 @@ function BinaryChart() {
         /* Create chart */
         chart.current = am4core.create(chartDiv.current, am4charts.TreeMap);
         chart.current.data = [
-        {name: "Low",value:70}, 
-        {name: "High",value:30}
+        {name: "Low",value:50}, 
+        {name: "High",value:50}
     ];
 
         chart.current.maxLevels = 1;
