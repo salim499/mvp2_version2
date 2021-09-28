@@ -16,7 +16,7 @@ function Histogram(props) {
 
 
     useEffect(()=>{
-
+/*
         console.log(props)
         
         // Create chart instance
@@ -38,6 +38,123 @@ function Histogram(props) {
         series.dataFields.valueY = "count";
         series.dataFields.categoryX = "from";
         series.columns.template.tooltipText = "{from} - {to}\n[bold]Count: {count}[/]";
+*/
+const datas =[
+    {date:new Date(), visits:1000 },
+    {date:new Date(), visits:1005 },
+    {date:new Date(), visits:1500 },
+    {date:new Date(), visits:1050 },
+    {date:new Date(), visits:1050 },
+    {date:new Date(), visits:1030 },
+    {date:new Date(), visits:1030 },
+    {date:new Date(), visits:1060 },
+    {date:new Date(), visits:1001 },
+    {date:new Date(), visits:900 },
+    {date:new Date(), visits:1300 },
+]
+am4core.ready(function() {
+
+    // Themes begin
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+    
+    // Create chart instance
+    chart.current = am4core.create(chartDiv.current, am4charts.XYChart);
+    
+    // Add data
+    console.log(generateChartData())
+    chart.current.data = datas;
+    
+    // Create axes
+    var dateAxis = chart.current.xAxes.push(new am4charts.DateAxis());
+    
+    var valueAxis = chart.current.yAxes.push(new am4charts.ValueAxis());
+    
+    // Create series
+    var series = chart.current.series.push(new am4charts.LineSeries());
+    series.dataFields.valueY = "visits";
+    series.dataFields.dateX = "date";
+    series.strokeWidth = 1;
+    series.minBulletDistance = 10;
+    series.tooltipText = "{valueY}";
+    series.fillOpacity = 0.1;
+    series.tooltip.pointerOrientation = "vertical";
+    series.tooltip.background.cornerRadius = 20;
+    series.tooltip.background.fillOpacity = 0.5;
+    series.tooltip.label.padding(12, 12, 12, 12)
+    
+    var seriesRange = dateAxis.createSeriesRange(series);
+    seriesRange.contents.strokeDasharray = "2,3";
+    seriesRange.contents.stroke = chart.current.colors.getIndex(8);
+    seriesRange.contents.strokeWidth = 1;
+    
+    var pattern = new am4core.LinePattern();
+    pattern.rotation = -45;
+    pattern.stroke = seriesRange.contents.stroke;
+    pattern.width = 1000;
+    pattern.height = 1000;
+    pattern.gap = 6;
+    seriesRange.contents.fill = pattern;
+    seriesRange.contents.fillOpacity = 0.5;
+    
+    // Add scrollbar
+    chart.current.scrollbarX = new am4core.Scrollbar();
+    
+    function generateChartData() {
+      var chartData = [];
+      var firstDate = new Date();
+      firstDate.setDate(firstDate.getDate() - 200);
+      var visits = 1200;
+      for (var i = 0; i < 200; i++) {
+        // we create date objects here. In your data, you can have date strings
+        // and then set format of your dates using chart.dataDateFormat property,
+        // however when possible, use date objects, as this will speed up chart rendering.
+        var newDate = new Date(firstDate);
+        newDate.setDate(newDate.getDate() + i);
+    
+        visits += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 10);
+    
+        chartData.push({
+          date: newDate,
+          visits: visits
+        });
+      }
+      return chartData;
+    }
+    
+    
+    // add range
+    var range = dateAxis.axisRanges.push(new am4charts.DateAxisDataItem());
+    range.grid.stroke = chart.current.colors.getIndex(0);
+    range.grid.strokeOpacity = 1;
+    range.bullet = new am4core.ResizeButton();
+    range.bullet.background.fill = chart.current.colors.getIndex(0);
+    range.bullet.background.states.copyFrom(chart.current.zoomOutButton.background.states);
+    range.bullet.minX = 0;
+    range.bullet.adapter.add("minY", function(minY, target) {
+      target.maxY = chart.current.plotContainer.maxHeight;
+      target.maxX = chart.current.plotContainer.maxWidth;
+      return chart.current.plotContainer.maxHeight;
+    })
+    
+    range.bullet.events.on("dragged", function() {
+      range.value = dateAxis.xToValue(range.bullet.pixelX);
+      seriesRange.value = range.value;
+    })
+    
+    
+    var firstTime = chart.current.data[0].date.getTime();
+    var lastTime = chart.current.data[chart.current.data.length - 1].date.getTime();
+    var date = new Date(firstTime + (lastTime - firstTime) / 2);
+    
+    range.date = date;
+    
+    seriesRange.date = date;
+    seriesRange.endDate = chart.current.data[chart.current.data.length - 1].date;
+    
+    
+    
+    });  
     },[])
 
     return (

@@ -68,8 +68,10 @@ function ExploreDataset() {
                 setFactorsTable(factorsTable=>[...factorsTable, {
                     name:res.data.columns[i],
                     type:res.data.dataType[res.data.columns[i]],
-                    stationaryState:res.data.stationaryState[res.data.columns[i]],
-                    histogram:res.data.histograms[i]
+                    stationaryState:res.data.stationaryState[res.data.columns[i]]===2?'treatedByScalnyx'
+                    :res.data.stationaryState[res.data.columns[i]]===true?'stationary':'not stationary',
+                    histogram:res.data.histograms[i],
+                    cutPoint:res.data.discretization[res.data.columns[i]][0]
                     }])
             }
             // setNameDataSet

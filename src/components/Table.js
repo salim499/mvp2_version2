@@ -18,7 +18,8 @@ function Table(props) {
     // useState
     const [factorNameInputValue, setFactorNameInputValue] = useState("")
     const [factorTypeSelectValue, setFactorTypeSelectValue] = useState("All")
-    
+    const [factorStationaryInputValue ,setFactorStationaryInputValue] = useState("")
+
     // functions
     const handleDeleteFactor = (factorName) => {
       props.handleDeleteFactor(factorName)
@@ -36,6 +37,10 @@ function Table(props) {
       setFactorTypeSelectValue(event.target.value)
     }
 
+    const handleChangeStationaryInputValue = (event) => {
+      setFactorStationaryInputValue(event.target.value)
+    }
+
     return (
         <section>
         <table 
@@ -46,7 +51,7 @@ function Table(props) {
             <th className="val-1">Factor name</th>
             <th className="val-2">Type</th>
             <th className="val-3"></th>
-            <th className="val-4"></th>
+            <th className="val-4">Stationary</th>
           </tr>
           <br/>
           <br/>
@@ -67,8 +72,9 @@ function Table(props) {
             <th className="val-3"> 
             <span>Discretization</span>
             </th>
-            <th className="val-4"> 
-            <span>Stationary</span>
+            <th className="val-4">
+              <input type="text" 
+              onChange={handleChangeStationaryInputValue}/>
             </th>
           </tr>
           </thead>
@@ -80,9 +86,11 @@ function Table(props) {
             ((factor.name.startsWith(factorNameInputValue) 
             || factorNameInputValue.length===0)
             && (factor.type===factorTypeSelectValue || factorTypeSelectValue==="All")
+            && (factor.stationaryState.startsWith(factorStationaryInputValue) || factor.stationaryState.length===0)
             ) &&
            <tr className="factor-row table-factors-select" id="dz" key={factor.name}>
             <td className="val-1">
+              {console.log(factor.cutPoint)}
             {factor.name}
             </td>
             <td className="val-2">
@@ -95,11 +103,11 @@ function Table(props) {
             </td>
             <td className="val-4">
             {
-              factor.stationaryState===2?
+              factor.stationaryState==="treatedByScalnyx"?
               <>
-              <p>TreatedByScalnyx</p><img src={TreatedByScalnyx}/>
+              <p>treatedByScalnyx</p><img src={TreatedByScalnyx}/>
               </>
-              :factor.stationaryState===true?
+              :factor.stationaryState==="stationary"?
               <>
               <p>stationary</p><img src={Stationary}/>
               </>
