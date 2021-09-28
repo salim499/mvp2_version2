@@ -19,6 +19,7 @@ import ModalHistogram from '../components/modalHistogram'
 import NextPreview from '../components/nextPreview'
 import Loader from '../components/loader'
 
+
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
 

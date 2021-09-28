@@ -7,7 +7,8 @@ import Stationary from '../assets/icons/ok_green.svg'
 import TreatedByScalnyx from '../assets/icons/ok_blue.svg'
 
 // Import from components 
-import Histogram from './binaryChart'
+//import Histogram from './binaryChart'
+import Histogram from './histogram'
 
 // Constants 
 const types = ["All","numerical", "categorical", "date"]
