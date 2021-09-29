@@ -78,19 +78,18 @@ function Table(props) {
             </th>
           </tr>
           </thead>
-          
           { 
-            props.factorsTable.filter((factor)=>factor.type!="date")
-            .filter((factor, index)=>(props.chosenPaginationNumber-1)*10<=index && index<props.chosenPaginationNumber*10)
-            .map((factor,index)=>(
+            props.factorsTable.filter((factor)=>factor.type!="date").filter((factor,index)=>(
             ((factor.name.startsWith(factorNameInputValue) 
             || factorNameInputValue.length===0)
             && (factor.type===factorTypeSelectValue || factorTypeSelectValue==="All")
             && (factor.stationaryState.startsWith(factorStationaryInputValue) || factor.stationaryState.length===0)
-            ) &&
+            )) )
+            //.filter((factor, index)=>(props.chosenPaginationNumber-1)*10<=index && index<props.chosenPaginationNumber*10)
+            .map((factor,index)=>(
+              ((props.chosenPaginationNumber-1)*10<=index && index<props.chosenPaginationNumber*10)&&
            <tr className="factor-row table-factors-select" id="dz" key={factor.name}>
             <td className="val-1">
-              {console.log(factor.cutPoint)}
             {factor.name}
             </td>
             <td className="val-2">

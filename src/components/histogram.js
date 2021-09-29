@@ -16,8 +16,6 @@ function Histogram(props) {
 
 
     useEffect(()=>{
-/*
-        console.log(props)
         
         // Create chart instance
         chart.current = am4core.create(chartDiv.current, am4charts.XYChart);
@@ -38,8 +36,34 @@ function Histogram(props) {
         series.dataFields.valueY = "count";
         series.dataFields.categoryX = "from";
         series.columns.template.tooltipText = "{from} - {to}\n[bold]Count: {count}[/]";
-*/
-const datas =[
+
+    var seriesRange = categoryAxis.createSeriesRange(series);
+    seriesRange.contents.strokeDasharray = "2,3";
+    seriesRange.contents.stroke = chart.current.colors.getIndex(8);
+    seriesRange.contents.strokeWidth = 1;
+
+    // add range
+    var range = categoryAxis.axisRanges.push(new am4charts.CategoryAxisDataItem());
+    range.grid.stroke = chart.current.colors.getIndex(0);
+    range.grid.strokeOpacity = 1;
+    range.bullet = new am4core.ResizeButton();
+    range.bullet.background.fill = chart.current.colors.getIndex(0);
+    range.bullet.background.states.copyFrom(chart.current.zoomOutButton.background.states);
+    range.bullet.minX = 0;
+    range.bullet.adapter.add("minY", function(minY, target) {
+      target.maxY = chart.current.plotContainer.maxHeight;
+      target.maxX = chart.current.plotContainer.maxWidth;
+      return chart.current.plotContainer.maxHeight;
+    })
+
+    range.bullet.events.on("dragged", function() {
+      range.value = categoryAxis.xToValue(range.bullet.pixelX);
+      seriesRange.value = range.value;
+    })
+    
+    
+
+/*const datas =[
     {date:new Date(), visits:1000 },
     {date:new Date(), visits:1005 },
     {date:new Date(), visits:1500 },
@@ -154,7 +178,7 @@ am4core.ready(function() {
     
     
     
-    });  
+    }); */ 
     },[])
 
     return (
