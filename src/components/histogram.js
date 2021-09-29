@@ -9,6 +9,7 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated"
 am4core.useTheme(am4themes_animated);
 
 function Histogram(props) {
+  console.log(props)
 
     // useRef
     const chart=useRef()
@@ -16,7 +17,7 @@ function Histogram(props) {
 
 
     useEffect(()=>{
-        
+        /*
         // Create chart instance
         chart.current = am4core.create(chartDiv.current, am4charts.XYChart);
         
@@ -42,6 +43,15 @@ function Histogram(props) {
     seriesRange.contents.stroke = chart.current.colors.getIndex(8);
     seriesRange.contents.strokeWidth = 1;
 
+    var pattern = new am4core.LinePattern();
+    pattern.rotation = -45;
+    pattern.stroke = seriesRange.contents.stroke;
+    pattern.width = 1000;
+    pattern.height = 1000;
+    pattern.gap = 6;
+    seriesRange.contents.fill = pattern;
+    seriesRange.contents.fillOpacity = 0.5;
+
     // add range
     var range = categoryAxis.axisRanges.push(new am4charts.CategoryAxisDataItem());
     range.grid.stroke = chart.current.colors.getIndex(0);
@@ -57,13 +67,14 @@ function Histogram(props) {
     })
 
     range.bullet.events.on("dragged", function() {
-      range.value = categoryAxis.xToValue(range.bullet.pixelX);
-      seriesRange.value = range.value;
-    })
+      console.log(range.bullet)
+      //range.value = categoryAxis.xToValue(range.bullet.pixelX);
+      //seriesRange.value = range.value;
+    })*/
     
     
 
-/*const datas =[
+const datas =[
     {date:new Date(), visits:1000 },
     {date:new Date(), visits:1005 },
     {date:new Date(), visits:1500 },
@@ -86,8 +97,8 @@ am4core.ready(function() {
     chart.current = am4core.create(chartDiv.current, am4charts.XYChart);
     
     // Add data
-    console.log(generateChartData())
-    chart.current.data = datas;
+    props.histogram&&props.histogram.forEach(element=>element.from="")
+    chart.current.data = props.histogram;
     
     // Create axes
     var dateAxis = chart.current.xAxes.push(new am4charts.DateAxis());
@@ -96,8 +107,8 @@ am4core.ready(function() {
     
     // Create series
     var series = chart.current.series.push(new am4charts.LineSeries());
-    series.dataFields.valueY = "visits";
-    series.dataFields.dateX = "date";
+    series.dataFields.valueY = "count";
+    series.dataFields.dateX = "from";
     series.strokeWidth = 1;
     series.minBulletDistance = 10;
     series.tooltipText = "{valueY}";
@@ -120,33 +131,7 @@ am4core.ready(function() {
     pattern.gap = 6;
     seriesRange.contents.fill = pattern;
     seriesRange.contents.fillOpacity = 0.5;
-    
-    // Add scrollbar
-    chart.current.scrollbarX = new am4core.Scrollbar();
-    
-    function generateChartData() {
-      var chartData = [];
-      var firstDate = new Date();
-      firstDate.setDate(firstDate.getDate() - 200);
-      var visits = 1200;
-      for (var i = 0; i < 200; i++) {
-        // we create date objects here. In your data, you can have date strings
-        // and then set format of your dates using chart.dataDateFormat property,
-        // however when possible, use date objects, as this will speed up chart rendering.
-        var newDate = new Date(firstDate);
-        newDate.setDate(newDate.getDate() + i);
-    
-        visits += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 10);
-    
-        chartData.push({
-          date: newDate,
-          visits: visits
-        });
-      }
-      return chartData;
-    }
-    
-    
+      
     // add range
     var range = dateAxis.axisRanges.push(new am4charts.DateAxisDataItem());
     range.grid.stroke = chart.current.colors.getIndex(0);
@@ -166,19 +151,9 @@ am4core.ready(function() {
       seriesRange.value = range.value;
     })
     
+ 
     
-    var firstTime = chart.current.data[0].date.getTime();
-    var lastTime = chart.current.data[chart.current.data.length - 1].date.getTime();
-    var date = new Date(firstTime + (lastTime - firstTime) / 2);
-    
-    range.date = date;
-    
-    seriesRange.date = date;
-    seriesRange.endDate = chart.current.data[chart.current.data.length - 1].date;
-    
-    
-    
-    }); */ 
+    }); 
     },[])
 
     return (

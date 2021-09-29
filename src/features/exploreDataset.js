@@ -129,7 +129,14 @@ function ExploreDataset() {
         try{
             const res= await put(
                 `${process.env.REACT_APP_URL_MASTER}/datasources/${localStorage.getItem('idDataSet')}`,
-                 {columns :columnsToSave},
+                 {
+                    columns :columnsToSave,
+                    discretization:{
+                        "gold":[2],
+                        "vm6":[1]
+                        }
+                        
+                 },
                 {
                     headers:{
                         token: JSON.parse(localStorage.getItem('user')).token
