@@ -183,6 +183,7 @@ function ExploreDataset() {
             handleRestartFactor={handleRestartFactor}/>
             <Table 
             chosenPaginationNumber={chosenPaginationNumber}
+            setChosenPaginationNumber={setChosenPaginationNumber}
             factorsTable={factorsTable}
             handleDeleteFactor={handleDeleteFactor}
             handleShowHistogram={handleShowHistogram}
@@ -195,6 +196,7 @@ function ExploreDataset() {
             }
             <Pagination
             count={paginationNumber}
+            page={chosenPaginationNumber}
             onChange={(e, number)=>handlePagination(number)}
             color="#081c4d"/>
             <NextPreview 

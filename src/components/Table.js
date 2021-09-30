@@ -30,14 +30,17 @@ function Table(props) {
     }
 
     const handleChangeFactorNameInputValue = (event) => {
+      props.setChosenPaginationNumber(1)
       setFactorNameInputValue(event.target.value)
     }
 
     const handleChangeFactorTypeSelectValue = (event) => {
+      props.setChosenPaginationNumber(1)
       setFactorTypeSelectValue(event.target.value)
     }
 
     const handleChangeStationaryInputValue = (event) => {
+      props.setChosenPaginationNumber(1)
       setFactorStationaryInputValue(event.target.value)
     }
 
