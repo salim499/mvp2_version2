@@ -148,6 +148,7 @@ const ChooseTarget = () => {
     if(targetsNames.length===0){
       setWarning(true)
     }else{
+      setWarning(false)
       history.push({
         pathname : '/predict'
       }) 

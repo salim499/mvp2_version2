@@ -32,12 +32,14 @@ function NextPreview(props) {
           style={{visibility: props.nextVisibility}}
           onClick={()=>setIsOpen(!isOpen)}>
                  Next
+                 {console.log("true")}
           </button> 
           :
           <button className="next_preview-next"
           style={{visibility: props.nextVisibility}}
           onClick={()=>props.handleNext()}>
                  Next
+                 {console.log("false")}
           </button>  
           }
       {/* Save Prediction Modal - Popup */}
