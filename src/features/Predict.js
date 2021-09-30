@@ -46,11 +46,23 @@ const options2 = {
     labels: ["factor1", "factor2", "factor3", "factor4","factor5", "factor6", "factor7", "factor8","factor9", "factor10", "factor11", "factor12"],
     datasets: [
       {
-        label: 'Dataset 1',
+        label: 'Target 1',
+        data: [10, 12, 13, -4, 5, -3, 25, -11, -9, 12, -2, 6],
+        backgroundColor:  ['green','green','green','green', 'green','green','green','green','green','green', 'green', 'green'],
+        borderColor:  ['green','green','green','green', 'green','green','green','green','green','green', 'green', 'green'], 
+    },
+      {
+        label: 'Target 2',
+        data: [1, 12, 13, -14, 15, -1, 15, -1, -29, 2, -12, 6],
+        backgroundColor:  ['blue','blue','blue','blue', 'blue','blue','blue','blue','blue','blue', 'blue', 'blue'],
+        borderColor:  ['blue','blue','blue','blue', 'blue','blue','blue','blue','blue','blue', 'blue', 'blue'],
+      },
+      {
+        label: 'Target 3',
         data: [10, 2, 3, -4, 15, -13, 5, -11, -9, 2, -12, 6],
-        borderColor: ['green','green','green','red', 'green','red','green','red','red','green', 'red', 'green'],
-        backgroundColor:  ['green','green','green','red', 'green','red','green','red','red','green', 'red', 'green'],
-      }
+        backgroundColor:  ['orange','orange','orange','orange', 'orange','orange','orange','orange','orange','orange', 'orange', 'orange'],
+        borderColor:  ['orange','orange','orange','orange', 'orange','orange','orange','orange','orange','orange', 'orange', 'orange'],
+    },
     ]
   };
 
