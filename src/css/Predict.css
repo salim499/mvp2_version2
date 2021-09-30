@@ -75,17 +75,7 @@ td {
   font-weight: 500;
 }
 
-/* .predict-table-container > table > tr:nth-child(2) > th:first-child {
-  width: 20%;
-}
-
-.predict-table-container > table > tr:nth-child(2) > th:nth-child(2),
-.predict-table-container > table > tr:nth-child(2) > th:last-child {
-  width: 40%;
-} */
-
 .predict-table-container > table > tr > td:first-child > div {
-  width: 300px;
   height: 58px;
   background: var(--yellow);
   border-radius: 2px;

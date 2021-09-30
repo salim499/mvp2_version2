@@ -5,10 +5,6 @@ import React, {useEffect, useState, useCallback} from 'react'
 import {get, put} from 'axios'
 import { useLocation, useHistory } from 'react-router-dom'
 import Pagination from '@material-ui/lab/Pagination'
-import { makeStyles } from '@material-ui/core/styles'
-
-// Import css files 
-import '../css/exploreDataset.css'
 
 // Import components 
 import Timeline from '../components/timeline'
