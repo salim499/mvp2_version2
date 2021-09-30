@@ -227,7 +227,7 @@ const Predict = () => {
             previewVisibility={previewVisibility}
             text="Save"
             className="save-button"
-            />
+            />  
     </div>
     )
 }

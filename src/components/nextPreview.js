@@ -1,14 +1,12 @@
 // Import from react
-import React, {useState} from 'react'
-
-// Import from libraries
-import { Link } from 'react-router-dom'
+import React, {useState, useCallback} from 'react'
 
 // Import css files 
 import '../css/nextPreview.css'
 
 // Import components
 import SavePredictionModal from "./SavePredictionModal";
+import ModalWarning from './modalWarning'
 
 function NextPreview(props) {
 
@@ -28,7 +26,14 @@ function NextPreview(props) {
           onClick={()=>setIsOpen(true)}>
                  {props.text}
           </button>  
-          : 
+          :
+          props.warning === true ? 
+          <button className="next_preview-next"
+          style={{visibility: props.nextVisibility}}
+          onClick={()=>setIsOpen(!isOpen)}>
+                 Next
+          </button> 
+          :
           <button className="next_preview-next"
           style={{visibility: props.nextVisibility}}
           onClick={()=>props.handleNext()}>
@@ -37,10 +42,17 @@ function NextPreview(props) {
           }
       {/* Save Prediction Modal - Popup */}
        <SavePredictionModal
+          open={isOpen}
+          setIsOpen={setIsOpen}
+          onClose={() => setIsOpen(false)}
+        />
+      {/* Warning Modal - Popup */}
+      <ModalWarning
         open={isOpen}
         setIsOpen={setIsOpen}
         onClose={() => setIsOpen(false)}
-        />
+        chooseTargetPage="chooseTargetPage"
+      />
       </div>
     )
 }

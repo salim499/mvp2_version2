@@ -2,13 +2,11 @@
 import React, {useState, useCallback, useEffect} from 'react'
 
 // Import from libraries
-import { Droppable, Draggable, DragDropContext } from 'react-beautiful-dnd'
 import { useHistory, useLocation } from 'react-router-dom'
 import { get, post } from 'axios'
 
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
-
 // Import components
 import GraphTarget from '../components/testChart2'
 import PredictionHorizonModal from '../components/PredictionHorizonModal';
@@ -110,6 +108,7 @@ const ChooseTarget = () => {
   const [horizonsSummary,setHorizonsSummary]= useState(false);
   const [editMode, setEditMode]=useState(false);
   const [showLoader, setShowLoader] = useState(true)
+  const [warning, setWarning]=useState(false);
 
   // useCallback
   const handleNext = useCallback(async()=>{
@@ -146,16 +145,22 @@ const ChooseTarget = () => {
         console.log(err)
     }  */
     localStorage.setItem('predictData', JSON.stringify({...dataFromBackend, horizons}))
-    history.push({
-      pathname : '/predict'
-    })   
+    if(targetsNames.length===0){
+      setWarning(true)
+    }else{
+      history.push({
+        pathname : '/predict'
+      }) 
+    }
+   
   },[targetsNames, horizons]) 
 
   const handlePreview = useCallback(()=>{
     history.push({
         pathname : '/explore-dataset',
     })      
-  },[]) 
+  },[])
+
 
   // useEffect
   useEffect(async()=>{ 
@@ -314,9 +319,11 @@ const ChooseTarget = () => {
         handlePreview={handlePreview}
         nextVisibility={nextVisibility}
         previewVisibility={previewVisibility}
+        warning={warning}
         />        
         </>
-        :<div style={{marginTop:'200px'}}><Loader/></div>
+        :
+        <div style={{marginTop:'200px'}}><Loader/></div>
       }
        </div>
        {/* Prediction Horizon Modal - Popup */}

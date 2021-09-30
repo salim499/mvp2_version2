@@ -53,6 +53,7 @@ const timelineLevel=1
     const [minDate, setMinDate] = useState(null)
     const [maxDate, setMaxDate] = useState(null)
 
+    const [isOpen, setIsOpen] = useState(false);
     // useEffect 
     /* get user datasources names */
     useEffect(async ()=>{
@@ -206,7 +207,11 @@ const timelineLevel=1
       </div>
       {
       openModal && !cvsOk &&
-      <ModalWarning handleHideModal={handleHideModal}/>
+      <ModalWarning
+      open={isOpen}
+      setIsOpen={setIsOpen}
+      onClose={() => setIsOpen(false)}
+      />
       }   
       {
       openModal&& cvsOk &&

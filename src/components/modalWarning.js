@@ -97,15 +97,16 @@ const TEXT_STYLES = {
     margin: '20px',
 }
 
-function ModalWarning(props) {
+function ModalWarning({open, setIsOpen, onClose, chooseTargetPage}) {
 
     // useContext
     const {navBarState} = useNavBar()
 
+    if(!open) return null
     return (
         ReactDom.createPortal(
             <>
-            <div style={OVERLAY_STYLES} />
+            <div onClick={onClose} style={OVERLAY_STYLES} />
             <div style={navBarState?MODAL_STYLES:MODAL_STYLES2}>
             <div style={LOGO_DIV_STYLES}>
                 <img src={Warning}/>
@@ -113,11 +114,17 @@ function ModalWarning(props) {
             <div style={TITLE_STYLES}>
                 Warning !
             </div>
+            {chooseTargetPage ? 
             <div style={TEXT_STYLES}>
-                Your CSV should have a date column.
+                Please choose at least one target and one prediction horizon before going forward 
             </div>
+            :   
+            <div style={TEXT_STYLES}>
+            Your CSV should have a date column.
+            </div>
+        }
               <button style={MODAL_BUTTON}
-              onClick={()=>props.handleHideModal()}>Cancel</button>
+              onClick={()=>setIsOpen(!open)}>Cancel</button>
             </div>
             </>,
         document.getElementById('portal')
