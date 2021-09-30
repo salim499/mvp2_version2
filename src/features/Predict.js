@@ -145,29 +145,33 @@ const Predict = () => {
                         <th>Confidence Level</th>
                         </tr>
                         <tr>
-                        <th style={{ display:'flex',alignItems: 'center', justifyContent: 'flex-end'}}></th>
+                        <th></th>
+                        <th>
                         {
                         [0,1,2].map((value,index)=>(
                             JSON.parse(localStorage.getItem('predictData')).horizons.length>index&&
-                            <th style={{width:'10%', display:'flex',alignItems: 'center',justifyContent: 'center'}}>
+                            <td>
                                 {
                                 JSON.parse(localStorage.getItem('predictData')).horizons[index]&&
                                 JSON.parse(localStorage.getItem('predictData')).horizons[index].duration+
                                 JSON.parse(localStorage.getItem('predictData')).horizons[index].timeUnit
                                 }
-                            </th>
+                            </td>
                         ))  
                         } 
+                        </th>
+                        <th>
                         {
                         [0,1,2].map((value,index)=>(
                             JSON.parse(localStorage.getItem('predictData')).horizons.length>index&&
-                            <th style={{width:'10%', display:'flex',alignItems: 'center',justifyContent: 'center'}}>
+                            <div>
                                 {JSON.parse(localStorage.getItem('predictData')).horizons[index]&&
                                 JSON.parse(localStorage.getItem('predictData')).horizons[index].duration+
                                 JSON.parse(localStorage.getItem('predictData')).horizons[index].timeUnit}
-                            </th>
+                            </div>
                         ))  
-                        }                         
+                        }    
+                        </th>                     
                         </tr>
                         {[0,1,2].map((i)=>(
                         JSON.parse(localStorage.getItem("targets"))[i]&&
@@ -176,35 +180,39 @@ const Predict = () => {
                             <div><p>{JSON.parse(localStorage.getItem("targets"))[i]}</p></div>
                         </td>
                         {/* Mettre une condition pour verifier que la prediction est positive ou negative et afficher la bonne classe en fonction et l'icone */}
+                        <td>
                         {
                         [0,1,2].map((j)=>(
                             JSON.parse(localStorage.getItem('predictData')).horizons.length>j&&
-                            <td style={{width:'10%'}}>
+                            <div>
                             {
                                 JSON.parse(localStorage.getItem('predictData')).predictions[Object.keys(JSON.parse(localStorage.getItem('predictData')).predictions)[j]].prediction[i].prediction==="+"?
-                                <div style={{backgroundColor:'#0000ff'}}>
+                                <div>
                                 <img src={arrowUp} alt="arrow up"/> 
                                 </div>
                                 :
-                                <div style={{backgroundColor:'#F65656'}}>
+                                <div>
                                 <img  src={arrowDown} alt="arrow down"/>
                                 </div>
                             }
-                            </td>
+                            </div>
                         ))
                         }
+                        </td>
+                        <td>
                         {
                         [0,1,2].map((j)=>(
                             JSON.parse(localStorage.getItem('predictData')).horizons.length>j&&
-                            <td style={{width:'10%'}}>
+                            <div>
                             {
-                                <div style={{backgroundColor:predictions[Object.keys(predictions)[j]].prediction[i].confidence.substring(0, predictions[Object.keys(predictions)[j]].prediction[i].confidence.length-1) >50 ? "#17A137" : "rgba(23, 161, 55, 0.5)", color:'white'}}>
+                                <div style={{backgroundColor:predictions[Object.keys(predictions)[j]].prediction[i].confidence.substring(0, predictions[Object.keys(predictions)[j]].prediction[i].confidence.length-1) >50 ? "#17A137" : "rgba(23, 161, 55, 0.5)", color:'white', width:'68px', height:'38px', borderRadius:'5px', display:'flex', justifyContent:'center', alignItems:'center'}}>
                                 <p>{predictions[Object.keys(predictions)[j]].prediction[i].confidence}</p>
                                 </div>
                             }
-                            </td>
+                            </div>
                         ))
-                        }               
+                        }    
+                        </td>           
                         </tr>
                         ))}            
                 </table>

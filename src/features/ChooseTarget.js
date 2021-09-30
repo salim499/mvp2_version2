@@ -58,7 +58,7 @@ let dataFromBackend =
    '48h':{
     'prediction' :
     [
-        {name:'name1', prediction:'-', confidence:'-90%'},
+        {name:'name1', prediction:'-', confidence:'10%'},
         {name:'name2', prediction:'-', confidence:'70%'},
         {name:'name3', prediction:'-', confidence:'20%'}
     ],
@@ -74,7 +74,7 @@ let dataFromBackend =
     [
         {name:'name1', prediction:'+', confidence:'9%'},
         {name:'name2', prediction:'-', confidence:'70%'},
-        {name:'name3', prediction:'+', confidence:'620%'}
+        {name:'name3', prediction:'+', confidence:'20%'}
     ],
     'explicativeFactors':
     [

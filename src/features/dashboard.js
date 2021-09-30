@@ -1,14 +1,31 @@
 import React, {useState} from 'react'
 
 // Import icons
-import add_portfolio from '../assets/icons/add_portfolio.svg'
+import add_portfolio from '../assets/icons/add_portfolio.svg';
+import gain from '../assets/icons/gain.svg';
 
 // Import components
 import UserProfile from '../components/userProfile'
+import ConfidenceLevel from '../components/ConfidenceLevel';
 
 // Import contexts
 import { useNavBar } from "../contexts/navbar"
 import { useAuth } from "../contexts/user"
+
+const targetsFromBackend = [
+  {name:"Target 1", 
+   direction:"up", 
+   confidenceLevel:30 
+  }, 
+  {name:"Target 2", 
+  direction:"down", 
+  confidenceLevel:"70" 
+ },
+ {name:"Target 3", 
+ direction:"up", 
+ confidenceLevel:"10" 
+}
+]
 
 const dataFromBackend =[
     {
@@ -144,7 +161,7 @@ function Dashboard() {
 
     // useState
     const [assetsGraphData, setAssetsGraphData] = useState(dataFromBackend)
-
+    const [direction, setDirection]=useState("down");
     return (
         <div className={navBarState?"container-with-margin ":"container-without-margin"}>
             <UserProfile/>
@@ -216,66 +233,25 @@ function Dashboard() {
                     </div>
                 </div>
             </div>
-            {/* <div className="portfolio-values">
-                <div className="portfolio-values-graph">
-                    <Graph_portfolio
-                    lineChartData={assetsGraphData}/>
-                    <div className="rebalance">
-                        <div className="rebalance_item">
-                            <div className="rebalance_item-button">
-                               <div className="rebalance_item-button-text">
-                                   t0 Before Rebalance
-                                   </div>
-                            </div>
-                            <Circle_portfolio className="rebalance_item-graph"/>
-                        </div>
-                        <div className="rebalance_item">
-                            <div className="rebalance_item-button">
-                                <div className="rebalance_item-button-text">
-                                   t0 After Rebalance
-                                </div>
-                            </div>
-                            <Circle_portfolio className="rebalance_item-graph"/>
-                        </div>
-                        <div className="rebalance_item">
-                           <div className="rebalance_item-button">
-                                <div className="rebalance_item-button-text">
-                                   tf
-                                </div>
-                            </div>
-                            <Circle_portfolio className="rebalance_item-graph"/>
-                        </div>
-                    </div>
-                </div>
-                <div className="portfolio-values-details">
-                    <div className="portfolio-values-details-item">
-                        <div className="portfolio-values-details-item-label">
-                            Initial value
-                        </div>
-                        <div className="portfolio-values-details-item-value">
-                            100 $
-                        </div>
-                    </div>
-                    <div className="portfolio-values-details-item">
-                    <div className="portfolio-values-details-item-label">
-                        Final value
-                    </div>
-                    <div className="portfolio-values-details-item-value">
-                        150 $
-                    </div>
-                    </div>
-                    <div className="portfolio-values-details-item">
-                    <div className="portfolio-values-details-item-label">
-                        Confidence Level
-                    </div>
-                    <div className="portfolio-values-details-item-value">
-                        0.99
-                    </div>
-                    </div>
-                </div>
-            </div> */}
+            <div className="targets-section">
+            {targetsFromBackend.map((target, index)=>{
+              return(   
+                <div className="target-box">
+                  <div>{target.name}</div>
+                {
+                  target.direction === "up" ?
+                  <img src={gain} alt="gain"/>
+                  : target.direction === "down" && 
+                  <img style={{transform: "rotate(180deg)"}} src={gain} alt="gain"/>
+                }
+                <ConfidenceLevel target={target} index={index}/>    
+              </div>
+              )
+            })}
+            </div>
+        
         </div>
     )
 }
 
-export default Dashboard
+export default Dashboard;
